@@ -4,7 +4,8 @@
 
 import {createStore, compose, applyMiddleware} from 'redux';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
-import promiseMiddleware from 'redux-promise';
+import promise from 'redux-promise-middleware';
+import logger from 'redux-logger';
 import rootReducer from '../reducers';
 
 export default function configureStore(initialState) {
@@ -15,7 +16,8 @@ export default function configureStore(initialState) {
     reduxImmutableStateInvariant(),
 
     // promise middleware
-    promiseMiddleware,
+    promise(),
+    logger()
   ];
 
   const store = createStore(rootReducer, initialState, compose(
