@@ -16,13 +16,10 @@ class HomePage extends React.Component {
   render() {
     return (
       <div>
-        <h1>React Slingshot</h1>
+        <h1>React / Redux DonderStarter</h1>
 
-        <h2>Get Started</h2>
         <ol>
-          <li>Review the <Link to="fuel-savings">demo app</Link></li>
-          {this.props.users.map(user => <div key={user.id}>{user.id}</div> )}
-          <li>Remove the demo and start coding: npm run remove-demo</li>
+          {this.props.users.map(user => <li key={user.id}>{user.id}</li> )}
         </ol>
       </div>
     );
