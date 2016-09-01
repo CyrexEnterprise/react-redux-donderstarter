@@ -17,7 +17,7 @@ class HomePage extends React.Component {
     return (
       <div className="root">
         <h1>React / Redux DonderStarter</h1>
-
+        <strong>Users list:</strong>
         <ol>
           {this.props.users.map(user => <li key={user.id}>{user.id}</li> )}
         </ol>
