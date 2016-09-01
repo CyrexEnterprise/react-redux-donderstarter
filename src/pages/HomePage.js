@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import { connect } from 'react-redux';
 import { fetch } from '../actions/baseActions';
+import './homePage.scss';
 
 const mapStateToProps = ({ users }) => ({
   users: users.data
@@ -15,7 +16,7 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="root">
         <h1>React / Redux DonderStarter</h1>
 
         <ol>
