@@ -1,5 +1,8 @@
 import {createStore, compose, applyMiddleware} from 'redux';
-import promiseMiddleware from 'redux-promise';
+import promise from 'redux-promise-middleware';
+import {browserHistory} from 'react-router';
+import {routerMiddleware} from 'react-router-redux';
+
 import rootReducer from '../reducers';
 
 export default function configureStore(initialState) {
@@ -7,7 +10,10 @@ export default function configureStore(initialState) {
     // Add other middleware on this line...
 
     // promise middleware
-    promiseMiddleware
+    promise(),
+
+    // allows for actions: push, replace, go, goBack, goForward
+    routerMiddleware(browserHistory),
   ];
 
   return createStore(rootReducer, initialState, compose(

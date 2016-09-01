@@ -10,16 +10,15 @@ const mapStateToProps = ({ users }) => ({
 class HomePage extends React.Component {
 
   componentDidMount() {
-      this.props.fetch('USERS');
+    this.props.fetch('USERS');
   }
 
   render() {
     return (
       <div className="root">
         <h1>React / Redux DonderStarter</h1>
-        <strong>Users list:</strong>
         <ol>
-          {this.props.users.map(user => <li key={user.id}>{user.id}</li> )}
+          { this.props.users.map(user => <li key={user.id}>{user.id}</li>) }
         </ol>
       </div>
     );
