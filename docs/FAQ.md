@@ -1,8 +1,8 @@
-##FAQ
-###Why does this exist?
+## FAQ
+### Why does this exist?
 This starter kit implements best practices like testing, minification, bundling, and so on. It codifies a long list of decisions that you no longer have to make to get rolling. It saves you from the long, painful process of wiring it all together into an automated dev environment and build process. It's also useful as inspiration for ideas you might want to integrate into your current development environment or build process.
 
-###What do the scripts in package.json do?
+### What do the scripts in package.json do?
 Unfortunately, scripts in package.json can't be commented inline because the JSON spec doesn't support comments, so I'm providing info on what each script in package.json does here.  
 
 | **Script** | **Description** |
@@ -22,7 +22,6 @@ Unfortunately, scripts in package.json can't be commented inline because the JSO
 ├── .editorconfig             # Configures editor rules
 ├── .eslintrc                 # Configures ESLint
 ├── .gitignore                # Tells git which files to ignore
-├── .istanbul.yml             # Configure istanbul code coverage
 ├── .npmrc                    # Configures npm to save exact by default
 ├── README.md                 # This file.
 ├── dist                      # Folder where the build script places the built app. Use this in prod.
@@ -31,9 +30,10 @@ Unfortunately, scripts in package.json can't be commented inline because the JSO
 │   ├── actions               # Flux/Redux actions. List of distinct actions that can occur in the app.  
 │   ├── components            # React components
 │   ├── constants             # Application constants including constants for Redux
-│   ├── containers            # Top-level React components that interact with Redux
+│   ├── containers            # High order component logic wrappers 
+│   ├── pages                 # Page-level React components
 │   ├── favicon.ico           # favicon to keep your browser from throwing a 404 during dev. Not actually used in prod build.
-│   ├── index.html            # Start page
+│   ├── index.ejs             # Start page
 │   ├── index.js              # Entry point for your app
 │   ├── reducers              # Redux reducers. Your state is altered here based on actions
 │   ├── store                 # Redux store configuration
@@ -41,7 +41,6 @@ Unfortunately, scripts in package.json can't be commented inline because the JSO
 │   ├── utils                 # Plain old JS objects (POJOs). Pure logic. No framework specific code here.
 ├── tools                     # Node scripts that run build related tools
 │   ├── build.js              # Runs the production build
-│   ├── buildHtml.js          # Builds index.html
 │   ├── distServer.js         # Starts webserver and opens final built app that's in dist in your default browser
 │   ├── srcServer.js          # Starts dev webserver with hot reloading and opens your app in your default browser
 └── webpack.config.js         # Configures webpack
