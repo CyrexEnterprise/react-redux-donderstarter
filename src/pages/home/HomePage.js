@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 import { connect } from 'react-redux';
-import { fetch } from '../actions/baseActions';
-import './homePage.scss';
+import { fetch } from '../../actions/baseActions';
+import './style.scss';
 
 const mapStateToProps = ({ users }) => ({
   users: users.data

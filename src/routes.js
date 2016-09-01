@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import App from './App';
-import HomePage from './pages/HomePage';
-import NotFoundPage from './pages/NotFoundPage.js';
+import HomePage from './pages/home/HomePage';
+import NotFoundPage from './pages/notFound/NotFoundPage.js';
 
 export default (
   <Route path="/" component={App}>
