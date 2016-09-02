@@ -10,10 +10,9 @@ import NotFoundPage from './pages/notFound';
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={HomePage}/>
     <Route path="login" component={LoginPage}/>
-    <Route path="protected" component={requireAuthentication(Auth)}>
-      <IndexRoute component={ProtectedPage}/>
+    <Route path="app" component={requireAuthentication(Auth)}>
+      <IndexRoute component={HomePage}/>
     </Route>
     <Route path="*" component={NotFoundPage}/>
   </Route>

@@ -5,7 +5,10 @@ export default {
   auth: {
     token: null,
     isAuthenticating: false,
-    isAuthenticated: false,
+    isAuthenticated: true,
     statusText: null
+  },
+  session: {
+
   }
 };
