@@ -8,7 +8,7 @@ export function requireAuthentication(Component) {
 
   class AuthenticatedComponent extends React.Component {
 
-    componentWillMount() { console.log("WILL MOUTN")
+    componentWillMount() {
       this.authorize();
     }
 
@@ -34,7 +34,7 @@ export function requireAuthentication(Component) {
         .then(null, this.redirect);
     }
 
-    redirect() { console.log("redirect")
+    redirect() {
       let redirectAfterLogin = this.props.location.pathname;
       this.props.dispatch(push(`/login?next=${redirectAfterLogin}`));
     }
