@@ -1,17 +1,17 @@
-import { LOGIN_PENDING, LOGIN_FULFILLED, LOGIN_REJECTED } from '../constants/actionTypes';
+import { AUTH_PENDING, AUTH_FULFILLED, AUTH_REJECTED} from '../constants/actionTypes';
 
 import initialState from './initialState';
 
 export default function auth(state = initialState.auth, action) {
 
   switch (action.type) {
-    case LOGIN_PENDING:
+    case AUTH_PENDING:
       return {
         ...state,
         'isAuthenticating': true,
         'statusText': null
       };
-    case LOGIN_FULFILLED:
+    case AUTH_FULFILLED:
       return {
         ...state,
         'isAuthenticating': false,
@@ -19,7 +19,7 @@ export default function auth(state = initialState.auth, action) {
         'token': action.payload.token,
         'statusText': 'You have been successfully logged in.'
       };
-    case LOGIN_REJECTED:
+    case AUTH_REJECTED:
       return {
         ...state,
         statusText: `Authentication Error: ${action.payload.message}`

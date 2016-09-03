@@ -1,44 +1,57 @@
 import React from 'react';
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import { fetch } from '../../actions/baseActions';
 
 export function requireAuthentication(Component) {
 
   class AuthenticatedComponent extends React.Component {
 
-    componentWillMount() {
-      this.checkAuth(this.props.isAuthenticated);
+    componentWillMount() { console.log("WILL MOUTN")
+      this.authorize();
     }
 
-    componentWillReceiveProps(nextProps) {
-      this.checkAuth(nextProps.isAuthenticated);
-    }
+    authorize(isValidating) {
 
-    checkAuth(isAuthenticated) {
+      if (isValidating)  return;
 
       // Check localstorage and state for token
-      // if it doesn't exist, do the redirect to login
-      // if it does exist, request session data
-      // if session promiss is rejected, do the redirect to login
-      // if session promiss is fullfilled, set authenticated to true
+      let token = this.props.token || window.localStorage.getItem('token');
 
-      if (!isAuthenticated) {
-        let redirectAfterLogin = this.props.location.pathname;
-        this.props.dispatch(push(`/login?next=${redirectAfterLogin}`));
-      }
+      // if it does exist, request session data
+      // if it doesn't exist, do the redirect to login
+      if (token && token.length >= 6)
+        this.getSession()
+      else
+        this.redirect()
+    }
+
+    // if session promiss is fullfilled, set authenticated to true (authReducer is catching the promiss)
+    // if session promiss is rejected, do the redirect to login
+    getSession() {
+      this.props.dispatch(fetch('SESSION'))
+        .then(null, this.redirect);
+    }
+
+    redirect() { console.log("redirect")
+      let redirectAfterLogin = this.props.location.pathname;
+      this.props.dispatch(push(`/login?next=${redirectAfterLogin}`));
     }
 
     render() {
-      return <Component {...this.props}/>;
+      return <Component {...this.props}/>
     }
   }
 
   const mapStateToProps = (state) => ({
     token: state.auth.token,
-    isAuthenticated: state.auth.isAuthenticated,
-    isAuthenticating: state.auth.isAuthenticating,
-    statusText: state.auth.statusText
+    isValidated: state.session.isValidated,
+    isValidating: state.session.isValidating,
+    statusText: state.session.statusText
   });
+
+ 
 
   return connect(mapStateToProps)(AuthenticatedComponent);
 }

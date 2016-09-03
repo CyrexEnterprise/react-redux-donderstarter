@@ -5,10 +5,12 @@ export default {
   auth: {
     token: null,
     isAuthenticating: false,
-    isAuthenticated: true,
+    isAuthenticated: false,
     statusText: null
   },
   session: {
-
+    isValidated: false,
+    isValidating: false,
+    statusText: null
   }
 };

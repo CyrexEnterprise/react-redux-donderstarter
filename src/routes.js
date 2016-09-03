@@ -11,6 +11,7 @@ import NotFoundPage from './pages/notFound';
 export default (
   <Route path="/" component={App}>
     <Route path="login" component={LoginPage}/>
+    <IndexRoute component={HomePage}/>
     <Route path="app" component={requireAuthentication(Auth)}>
       <IndexRoute component={HomePage}/>
     </Route>
