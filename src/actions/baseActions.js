@@ -1,5 +1,4 @@
 import axios from 'axios';
-import promise from 'redux-promise';
 
 export function fetch(endpoint, params) {
   return {

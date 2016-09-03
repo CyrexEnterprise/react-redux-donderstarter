@@ -5,6 +5,8 @@
 import {createStore, compose, applyMiddleware} from 'redux';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import promise from 'redux-promise-middleware';
+import {browserHistory} from 'react-router';
+import {routerMiddleware} from 'react-router-redux';
 import logger from 'redux-logger';
 import rootReducer from '../reducers';
 
@@ -15,8 +17,12 @@ export default function configureStore(initialState) {
     // Redux middleware that spits an error on you when you try to mutate your state either inside a dispatch or between dispatches.
     reduxImmutableStateInvariant(),
 
-    // promise middleware
+    // promise actions middleware
     promise(),
+
+    // allows for actions: push, replace, go, goBack, goForward
+    routerMiddleware(browserHistory),
+
     logger()
   ];
 
