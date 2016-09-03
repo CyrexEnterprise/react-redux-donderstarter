@@ -1,12 +1,5 @@
-import axios from 'axios';
-
-export function login({
-  redirectTo
-}) {
+export function login() {
   return {
-    type: 'LOGIN',
-    payload: Promise.resolve({
-      token: 'test'
-    })
-  }
+    type: 'LOGIN'
+  };
 }

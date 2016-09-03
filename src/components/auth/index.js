@@ -1,5 +1,4 @@
 import React from 'react';
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { fetch } from '../../actions/baseActions';
@@ -22,9 +21,9 @@ export function requireAuthentication(Component) {
       // if it does exist, request session data
       // if it doesn't exist, do the redirect to login
       if (token && token.length >= 6)
-        this.getSession()
+        this.getSession();
       else
-        this.redirect()
+        this.redirect();
     }
 
     // if session promiss is fullfilled, set authenticated to true (authReducer is catching the promiss)
@@ -40,7 +39,7 @@ export function requireAuthentication(Component) {
     }
 
     render() {
-      return <Component {...this.props}/>
+      return <Component {...this.props} />
     }
   }
 

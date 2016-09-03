@@ -1,6 +1,5 @@
 import React from 'react';
 import './style.scss';
-
 import { connect } from 'react-redux';
 import { login } from '../../actions/auth';
 
