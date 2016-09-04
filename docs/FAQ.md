@@ -7,7 +7,6 @@ Unfortunately, scripts in package.json can't be commented inline because the JSO
 
 | **Script** | **Description** |
 |----------|-------|
-| remove-demo | Removes the demo application so you can begin development. |
 | prestart | Runs automatically before start. Calls remove-dist script which deletes the dist folder. This helps remind you to run the build script before committing since the dist folder will be deleted if you don't. ;) |
 | start | Runs tests, lints, starts dev webserver, and opens the app in your default browser. |
 | lint:tools | Runs ESLint on build related JS files. (eslint-loader lints src files via webpack when `npm start` is run) |
@@ -71,29 +70,6 @@ When you run `npm run build`:
 
 For both of the above methods, a separate sourcemap is generated for debugging Sass in [compatible browsers](http://thesassway.com/intermediate/using-source-maps-with-sass).
 
-### I don't like the magic you just described above. I simply want to use a CSS file.
-No problem. Reference your CSS file in index.html, and add a step to the build process to copy your CSS file over to the same relative location /dist as part of the build step. But be forwarned, you lose style hot reloading with this approach.
-
-### I just want an empty starter kit.
-This starter kit includes an example app so you can see how everything hangs together on a real app. When you're done reviewing it, run this to remove the demo app:
-
-  `npm run remove-demo`  
-
-Don't want to use Redux? See the next question for some steps on removing Redux.
-
-### Do I have to use Redux?
-Nope. Redux is useful for applications with more complex data flows. If your app is simple, Redux is overkill. Remove Redux like this:
-
- 1. Run `npm run remove-demo`
- 2. Uninstall Redux related packages: `npm uninstall redux react-redux redux-thunk`
- 3. Create a new empty component in /components.
- 4. Call render on the new top level component you created in step 3 in src/index.js.
-
-### How do I remove React Router?
- 1. Uninstall React Router and routing related packages: `npm uninstall --save react-router`
- 2. Delete the following files: `src/routes.js`
- 3. Remove `import { Link, IndexLink } from 'react-router';` from top of `src/components/App.js`, add a reference to `src/components/FuelSavingsForm.js`, and replace body of (implicit) render with this: `<FuelSavingsPage />`.
-
 ### How do I deploy this?
 `npm run build`. This will build the project for production. It does the following:
 * Minifies all JS
@@ -129,7 +105,7 @@ On Windows, you need to install extra dependencies for browser-sync to build and
 To hit the external URL, all devices must be on the same LAN. So this may mean your dev machine needs to be on the same Wifi as the mobile devices you're testing.
 
 ### What about the Redux Devtools?
-Install the [Redux devtools extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) in Chrome Developer Tools. If you're interested in running Redux dev tools cross-browser, Barry Staes created a [branch with the devtools incorporated](https://github.com/coryhouse/react-slingshot/pull/27).
+Install the [Redux devtools extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) in Chrome Developer Tools.
 
 ### Hot reloading isn't working!
 Hot reloading doesn't always play nicely with stateless functional components at this time. [This is a known limitation that is currently being worked](https://github.com/gaearon/babel-plugin-react-transform/issues/57). To avoid issues with hot reloading for now, use a traditional class-based React component at the top of your component hierarchy.

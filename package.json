@@ -7,7 +7,7 @@
   },
   "scripts": {
     "preinstall": "node tools/nodeVersionCheck.js",
-    "start": "npm-run-all --parallel open:src lint:watch",
+    "start": "npm run preinstall && npm-run-all --parallel open:src lint:watch",
     "open:src": "babel-node tools/srcServer.js",
     "open:dist": "babel-node tools/distServer.js",
     "lint": "esw webpack.config.* src tools --color",
