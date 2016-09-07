@@ -50,7 +50,5 @@ export function requireAuthentication(Component) {
     statusText: state.session.statusText
   });
 
- 
-
   return connect(mapStateToProps)(AuthenticatedComponent);
 }

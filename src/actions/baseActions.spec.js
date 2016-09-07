@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/named
 import { fetch, save, remove, __RewireAPI__ as baseActionsRewire } from './baseActions.js';
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
