@@ -7,7 +7,7 @@ const mapStateToProps = ({ users }) => ({
   users: users.data
 });
 
-class HomePage extends React.Component {
+export class Home extends React.Component {
 
   componentDidMount() {
     this.props.fetch('USERS');
@@ -25,4 +25,4 @@ class HomePage extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, { fetch })(HomePage);
+export default connect(mapStateToProps, { fetch })(Home);
