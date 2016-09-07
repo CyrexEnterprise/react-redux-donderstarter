@@ -1,13 +1,11 @@
 import * as ActionCreators from './auth';
-import initialState from '../reducers/initialState';
 
 import { expect } from 'chai';
 
 describe('actions.auth', () => {
-  const appState = initialState;
 
   it('should create an action to login', () => {
-    const actual = ActionCreators.login(appState);
+    const actual = ActionCreators.login();
     const expected = {
       type: 'LOGIN'
     };
