@@ -5,7 +5,7 @@ import { login } from '../../actions/auth';
 
 const redirectRoute = props => props.location.query.next || '/login';
 
-export class LoginPage extends React.Component {
+class LoginPage extends React.Component {
 
   login(e) {
       e.preventDefault();

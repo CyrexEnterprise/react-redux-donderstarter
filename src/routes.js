@@ -5,7 +5,6 @@ import HomePage from './pages/home';
 import LoginPage from './pages/login';
 import {requireAuthentication} from './components/auth';
 import Auth from './containers/Auth';
-import ProtectedPage from './pages/protected';
 import NotFoundPage from './pages/notFound';
 
 export default (
