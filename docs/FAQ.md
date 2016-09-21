@@ -53,10 +53,6 @@ Unfortunately, scripts in package.json can't be commented inline because the JSO
 This projects has a testing stack based on [Mocha](https://mochajs.org/) for test running, [Chai](http://chaijs.com/) as the assertion layer, and [Enzyme](http://airbnb.io/enzyme/) as a React Component renderer. Some other tools such as [redux-mock-store](https://github.com/arnaudbenard/redux-mock-store) and [nock](https://github.com/node-nock/nock) are aso used to mock redux stores and async requests.
 Mocha and Chai will be enough to test actions, reducers and pretty much everything except component rendering tests, such as detecting if a specific button was rendered, and it if has the correct class. For these Enzyme is required.
 
-- Testing action creators example: `src/actions/userActions`;
-- Testing reducers example: `src/reducers/usersReducer`
-- Testing components, action handling and pure functions example: `src/components/userListItem`
-
 ### Where are the files being served from when I run `npm start`?
 Webpack serves your app in memory when you run `npm start`. No physical files are written. However, the web root is /src, so you can reference files under /src in index.html. When the app is built using `npm run build`, physical files are written to /dist and the app is served from /dist.
 
