@@ -1,6 +1,4 @@
 ## FAQ
-### Why does this exist?
-This starter kit implements best practices like testing, minification, bundling, and so on. It codifies a long list of decisions that you no longer have to make to get rolling. It saves you from the long, painful process of wiring it all together into an automated dev environment and build process. It's also useful as inspiration for ideas you might want to integrate into your current development environment or build process.
 
 ### What do the scripts in package.json do?
 Unfortunately, scripts in package.json can't be commented inline because the JSON spec doesn't support comments, so I'm providing info on what each script in package.json does here.  
@@ -9,7 +7,7 @@ Unfortunately, scripts in package.json can't be commented inline because the JSO
 |----------|-------|
 | prestart | Runs automatically before start. Calls remove-dist script which deletes the dist folder. This helps remind you to run the build script before committing since the dist folder will be deleted if you don't. ;) |
 | start | Runs tests, lints, starts dev webserver, and opens the app in your default browser. |
-| lint:tools | Runs ESLint on build related JS files. (eslint-loader lints src files via webpack when `npm start` is run) |
+| lint | Runs ESLint on build related JS files. (eslint-loader lints src files via webpack when `npm start` is run) |
 | clean-dist | Removes everything from the dist folder. |
 | remove-dist | Deletes the dist folder. |
 | create-dist | Creates the dist folder and the necessary subfolders. |
@@ -44,6 +42,20 @@ Unfortunately, scripts in package.json can't be commented inline because the JSO
 │   ├── srcServer.js          # Starts dev webserver with hot reloading and opens your app in your default browser
 └── webpack.config.js         # Configures webpack
 ```
+
+### What should be tested?
+ 1. Test that a component has received the right state items and actions from the store
+ 2. Test that a component renders correctly depending on props and actions
+ 3. Test that the action does what we expect it to do
+ 4. Test that reducer correctly handles that action (and has an appropriate default/initial state)
+
+### How should it be tested?
+This projects has a testing stack based on [Mocha](https://mochajs.org/) for test running, [Chai](http://chaijs.com/) as the assertion layer, and [Enzyme](http://airbnb.io/enzyme/) as a React Component renderer. Some other tools such as [redux-mock-store](https://github.com/arnaudbenard/redux-mock-store) and [nock](https://github.com/node-nock/nock) are aso used to mock redux stores and async requests.
+Mocha and Chai will be enough to test actions, reducers and pretty much everything except component rendering tests, such as detecting if a specific button was rendered, and it if has the correct class. For these Enzyme is required.
+
+- Testing action creators example: `src/actions/userActions`;
+- Testing reducers example: `src/reducers/usersReducer`
+- Testing components, action handling and pure functions example: `src/components/userListItem`
 
 ### Where are the files being served from when I run `npm start`?
 Webpack serves your app in memory when you run `npm start`. No physical files are written. However, the web root is /src, so you can reference files under /src in index.html. When the app is built using `npm run build`, physical files are written to /dist and the app is served from /dist.
