@@ -30,7 +30,7 @@ export function requireAuthentication(Component) {
     // if session promiss is rejected, do the redirect to login
     getSession() {
       this.props.dispatch(fetch('SESSION'))
-        .then(null, this.redirect);
+        .then(null, this.redirect.bind(this));
     }
 
     redirect() {
@@ -39,9 +39,18 @@ export function requireAuthentication(Component) {
     }
 
     render() {
-      return <Component {...this.props} />
+      return (
+        this.props.isValidated? <Component {...this.props} />: <div/>
+      );
     }
   }
+
+  AuthenticatedComponent.propTypes = {
+    token: React.PropTypes.string,
+    dispatch: React.PropTypes.func.isRequired,
+    location: React.PropTypes.object.isRequired,
+    isValidated: React.PropTypes.bool
+  };
 
   const mapStateToProps = (state) => ({
     token: state.auth.token,

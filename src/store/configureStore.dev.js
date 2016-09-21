@@ -7,7 +7,6 @@ import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import promise from 'redux-promise-middleware';
 import {browserHistory} from 'react-router';
 import {routerMiddleware} from 'react-router-redux';
-import logger from 'redux-logger';
 import rootReducer from '../reducers';
 
 export default function configureStore(initialState) {
@@ -22,8 +21,6 @@ export default function configureStore(initialState) {
 
     // allows for actions: push, replace, go, goBack, goForward
     routerMiddleware(browserHistory),
-
-    logger()
   ];
 
   const store = createStore(rootReducer, initialState, compose(

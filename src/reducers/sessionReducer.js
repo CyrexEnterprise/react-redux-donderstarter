@@ -9,18 +9,20 @@ export default function auth(state = initialState.session, action) {
       return {
         ...state,
         'isValidating': true,
-        'statusText': null
+        'isValidated': false
       };
     case SESSION_FULFILLED:
       return {
         ...state,
-        'isValidating': true,
+        'isValidating': false,
         'isValidated': true,
-        'user': 'someUser'
+        data: action.payload.data[0]
       };
     case SESSION_REJECTED:
       return {
         ...state,
+        isValidating: false,
+        isValidated: false,
         statusText: `Authentication Error: ${action.payload.message}`
       };
 

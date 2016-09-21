@@ -26,6 +26,12 @@ export class Login extends React.Component {
   }
 }
 
+Login.propTypes = {
+  login: React.PropTypes.func.isRequired,
+  statusText: React.PropTypes.string,
+  isAuthenticating: React.PropTypes.bool
+};
+
 const mapStateToProps = (state) => ({
   isAuthenticating: state.auth.isAuthenticating,
   statusText: state.auth.statusText

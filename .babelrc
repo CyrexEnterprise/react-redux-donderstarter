@@ -5,15 +5,13 @@
     "stage-1"
   ],
   "env": {
-    "test": {
-      "plugins": [
-        "rewire"
-      ]
-    },
     "development": {
       "presets": [
         "react-hmre"
       ]
+    },
+    "test": {
+      "plugins": [ "__coverage__" ]
     },
     "production": {
       "plugins": [
