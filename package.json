@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "react, redux, react-router boilerplate",
   "main": "dist/index.js",
-  "scripts": {},
+  "scripts": {
+    "dev": "webpack-dev-server"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Cloudoki/react-redux-donderstarter.git"
@@ -23,7 +25,18 @@
     "url": "https://github.com/Cloudoki/react-redux-donderstarter/issues"
   },
   "homepage": "https://github.com/Cloudoki/react-redux-donderstarter.git#readme",
-  "dependencies": {},
+  "dependencies": {
+    "history": "4.6.1",
+    "prop-types": "15.5.10",
+    "react": "15.5.4",
+    "react-dom": "15.5.4",
+    "react-redux": "5.0.5",
+    "react-router": "4.1.1",
+    "react-router-redux": "next",
+    "redux": "3.6.0",
+    "redux-logger": "3.0.6",
+    "redux-saga": "0.15.3"
+  },
   "devDependencies": {
     "autoprefixer": "7.1.1",
     "babel-cli": "6.24.1",
@@ -49,6 +62,7 @@
     "html-webpack-plugin": "2.28.0",
     "node-sass": "4.5.3",
     "postcss-loader": "2.0.5",
+    "react-hot-loader": "next",
     "sass-loader": "6.0.5",
     "style-loader": "0.18.1",
     "webpack": "2.6.1",
