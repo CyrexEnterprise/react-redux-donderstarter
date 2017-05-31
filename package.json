@@ -8,7 +8,12 @@
     "type": "git",
     "url": "https://github.com/Cloudoki/react-redux-donderstarter.git"
   },
-  "keywords": ["react", "redux", "react-router", "boilerplate"],
+  "keywords": [
+    "react",
+    "redux",
+    "react-router",
+    "boilerplate"
+  ],
   "contributors": [
     "muffles <molefas@gmail.com>",
     "mstrk <mstrk512@gmail.com> (http://www.meetbruno.eu/)"
@@ -19,5 +24,36 @@
   },
   "homepage": "https://github.com/Cloudoki/react-redux-donderstarter.git#readme",
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "3.19.0",
+    "eslint-config-standard": "10.2.1",
+    "eslint-config-standard-react": "5.0.0",
+    "eslint-import-resolver-webpack": "0.8.1",
+    "eslint-plugin-import": "2.3.0",
+    "eslint-plugin-node": "4.2.2",
+    "eslint-plugin-promise": "3.5.0",
+    "eslint-plugin-react": "7.0.1",
+    "eslint-plugin-standard": "3.0.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "standard",
+      "standard-react"
+    ],
+    "parser": "babel-eslint",
+    "env": {
+      "browser": true
+    },
+    "rules": {
+      "prefer-const": 2,
+      "no-var": 2,
+      "prefer-arrow-callback": 2,
+      "arrow-body-style": 2,
+      "react/no-unused-prop-types": 0,
+      "import/no-unresolved": 2
+    },
+    "settings": {
+      "import/resolver": "webpack"
+    }
+  }
 }
