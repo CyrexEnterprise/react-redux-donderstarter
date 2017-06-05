@@ -1,6 +1,6 @@
 /*
  *
- * App actions
+ * Auth actions
  *
  */
 

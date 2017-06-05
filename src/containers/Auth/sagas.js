@@ -20,14 +20,36 @@ import {
 
 // login
 function * loginSaga (action) {
-  const requestUrl = `${DUMMY_API}/auth/local` // <-- add real endpoint
+  /**
+   * Real exmple of a login request
+   */
+  // const requestUrl = `${DUMMY_API}/auth/local` // <-- add real endpoint
+  // const headers = { 'Content-Type': 'application/json' }
+  // const body = JSON.stringify(action.credentials)
+
+  // const response = yield call(request, requestUrl, {
+  //   method: 'POST',
+  //   headers,
+  //   body
+  // })
+
+  // if (!response.err) {
+  //   yield put(success(response.data))
+  // } else {
+  //   yield put(error(response.err))
+  // }
+
+  /**
+   *
+   * Fake login
+   * this will allways login
+   *
+   */
+  const requestUrl = `${DUMMY_API}/users/0`
   const headers = { 'Content-Type': 'application/json' }
-  const body = JSON.stringify(action.credentials)
 
   const response = yield call(request, requestUrl, {
-    method: 'POST',
-    headers,
-    body
+    headers
   })
 
   if (!response.err) {

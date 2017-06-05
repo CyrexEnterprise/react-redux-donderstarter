@@ -4,7 +4,8 @@
   "description": "react, redux, react-router boilerplate",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server",
+    "mock-api": "json-server --watch mock-api/db.json --port 9004"
   },
   "repository": {
     "type": "git",
@@ -64,6 +65,7 @@
     "eslint-plugin-standard": "3.0.1",
     "extract-text-webpack-plugin": "2.1.0",
     "html-webpack-plugin": "2.28.0",
+    "json-server": "0.10.1",
     "node-sass": "4.5.3",
     "postcss-loader": "2.0.5",
     "react-hot-loader": "next",

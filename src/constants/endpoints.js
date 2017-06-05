@@ -4,4 +4,4 @@
  *
  */
 
-export const DUMMY_API = 'http://dummy.endpoint.com'
+export const DUMMY_API = 'http://localhost:9004'
