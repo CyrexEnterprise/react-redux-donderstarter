@@ -19,7 +19,7 @@ import {
 
 export const login = (credentials) => ({ type: LOGIN_USER, credentials })
 export const signup = (credentials) => ({ type: SIGNUP_USER, credentials })
-export const success = (data) => ({ type: LOGIN_USER_SUCCESS, ...data })
+export const success = (data) => ({ type: LOGIN_USER_SUCCESS, data })
 export const error = (err) => ({ type: LOGIN_USER_ERROR, ...err })
 export const signupSuccess = (data) => ({ type: SIGNUP_USER_SUCCESS, ...data })
 export const signupError = (err) => ({ type: SIGNUP_USER_ERROR, ...err })

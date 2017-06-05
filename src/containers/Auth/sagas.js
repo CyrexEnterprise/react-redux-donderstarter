@@ -46,11 +46,8 @@ function * loginSaga (action) {
    *
    */
   const requestUrl = `${DUMMY_API}/users/0`
-  const headers = { 'Content-Type': 'application/json' }
 
-  const response = yield call(request, requestUrl, {
-    headers
-  })
+  const response = yield call(request, requestUrl)
 
   if (!response.err) {
     yield put(success(response.data))

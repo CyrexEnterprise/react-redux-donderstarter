@@ -36,12 +36,12 @@ function appReducer (state = initialState, action) {
     case LOGIN_USER_SUCCESS:
     case SIGNUP_USER_SUCCESS:
       return state
-        .set('authToken', action.token)
-        .set('user', action.user)
+        .set('authToken', action.data.token)
+        .set('user', action.data)
         .set('isAuthorizing', false)
     case AUTH_LOGIN_USER_SUCCESS:
       return state
-        .set('user', action.user)
+        .set('user', action.data)
         .set('isAuthorizing', false)
     case LOGIN_USER_ERROR:
     case SIGNUP_USER_ERROR:
