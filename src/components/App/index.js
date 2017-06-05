@@ -9,7 +9,9 @@ import routes from './routes'
 class App extends Component {
   componentWillMount () {
     const { auth } = this.props
-    this.props.userAuthLogin(auth.authToken)
+    if (auth.token != null) {
+      this.props.userAuthLogin(auth.authToken)
+    }
   }
 
   render () {
