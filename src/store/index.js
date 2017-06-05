@@ -21,11 +21,16 @@ export const history = createHistory()
 // Build the middleware for intercepting and dispatching navigation actions
 const sagaMiddleware = createSagaMiddleware()
 const routingMiddleware = routerMiddleware(history)
-const logger = createLogger()
+
+const middleware = [sagaMiddleware, routingMiddleware, authMiddleware]
+
+if (process.env.NODE_ENV !== 'production') {
+  middleware.push(createLogger())
+}
 
 const store = createStore(
   combinedReducers,
-  applyMiddleware(sagaMiddleware, routingMiddleware, authMiddleware, logger)
+  applyMiddleware(...middleware)
 )
 
 combinedSagas.forEach((saga) => {

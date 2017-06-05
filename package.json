@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "webpack-dev-server",
-    "mock-api": "json-server --watch mock-api/db.json --port 9004"
+    "mock-api": "json-server --watch mock-api/db.json --port 9004",
+    "build": "rimraf dist && webpack --config webpack.config.prod.js"
   },
   "repository": {
     "type": "git",
@@ -37,7 +38,6 @@
     "react-router": "4.1.1",
     "react-router-redux": "next",
     "redux": "3.6.0",
-    "redux-logger": "3.0.6",
     "redux-saga": "0.15.3",
     "seamless-immutable": "7.1.2",
     "whatwg-fetch": "2.0.3"
@@ -69,10 +69,13 @@
     "node-sass": "4.5.3",
     "postcss-loader": "2.0.5",
     "react-hot-loader": "next",
+    "redux-logger": "3.0.6",
+    "rimraf": "2.6.1",
     "sass-loader": "6.0.5",
     "style-loader": "0.18.1",
     "webpack": "2.6.1",
-    "webpack-dev-server": "2.4.5"
+    "webpack-dev-server": "2.4.5",
+    "webpack-visualizer-plugin": "0.1.11"
   },
   "babel": {
     "presets": [
