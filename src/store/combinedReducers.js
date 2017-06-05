@@ -8,6 +8,9 @@
 import { combineReducers } from 'redux'
 import { routerReducer as routing } from 'react-router-redux'
 
+import auth from 'containers/Auth/reducer'
+
 export default combineReducers({
-  routing
+  routing,
+  auth
 })

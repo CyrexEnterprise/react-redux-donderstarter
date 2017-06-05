@@ -4,22 +4,32 @@
  *
  */
 
+import 'babel-polyfill'
 import { createStore, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga'
 import { routerMiddleware } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 import { createLogger } from 'redux-logger'
 
+import authMiddleware from 'containers/Auth/middleware'
+
 import combinedReducers from './combinedReducers'
+import combinedSagas from './combinedSagas'
 
 export const history = createHistory()
 
 // Build the middleware for intercepting and dispatching navigation actions
+const sagaMiddleware = createSagaMiddleware()
 const routingMiddleware = routerMiddleware(history)
 const logger = createLogger()
 
 const store = createStore(
   combinedReducers,
-  applyMiddleware(routingMiddleware, logger)
+  applyMiddleware(sagaMiddleware, routingMiddleware, authMiddleware, logger)
 )
+
+combinedSagas.forEach((saga) => {
+  sagaMiddleware.run(saga)
+})
 
 export default store

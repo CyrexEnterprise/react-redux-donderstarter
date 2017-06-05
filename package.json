@@ -26,9 +26,11 @@
   },
   "homepage": "https://github.com/Cloudoki/react-redux-donderstarter.git#readme",
   "dependencies": {
+    "babel-polyfill": "6.23.0",
     "history": "4.6.1",
     "prop-types": "15.5.10",
     "react": "15.5.4",
+    "react-cookie": "1.0.5",
     "react-dom": "15.5.4",
     "react-redux": "5.0.5",
     "react-router": "4.1.1",
@@ -36,6 +38,7 @@
     "redux": "3.6.0",
     "redux-logger": "3.0.6",
     "redux-saga": "0.15.3",
+    "seamless-immutable": "7.1.2",
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
