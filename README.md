@@ -56,36 +56,35 @@ Ex: `import App from 'components/App'`
 
 ```
 .
-├── build                    				# All build-related source code
-├── __tests__                				# Unit tests
+├── build								# All build-related source code
+├── __tests__							# Unit tests
 mock-api
-│   └── db.json              				# mock api data
-└── src                      				# Application source code
-    ├── index.html           				# Main HTML page container for app
-    ├── index.js             				# Application bootstrap and rendering
-    ├── components           				# Global reusable components
+│   └── db.json							# mock api data
+└── src									# Application source code
+    ├── index.html						# Main HTML page container for app
+    ├── index.js						# Application bootstrap and rendering
+    ├── components						# Global reusable components
     │	  └── Component
-    │	  		├── index.js					# Component source code
-    │	  		├── routes.js					# Your nested routes (if any)
-    │	  		└── _styles.scss				# Your component styles (if any)
-    ├── containers           				# Components wrapped by redux/connect
+    │	  		├── index.js			# Component source code
+    │	  		├── routes.js			# Your nested routes (if any)
+    │	  		└── _styles.scss		# Your component styles (if any)
+    ├── containers						# Components wrapped by redux/connect
     │	  └── Container
-    │	  		├── actions.js				# All component related actions
-    │	  		├── constants.js				# All component related constants
-    │	  		├── reducer.js				# Component reducer code source
-    │	  		├── sagas.js					# All component related sagas
-    │	  		├── middleware.js			# All component related middleware
-    │	  		├── index.js					# Component source code
-    │	  		├── routes.js					# Your nested routes (if any)
-    │	  		└── _styles.scss				# Your component styles (if any)
-    ├── containers           				# Components wrapped by redux/connect
-    ├── constants			 				# Global constants
+    │	  		├── actions.js			# All component related actions
+    │	  		├── constants.js		# All component related constants
+    │	  		├── reducer.js			# Component reducer code source
+    │	  		├── sagas.js			# All component related sagas
+    │	  		├── middleware.js		# All component related middleware
+    │	  		├── index.js			# Component source code
+    │	  		├── routes.js			# Your nested routes (if any)
+    │	  		└── _styles.scss		# Your component styles (if any)
+    ├── constants						# Global constants
     ├── store
-    │	 ├── combinedReducers.js			# Combine all reducers in one place
-    │	 ├── combinedSagas.js				# Combine all reducers in one place
-    │	 └── index.js							# Redux store bootstrap
-    ├── styles								# Global styles
+    │	 ├── combinedReducers.js		# Combine all reducers in one place
+    │	 ├── combinedSagas.js			# Combine all reducers in one place
+    │	 └── index.js					# Redux store bootstrap
+    ├── styles							# Global styles
     └── util
-    	 ├── request.js						# Fetch API handler
-    	 └── getDefaultHeaders.js			# Helper to inject headers on requests
+    	 ├── request.js					# Fetch API handler
+    	 └── getDefaultHeaders.js		# Helper to inject headers on requests
 ```
