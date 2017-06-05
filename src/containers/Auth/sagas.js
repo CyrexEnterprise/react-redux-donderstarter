@@ -85,11 +85,24 @@ function * signup () {
 
 // auth login
 function * authLoginSaga () {
-  const requestUrl = `${DUMMY_API}/token/login` // <-- add real endpoint
-  const state = yield select()
-  const headers = yield call(getDefaultHeaders, state)
+  /**
+   * Real exmple of a auth login request
+   */
+  // const requestUrl = `${DUMMY_API}/token/login` // <-- add real endpoint
+  // const state = yield select()
+  // const headers = yield call(getDefaultHeaders, state)
 
-  const response = yield call(request, requestUrl, { headers })
+  // const response = yield call(request, requestUrl, { headers })
+
+  // if (!response.err) {
+  //   yield put(authLoginSucces(response.data))
+  // } else {
+  //   yield put(authLoginError(response.err))
+  // }
+
+  const requestUrl = `${DUMMY_API}/users/0`
+
+  const response = yield call(request, requestUrl)
 
   if (!response.err) {
     yield put(authLoginSucces(response.data))
