@@ -1,0 +1,10 @@
+{
+  "users": [
+    {
+      "id": 0,
+      "name": "Zé",
+      "role": "user",
+      "token": "abc.123.xxx"
+    }
+  ]
+}

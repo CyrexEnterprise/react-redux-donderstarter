@@ -1,6 +1,6 @@
 /*
  *
- * Webpack PRODUCTION configuration file
+ * Webpack DEVELOPMENT configuration file
  *
  */
 
@@ -9,15 +9,13 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const BabiliPlugin = require('babili-webpack-plugin')
-const Visualizer = require('webpack-visualizer-plugin')
 
 module.exports = {
   entry: path.resolve(__dirname, 'src', 'index.js'),
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'app-[hash].js',
+    filename: 'bundle.js',
     publicPath: '/'
   },
 
@@ -33,10 +31,7 @@ module.exports = {
         use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
-            {
-              loader: 'css-loader',
-              options: { minimize: true }
-            },
+            'css-loader',
             {
               loader: 'postcss-loader',
               options: {
@@ -56,24 +51,30 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'src', 'index.html'),
-      minify: {
-        collapseWhitespace: true
-      }
-    }),
-    new ExtractTextPlugin({ filename: '[name]-[hash].css' }),
-    new BabiliPlugin(),
-    new Visualizer({
-      filename: './statistics.html'
-    })
+    new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'index.html') }),
+    new ExtractTextPlugin({ filename: 'styles.css' }),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin()
   ],
+
+  devServer: {
+    contentBase: path.resolve(__dirname, 'src'),
+    publicPath: '/',
+    historyApiFallback: true,
+    port: 9000,
+    host: '0.0.0.0',
+    noInfo: false,
+    inline: true,
+    hot: true,
+    stats: 'errors-only'
+  },
 
   resolve: {
     modules: [
       path.resolve(__dirname, 'src'),
       'node_modules'
     ]
-  }
+  },
+
+  devtool: 'eval-source-map'
 }

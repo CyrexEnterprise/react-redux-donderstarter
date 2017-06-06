@@ -1,18 +1,90 @@
 # React/Redux Donderstarter
 
-##Technologies
+This boilerplate is designed to get you up and running with React/Router/Redux/Sagas workflow, backed up by webpack and unit testing with jest/enzyme.
 
-| **Tech** | **Description** |**Learn More**|
-|----------|-------|---|
-|  [React](https://facebook.github.io/react/)  |   Fast, composable client-side components.    | [Pluralsight Course](https://www.pluralsight.com/courses/react-flux-building-applications)  |
-|  [Redux](http://redux.js.org) |  Enforces unidirectional data flows and immutable, hot reloadable store. Supports time-travel debugging. Lean alternative to [Facebook's Flux](https://facebook.github.io/flux/docs/overview.html).| [Pluralsight Course](http://www.pluralsight.com/courses/react-redux-react-router-es6)    |
-|  [React Router](https://github.com/reactjs/react-router) | A complete routing library for React | [Pluralsight Course](https://www.pluralsight.com/courses/react-flux-building-applications) |
-|  [Babel](http://babeljs.io) |  Compiles ES6 to ES5. Enjoy the new version of JavaScript today.     | [ES6 REPL](https://babeljs.io/repl/), [ES6 vs ES5](http://es6-features.org), [ES6 Katas](http://es6katas.org), [Pluralsight course](https://www.pluralsight.com/courses/javascript-fundamentals-es6)    |
-| [Webpack](http://webpack.github.io) | Bundles npm packages and our JS into a single file. Includes hot reloading via [react-transform-hmr](https://www.npmjs.com/package/react-transform-hmr). | [Quick Webpack How-to](https://github.com/petehunt/webpack-howto) [Pluralsight Course](https://www.pluralsight.com/courses/webpack-fundamentals)|
-| [Browsersync](https://www.browsersync.io/) | Lightweight development HTTP server that supports synchronized testing and debugging on multiple devices. | [Intro vid](https://www.youtube.com/watch?time_continue=1&v=heNWfzc7ufQ)|
-| [ESLint](http://eslint.org/)| Lint JS. Reports syntax and style issues. Using [eslint-plugin-react](https://github.com/yannickcr/eslint-plugin-react) for additional React specific linting rules. | |
-| [SASS](http://sass-lang.com/) | Compiled CSS styles with variables, functions, and more. | [Pluralsight Course](https://www.pluralsight.com/courses/better-css)|
-| [npm Scripts](https://docs.npmjs.com/misc/scripts)| Glues all this together in a handy automated build. | [Pluralsight course](https://www.pluralsight.com/courses/npm-build-tool-introduction), [Why not Gulp?](https://medium.com/@housecor/why-i-left-gulp-and-grunt-for-npm-scripts-3d6853dd22b8#.vtaziro8n)  |
+The primary goal of this boilerplate is to provide a stable foundation upon which to build modern web applications.
 
-## Questions?
-Check out the [FAQ](/docs/FAQ.md)
+## Table of Contents
+1. [Requirements](#requirements)
+1. [Installation](#instalation)
+1. [Development](#development)
+1. [Project Structure](#project-structure)
+
+## Requirements
+* node `^5.0.0`
+* yarn `^0.22.0`
+
+## Installation
+
+After confirming that your environment meets the above [requirements](#requirements), you can create a new project based on `react-redux-donderstarter` by doing the following:
+
+```bash
+$ git clone https://github.com/Cloudoki/react-redux-donderstarter.git <my-project-name>
+$ cd <my-project-name>
+```
+
+When that's done, install the project dependencies. It is recommended that you use [Yarn](https://yarnpkg.com/) for deterministic dependency management, but `npm install` will suffice.
+
+```bash
+$ yarn  # Install project dependencies (or `npm install`)
+```
+
+## Development
+
+After completing the [installation](#installation) step, you're ready to start deveoping your App!
+
+```bash
+$ yarn run dev  # Start the development server (or `npm run dev`)
+```
+
+Hot reloading is enabled by default for both **JavaScript** and **SCSS** files.
+
+All scripts at your disposal:
+
+|`yarn run <script>`    |Description|
+|-------------------|-----------|
+|`dev`            	|Serves your app at `localhost:9000`|
+|`mock-api`			|Serves a mock api at `localhost:9004`|
+|`build`            |Builds the application to ./dist|
+|`test`             |Runs unit tests with jest|
+
+## Project Structure
+
+All files are in the relative folder and imported when needed with the help of `webpack resolve`.
+
+Ex: `import App from 'components/App'`
+
+```
+.
+├── build                           # All build-related source code
+├── __tests__                       # Unit tests
+mock-api
+│ └── db.json                       # mock api data
+└── src                             # Application source code
+    ├── index.html                  # Main HTML page container for app
+    ├── index.js                    # Application bootstrap and rendering
+    ├── components                  # Global reusable components
+    │   └── Component
+    │       ├── index.js            # Component source code
+    │       ├── routes.js           # Your nested routes (if any)
+    │       └── _styles.scss        # Your component styles (if any)
+    ├── containers                  # Components wrapped by redux/connect
+    │   └── Container
+    │       ├── actions.js          # All component related actions
+    │       ├── constants.js        # All component related constants
+    │       ├── reducer.js          # Component reducer code source
+    │       ├── sagas.js            # All component related sagas
+    │       ├── middleware.js       # All component related middleware
+    │       ├── index.js            # Component source code
+    │       ├── routes.js           # Your nested routes (if any)
+    │       └── _styles.scss        # Your component styles (if any)
+    ├── constants                   # Global constants
+    ├── store
+    │   ├── combinedReducers.js     # Combine all reducers in one place
+    │   ├── combinedSagas.js        # Combine all reducers in one place
+    │   └── index.js                # Redux store bootstrap
+    ├── styles                      # Global styles
+    └── util
+        ├── request.js              # Fetch API handler
+        └── getDefaultHeaders.js    # Helper to inject headers on requests
+```
