@@ -29,6 +29,23 @@ When that's done, install the project dependencies. It is recommended that you u
 $ yarn  # Install project dependencies (or `npm install`)
 ```
 
+You can also merge `react-redux-donderstarter` by doing the following:
+
+```bash
+$ cd path/to/existing-project-folder
+$ git remote add react-redux-donderstarter https://github.com/Cloudoki/react-redux-donderstarter.git
+$ git fetch react-redux-donderstarter
+$ git merge --allow-unrelated-histories react-redux-donderstarter/master # or whichever branch you want to merge
+$ git remote remove react-redux-donderstarter
+```
+
+Note: if you have files with the same name as `react-redux-donderstarter` those might get some merge conflicts, most common are the `README.md` - fix the conflicts and then:
+
+```bash
+$ git commit
+$ git push
+```
+
 ## Development
 
 After completing the [installation](#installation) step, you're ready to start deveoping your App!
@@ -81,7 +98,7 @@ mock-api
     ├── constants                   # Global constants
     ├── store
     │   ├── combinedReducers.js     # Combine all reducers in one place
-    │   ├── combinedSagas.js        # Combine all reducers in one place
+    │   ├── combinedSagas.js        # Combine all sagas in one place
     │   └── index.js                # Redux store bootstrap
     ├── styles                      # Global styles
     └── util
