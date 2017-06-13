@@ -29,7 +29,7 @@ When that's done, install the project dependencies. It is recommended that you u
 $ yarn  # Install project dependencies (or `npm install`)
 ```
 
-You can also merge `react-redux-donderstarter` by doing the following:
+You can also merge `react-redux-donderstarter` into an existing project by doing the following:
 
 ```bash
 $ cd path/to/existing-project-folder
