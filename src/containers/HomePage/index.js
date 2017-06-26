@@ -1,7 +1,7 @@
 
 import React from 'react'
 
-const HomePage = () => <div style={styles.container}>Hello world!!</div>
+const HomePage = () => <div style={styles.container}>Hello world!</div>
 
 const styles = {
   container: {
