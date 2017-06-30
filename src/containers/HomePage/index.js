@@ -1,7 +1,10 @@
 
 import React from 'react'
+import PropTypes from 'prop-types'
 
-const HomePage = () => <div style={styles.container}>Hello world!</div>
+const HomePage = (props, ctx) => (
+  <div style={styles.container}>Hello world! i18n => {ctx.intl.messages['test']} </div>
+)
 
 const styles = {
   container: {
@@ -10,6 +13,10 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center'
   }
+}
+
+HomePage.contextTypes = {
+  intl: PropTypes.object.isRequired
 }
 
 export default HomePage
