@@ -6,7 +6,7 @@ The primary goal of this boilerplate is to provide a stable foundation upon whic
 
 ## Table of Contents
 1. [Requirements](#requirements)
-1. [Installation](#instalation)
+1. [Installation](#installation)
 1. [Development](#development)
 1. [Project Structure](#project-structure)
 1. [i18n Support](#i18n-support)
@@ -118,7 +118,7 @@ $ cd <my-project-name>
 $ git checkout master
 $ git merge i18n-support
 ```
-Merge into an existing project? Check [Installation](#instalation) and point to the `i18n` branch: `react-redux-donderstarter/master` to `react-redux-donderstarter/i18n-support`
+Merge into an existing project? Check [Installation](#installation) and point to the `i18n` branch: `react-redux-donderstarter/master` to `react-redux-donderstarter/i18n-support`
 
 ### Adding translations
 
