@@ -9,7 +9,7 @@ import { translationMessages } from 'util/i18n'
 
 // route components
 import LanguageProvider from 'containers/LanguageProvider'
-import App from 'components/App'
+import App from 'containers/App'
 
 // Main Application Styles
 import 'styles/app.scss'
@@ -31,8 +31,8 @@ render(App)
 
 // Enable HMR for js files
 if (module.hot) {
-  module.hot.accept('./components/App', () => {
-    const NextApp = require('./components/App').default
+  module.hot.accept('./containers/App', () => {
+    const NextApp = require('./containers/App').default
     render(NextApp)
   })
 }

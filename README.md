@@ -127,32 +127,31 @@ Add the following to `src/util/i18n.js`
 ```javascript
 ...
 
-import frLocaleData from 'react-intl/locale-data/fr' # import the locale data
+import frLocaleData from 'react-intl/locale-data/fr' // import the locale data
 
 ...
 
-import frTranslationMessages from 'translations/fr.json' # import the translations JSON file
+import frTranslationMessages from 'translations/fr.json' // import the translations JSON file
 
 ...
 
-addLocaleData(frLocaleData) # add locale data to react-intl
+addLocaleData(frLocaleData) // add locale data to react-intl
 
 export const appLocales = [
-  'fr' # add the locale to the array of options
+  'fr' // add the locale to the array of options
 ]
 
 ...
 
 export const translationMessages = {
-  fr: formatTranslationMessages(frTranslationMessages) # export the translations
+  fr: formatTranslationMessages(frTranslationMessages) // export the translations
 }
 ```
 
 You should first add the translation object to your default language file and then copy paste it on the translation file and add the translation to the message like the following:
 
-`src/translations/en.json`
-
-```json
+```javascript
+// src/translations/en.json
 [
   {
     "id": "homePage.hello",
@@ -162,9 +161,8 @@ You should first add the translation object to your default language file and th
 ]
 ```
 
-`src/translations/fr.json`
-
-```json
+```javascript
+// src/translations/fr.json
 [
   {
     "id": "homePage.hello",
