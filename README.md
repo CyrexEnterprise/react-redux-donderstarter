@@ -120,6 +120,62 @@ $ git merge i18n-support
 ```
 Merge into an existing project? Check [Installation](#instalation) and point to the `i18n` branch: `react-redux-donderstarter/master` to `react-redux-donderstarter/i18n-support`
 
+### Adding translations
+
+Add the following to `src/util/i18n.js`
+
+```javascript
+...
+
+import frLocaleData from 'react-intl/locale-data/fr' # import the locale data
+
+...
+
+import frTranslationMessages from 'translations/fr.json' # import the translations JSON file
+
+...
+
+addLocaleData(frLocaleData) # add locale data to react-intl
+
+export const appLocales = [
+  'fr' # add the locale to the array of options
+]
+
+...
+
+export const translationMessages = {
+  fr: formatTranslationMessages(frTranslationMessages) # export the translations
+}
+```
+
+You should first add the translation object to your default language file and then copy paste it on the translation file and add the translation to the message like the following:
+
+`src/translations/en.json`
+
+```json
+[
+  {
+    "id": "homePage.hello",
+    "defaultMessage": "Made with ♥ by Cloudoki Team",
+    "message": ""
+  }
+]
+```
+
+`src/translations/fr.json`
+
+```json
+[
+  {
+    "id": "homePage.hello",
+    "defaultMessage": "Made with ♥ by Cloudoki Team",
+    "message": "Fabriqué avec ♥ par Cloudoki équipe"
+  }
+]
+```
+
+Check [react-intl documentation](https://github.com/yahoo/react-intl/wiki#formatting-data) for more.
+
 ## Caveats
 
 Some times `node-sass` have build problems on linux environments, probable solution:
