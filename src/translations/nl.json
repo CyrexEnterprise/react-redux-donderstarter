@@ -1,7 +1,7 @@
 [
   {
-    "id": "test",
-    "defaultMessage": "test",
-    "message": ""
+    "id": "hello",
+    "defaultMessage": "Made with ♥ by Cloudoki Team",
+    "message": "Gemaakt met ♥ door Cloudoki Team"
   }
 ]

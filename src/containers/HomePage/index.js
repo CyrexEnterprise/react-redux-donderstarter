@@ -7,7 +7,7 @@ const HomePage = (props, ctx) => (
   <div style={styles.container}>
     <LocaleSelect />
     <div>
-      Hello world! i18n => {ctx.intl.messages['test']}
+      {ctx.intl.messages['hello']}
     </div>
   </div>
 )
