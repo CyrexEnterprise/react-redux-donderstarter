@@ -105,3 +105,11 @@ mock-api
         ├── request.js              # Fetch API handler
         └── getDefaultHeaders.js    # Helper to inject headers on requests
 ```
+
+## Caveats
+
+Some times `node-sass` have build problems on linux environments, probable solution:
+
+- Bring your node version to `^6.0.0`
+- Run `npm rebuild node-sass`
+	- You need to run `npm rebuild node-sass` everytime `node-sass` package is installed.
