@@ -7,7 +7,7 @@ import { ConnectedRouter } from 'react-router-redux'
 import store, { history } from 'store'
 
 // route components
-import App from 'components/App'
+import App from 'containers/App'
 
 // Main Application Styles
 import 'styles/app.scss'
@@ -27,8 +27,8 @@ render(App)
 
 // Enable HMR for js files
 if (module.hot) {
-  module.hot.accept('./components/App', () => {
-    const NextApp = require('./components/App').default
+  module.hot.accept('./containers/App', () => {
+    const NextApp = require('./containers/App').default
     render(NextApp)
   })
 }
