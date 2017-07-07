@@ -11,6 +11,7 @@ const autoprefixer = require('autoprefixer')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const BabiliPlugin = require('babili-webpack-plugin')
 const Visualizer = require('webpack-visualizer-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: path.resolve(__dirname, 'src', 'index.js'),
@@ -65,6 +66,7 @@ module.exports = {
     }),
     new ExtractTextPlugin({ filename: '[name]-[hash].css' }),
     new BabiliPlugin(),
+    new CopyWebpackPlugin([{ from: path.resolve(__dirname, 'src', 'assets'), to: 'assets' }]),
     new Visualizer({
       filename: './statistics.html'
     })
