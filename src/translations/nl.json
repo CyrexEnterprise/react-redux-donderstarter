@@ -1,7 +1,17 @@
 [
   {
-    "id": "hello",
+    "id": "homePage.hello",
     "defaultMessage": "Made with ♥ by Cloudoki Team",
     "message": "Gemaakt met ♥ door Cloudoki Team"
+  },
+  {
+    "id": "homePage.h1",
+    "defaultMessage": "at",
+    "message": "op"
+  },
+  {
+    "id": "homePage.button",
+    "defaultMessage": "protected",
+    "message": "beschermde"
   }
 ]

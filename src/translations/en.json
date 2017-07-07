@@ -1,7 +1,17 @@
 [
   {
-    "id": "hello",
+    "id": "homePage.hello",
     "defaultMessage": "Made with ♥ by Cloudoki Team",
+    "message": ""
+  },
+  {
+    "id": "homePage.h1",
+    "defaultMessage": "at",
+    "message": ""
+  },
+  {
+    "id": "homePage.button",
+    "defaultMessage": "protected",
     "message": ""
   }
 ]
