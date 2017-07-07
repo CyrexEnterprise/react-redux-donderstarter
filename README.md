@@ -9,6 +9,8 @@ The primary goal of this boilerplate is to provide a stable foundation upon whic
 1. [Installation](#instalation)
 1. [Development](#development)
 1. [Project Structure](#project-structure)
+1. [i18n Support](#i18n-support)
+1. [Caveats](#caveats)
 
 ## Requirements
 * node `^5.0.0`
@@ -51,14 +53,14 @@ $ git push
 After completing the [installation](#installation) step, you're ready to start deveoping your App!
 
 ```bash
-$ yarn run dev  # Start the development server (or `npm run dev`)
+$ yarn dev  # Start the development server (or `npm run dev`)
 ```
 
 Hot reloading is enabled by default for both **JavaScript** and **SCSS** files.
 
 All scripts at your disposal:
 
-|`yarn run <script>`    |Description|
+|`yarn <script>`    |Description|
 |-------------------|-----------|
 |`dev`            	|Serves your app at `localhost:9000`|
 |`mock-api`			|Serves a mock api at `localhost:9004`|
@@ -105,6 +107,19 @@ mock-api
         ├── request.js              # Fetch API handler
         └── getDefaultHeaders.js    # Helper to inject headers on requests
 ```
+
+## i18n Support
+
+Same boilerplate with `i18n` support is on this [branch](https://github.com/Cloudoki/react-redux-donderstarter/tree/i18n-support). You can create a new project based on `react-redux-donderstarter` with `i18n` support by doing the following:
+
+```bash
+$ git clone -b i18n-support https://github.com/Cloudoki/react-redux-donderstarter.git <my-project-name>
+$ cd <my-project-name>
+$ git checkout master
+$ git merge i18n-support
+```
+Merge into an existing project? Check [Installation](#instalation).
+
 
 ## Caveats
 
