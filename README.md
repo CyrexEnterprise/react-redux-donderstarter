@@ -118,8 +118,7 @@ $ cd <my-project-name>
 $ git checkout master
 $ git merge i18n-support
 ```
-Merge into an existing project? Check [Installation](#instalation).
-
+Merge into an existing project? Check [Installation](#instalation) and point to the `i18n` branch: `react-redux-donderstarter/master` to `react-redux-donderstarter/i18n-support`
 
 ## Caveats
 
