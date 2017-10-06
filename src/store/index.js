@@ -5,7 +5,7 @@
  */
 
 import 'babel-polyfill'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { routerMiddleware } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
@@ -24,14 +24,19 @@ const routingMiddleware = routerMiddleware(history)
 
 const middleware = [sagaMiddleware, routingMiddleware, authMiddleware]
 
-if (process.env.NODE_ENV !== 'production') {
+const __DEV__ = process.env.NODE_ENV !== 'production'
+
+if (__DEV__) {
   middleware.push(createLogger())
 }
 
-const store = createStore(
-  combinedReducers,
-  applyMiddleware(...middleware)
-)
+// redux devtools
+const composeEnhancer = __DEV__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose
+
+const enhancer = composeEnhancer(applyMiddleware(...middleware))
+
+const store = createStore(combinedReducers, enhancer)
 
 combinedSagas.forEach((saga) => {
   sagaMiddleware.run(saga)
