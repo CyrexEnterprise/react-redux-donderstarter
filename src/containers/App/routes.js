@@ -6,7 +6,7 @@ import requireAuth from 'containers/Auth'
 import Login from 'containers/Auth/Login'
 import HomePage from 'containers/HomePage'
 import Protected from 'components/Protected'
-import NotFound from '../NotFound'
+import NotFound from 'components/NotFound'
 
 export default () => (
   <Switch>

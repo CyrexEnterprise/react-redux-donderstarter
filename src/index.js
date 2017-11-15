@@ -7,23 +7,28 @@ import { ConnectedRouter } from 'react-router-redux'
 import store, { history } from 'store'
 
 // route components
-import App from 'components/App'
+import App from 'containers/App'
 
 // Main Application Styles
 import 'styles/app.scss'
 
-ReactDOM.render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <div className='routerRoot'>
-        <Route path='/' component={App} />
-      </div>
-    </ConnectedRouter>
-  </Provider>,
-  document.getElementById('root')
-)
+function render (Component) {
+  ReactDOM.render(
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <Route path='/' component={Component} />
+      </ConnectedRouter>
+    </Provider>,
+    document.getElementById('root')
+  )
+}
+
+render(App)
 
 // Enable HMR for js files
 if (module.hot) {
-  module.hot.accept()
+  module.hot.accept('./containers/App', () => {
+    const NextApp = require('./containers/App').default
+    render(NextApp)
+  })
 }
