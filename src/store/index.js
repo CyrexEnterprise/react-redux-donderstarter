@@ -11,7 +11,7 @@ import { routerMiddleware } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 import { createLogger } from 'redux-logger'
 
-import authMiddleware from 'containers/Auth/middleware'
+import { authMiddleware } from 'containers/Auth/ducks'
 
 import combinedReducers from './combinedReducers'
 import combinedSagas from './combinedSagas'

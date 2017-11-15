@@ -1,15 +1,13 @@
-/*
- *
- * Require Authentication
- *
- * HOC
- *
+/**
+ * HOC that authorizes users based on their role
+ * and the component required role
+ * @module Auth
  */
 
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { USER_ROLES } from './constants'
+import { USER_ROLES } from './ducks'
 
 export default (Component, roleRequired = 'user') => {
   class requireAuth extends React.Component {
