@@ -69,13 +69,15 @@ All scripts at your disposal:
 
 ## Project Structure
 
+Containers use the [ducks](https://github.com/erikras/ducks-modular-redux) approach, with small changes. Instead of having the effects in the `ducks.js` file we preserve the sagas file to prevent our files of having more than 150/200 lines of code each and be easier to debug/read them. The other small change to this approach is that the middleware is also present in the `ducks.js` file, because we don't expect to have more than a couple per container, normally just one. 
+
 All files are in the relative folder and imported when needed with the help of `webpack resolve`.
 
 Ex: `import App from 'components/App'`
 
 ```
 .
-├── build                           # All build-related source code
+├── dist                            # All build-related source code
 ├── __tests__                       # Unit tests
 mock-api
 │ └── db.json                       # mock api data
@@ -89,14 +91,11 @@ mock-api
     │       └── _styles.scss        # Your component styles (if any)
     ├── containers                  # Components wrapped by redux/connect
     │   └── Container
-    │       ├── actions.js          # All component related actions
-    │       ├── constants.js        # All component related constants
-    │       ├── reducer.js          # Component reducer code source
-    │       ├── sagas.js            # All component related sagas
-    │       ├── middleware.js       # All component related middleware
     │       ├── index.js            # Component source code
     │       ├── routes.js           # Your nested routes (if any)
-    │       └── _styles.scss        # Your component styles (if any)
+    │       ├── ducks.js            # Reducer, action creators, contstants and middleware
+    │       ├── sagas.js            # All container related sagas
+    │       └── _styles.scss        # Your container styles (if any)
     ├── constants                   # Global constants
     ├── store
     │   ├── combinedReducers.js     # Combine all reducers in one place
