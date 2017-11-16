@@ -66,7 +66,7 @@ All scripts at your disposal:
 |`mock-api`			    |Serves a mock api at `localhost:9004`|
 |`build`            |Builds the application to ./dist|
 |`test`             |Runs unit tests with jest|
-|`start`            |Runs build and serves dist application at `localhost:8080`|
+|`start`            |Runs tests, build and serves dist application at `localhost:8080`|
 
 ## Project Structure
 
