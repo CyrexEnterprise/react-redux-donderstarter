@@ -7,53 +7,15 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const autoprefixer = require('autoprefixer')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const BabiliPlugin = require('babili-webpack-plugin')
 const Visualizer = require('webpack-visualizer-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const merge = require('webpack-merge')
+const baseConfig = require('./webpack.config')
 
-module.exports = {
-  entry: path.resolve(__dirname, 'src', 'index.js'),
-
+module.exports = merge.smart(baseConfig, {
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'app-[hash].js',
-    publicPath: '/'
-  },
-
-  module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: 'babel-loader'
-      },
-      {
-        test: /\.scss$/,
-        use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: { minimize: true }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins: () => ([autoprefixer({ browsers: ['last 3 versions', '> 1%'] })])
-              }
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                outputStyle: 'extended'
-              }
-            }
-          ]
-        }))
-      }
-    ]
+    filename: 'app-[hash].js'
   },
 
   plugins: [
@@ -66,16 +28,8 @@ module.exports = {
     }),
     new ExtractTextPlugin({ filename: '[name]-[hash].css' }),
     new BabiliPlugin(),
-    new CopyWebpackPlugin([{ from: path.resolve(__dirname, 'src', 'assets'), to: 'assets' }]),
     new Visualizer({
       filename: './statistics.html'
     })
-  ],
-
-  resolve: {
-    modules: [
-      path.resolve(__dirname, 'src'),
-      'node_modules'
-    ]
-  }
-}
+  ]
+})

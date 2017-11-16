@@ -3,12 +3,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import LocaleSelect from 'containers/LocaleSelect'
 
+const imgUrl = require('assets/hackforgood.jpg')
+
 const navigate = (fn, path) => event => fn(path)
 const HomePage = ({ history }, { intl }) => (
   <div style={styles.container}>
     <h2>Cloudoki {intl.messages['homePage.h1']} <a href='http://hackforgood.pt/index/en/' target='_blank'>#hackforgood</a></h2>
     <div style={styles.imgContainer}>
-      <img style={styles.img} src='/assets/hackforgood.jpg' />
+      <img style={styles.img} src={imgUrl} />
     </div>
     <br />
     <div>

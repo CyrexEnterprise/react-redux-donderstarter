@@ -2,24 +2,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { authLogin } from 'containers/Auth/actions'
+import { authLogin } from 'containers/Auth/ducks'
 
 import routes from './routes'
 
 class App extends Component {
   componentWillMount () {
     const { auth } = this.props
-    if (auth.token != null) {
+    if (auth.authToken != null) {
       this.props.userAuthLogin(auth.authToken)
     }
   }
 
   render () {
-    return (
-      <div style={styles.container}>
-        {routes()}
-      </div>
-    )
+    return routes()
   }
 }
 
