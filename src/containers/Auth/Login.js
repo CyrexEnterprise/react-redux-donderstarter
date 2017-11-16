@@ -66,7 +66,7 @@ Login.propTypes = {
 
 const styles = {
   container: {
-    flex: 1,
+    minHeight: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'

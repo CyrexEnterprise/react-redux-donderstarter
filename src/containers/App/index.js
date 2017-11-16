@@ -15,11 +15,7 @@ class App extends Component {
   }
 
   render () {
-    return (
-      <div style={styles.container}>
-        {routes()}
-      </div>
-    )
+    return routes()
   }
 }
 
