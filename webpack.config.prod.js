@@ -10,7 +10,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const BabiliPlugin = require('babili-webpack-plugin')
 const Visualizer = require('webpack-visualizer-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.config')
 
