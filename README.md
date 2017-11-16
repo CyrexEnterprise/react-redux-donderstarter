@@ -78,8 +78,10 @@ Ex: `import App from 'components/App'`
 
 ```
 .
-├── dist                            # All build-related source code
 ├── __tests__                       # Unit tests
+├── dist                            # All build-related source code
+├── internals                       # Project development configurations
+│ └── jest                          # Tests setups and shims
 mock-api
 │ └── db.json                       # mock api data
 └── src                             # Application source code

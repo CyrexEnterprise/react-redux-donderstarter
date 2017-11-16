@@ -2,7 +2,7 @@
  * @module Auth/ducks
  */
 
-import cookie from 'react-cookie'
+import cookie from 'js-cookie'
 import update from 'immutability-helper'
 import { history } from 'store'
 
@@ -28,7 +28,7 @@ export const LOGOUT_USER = 'Auth/LOGOUT_USER'
  * @prop {boolean} isAuthorizing - flag to tell if the API was called to authenticate the user
  */
 const initialState = {
-  authToken: cookie.load(TOKEN_KEY) || null,
+  authToken: cookie.get(TOKEN_KEY) || null,
   user: {},
   isAuthorizing: false
 }
@@ -142,17 +142,17 @@ export const authMiddleware = (store) => (next) => (action) => {
   next(action)
 
   if (action.type === LOGIN_USER_SUCCESS) {
-    cookie.save(TOKEN_KEY, action.data.token, {
+    cookie.set(TOKEN_KEY, action.data.token, {
       path: '/',
-      maxAge: TOKEN_MAX_AGE
+      expires: TOKEN_MAX_AGE
     })
 
     const nextPath = history.location.state && history.location.state.onSuccess ? history.location.state.onSuccess : '/'
     history.replace(nextPath)
   } else if (action.type === AUTH_LOGIN_USER_ERROR) {
-    cookie.remove(TOKEN_KEY)
+    cookie.remove(TOKEN_KEY, { path: '/' })
   } else if (action.type === LOGOUT_USER) {
-    cookie.remove(TOKEN_KEY)
+    cookie.remove(TOKEN_KEY, { path: '/' })
     history.replace('/login')
   }
 }
