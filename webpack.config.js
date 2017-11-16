@@ -5,10 +5,9 @@
  */
 
 const path = require('path')
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const __PROD__ = process.env.NODE_ENV === 'production'
 
 module.exports = {
   entry: path.resolve(__dirname, 'src', 'index.js'),
@@ -31,7 +30,10 @@ module.exports = {
         use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
-            'css-loader',
+            {
+              loader: 'css-loader',
+              options: { minimize: __PROD__ }
+            },
             {
               loader: 'postcss-loader',
               options: {
@@ -50,31 +52,10 @@ module.exports = {
     ]
   },
 
-  plugins: [
-    new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'index.html') }),
-    new ExtractTextPlugin({ filename: 'styles.css' }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin()
-  ],
-
-  devServer: {
-    contentBase: path.resolve(__dirname, 'src'),
-    publicPath: '/',
-    historyApiFallback: true,
-    port: 9000,
-    host: '0.0.0.0',
-    noInfo: false,
-    inline: true,
-    hot: true,
-    stats: 'errors-only'
-  },
-
   resolve: {
     modules: [
       path.resolve(__dirname, 'src'),
       'node_modules'
     ]
-  },
-
-  devtool: 'eval-source-map'
+  }
 }
