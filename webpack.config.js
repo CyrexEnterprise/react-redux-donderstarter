@@ -48,6 +48,18 @@ module.exports = {
             }
           ]
         }))
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: 'assets/images/[hash].[ext]'
+            }
+          }
+        ]
       }
     ]
   },

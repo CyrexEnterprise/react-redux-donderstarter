@@ -29,7 +29,6 @@ module.exports = merge.smart(baseConfig, {
     }),
     new ExtractTextPlugin({ filename: '[name]-[hash].css' }),
     new BabiliPlugin(),
-    new CopyWebpackPlugin([{ from: path.resolve(__dirname, 'src', 'assets'), to: 'assets' }]),
     new Visualizer({
       filename: './statistics.html'
     })
