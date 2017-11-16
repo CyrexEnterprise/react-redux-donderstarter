@@ -2,12 +2,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+const imgUrl = require('assets/hackforgood.jpg')
+
 const navigate = (fn, path) => event => fn(path)
 const HomePage = ({ history }) => (
   <div style={styles.container}>
     <h2>Cloudoki at <a href='http://hackforgood.pt/index/en/' target='_blank'>#hackforgood</a></h2>
     <div style={styles.imgContainer}>
-      <img style={styles.img} src='/assets/hackforgood.jpg' />
+      <img style={styles.img} src={imgUrl} />
     </div>
     <div style={styles.actions}>
       <button onClick={navigate(history.push, '/login')}>LOGIN</button>

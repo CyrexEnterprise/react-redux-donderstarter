@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { login } from './actions'
+import { login } from './ducks'
 
 class Login extends Component {
   state = {

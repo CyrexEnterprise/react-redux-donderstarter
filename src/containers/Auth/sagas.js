@@ -1,108 +1,66 @@
-/*
- *
- * Auth Sagas
- *
+/**
+ * @module Auth/sagas
  */
 
 import request from 'util/request'
 import getDefaultHeaders from 'util/getDefaultHeaders'
 import { takeLatest, call, put, select } from 'redux-saga/effects'
 import { DUMMY_API } from 'constants/endpoints'
-import { LOGIN_USER, SIGNUP_USER, AUTH_LOGIN_USER } from './constants'
 import {
-  success,
-  error,
-  signupSuccess,
-  signupError,
+  LOGIN_USER,
+  AUTH_LOGIN_USER,
+  loginSuccess,
+  loginError,
   authLoginSucces,
   authLoginError
-} from './actions'
+} from './ducks'
 
-// login
-function * loginSaga (action) {
-  /**
-   * Real exmple of a login request
-   */
-  // const requestUrl = `${DUMMY_API}/auth/local` // <-- add real endpoint
+/**
+ * User email and password
+ * @typedef {Object} credentials
+ * @prop {string} email - user email
+ * @prop {string} password - user password
+ */
+
+/**
+ * login saga worker
+ * @param {Object} action
+ * @param {credentials} action.credentials
+ */
+function * loginWorker (action) {
+  const requestUrl = `${DUMMY_API}/users/0` // <-- add a real endpoint
   // const headers = { 'Content-Type': 'application/json' }
   // const body = JSON.stringify(action.credentials)
 
-  // const response = yield call(request, requestUrl, {
-  //   method: 'POST',
-  //   headers,
-  //   body
-  // })
-
-  // if (!response.err) {
-  //   yield put(success(response.data))
-  // } else {
-  //   yield put(error(response.err))
-  // }
-
-  /**
-   *
-   * Fake login
-   * this will allways login
-   *
-   */
-  const requestUrl = `${DUMMY_API}/users/0`
-
-  const response = yield call(request, requestUrl)
-
-  if (!response.err) {
-    yield put(success(response.data))
-  } else {
-    yield put(error(response.err))
-  }
-}
-
-function * login () {
-  yield takeLatest(LOGIN_USER, loginSaga)
-}
-
-// signup
-function * signupSaga (action) {
-  const requestUrl = `${DUMMY_API}/signup` // <-- add real endpoint
-  const headers = { 'Content-Type': 'application/json' }
-  const body = JSON.stringify(action.credentials)
-
   const response = yield call(request, requestUrl, {
-    method: 'POST',
-    headers,
-    body
+    method: 'GET', // <-- shold be a `POST` in real calls
+    // headers,
+    // body
   })
 
   if (!response.err) {
-    yield put(signupSuccess(response.data))
+    yield put(loginSuccess(response.data))
   } else {
-    yield put(signupError(response.err))
+    yield put(loginError(response.err))
   }
 }
 
-function * signup () {
-  yield takeLatest(SIGNUP_USER, signupSaga)
+/**
+ * login saga
+ */
+function * loginSaga () {
+  yield takeLatest(LOGIN_USER, loginWorker)
 }
 
-// auth login
-function * authLoginSaga () {
-  /**
-   * Real exmple of a auth login request
-   */
-  // const requestUrl = `${DUMMY_API}/token/login` // <-- add real endpoint
-  // const state = yield select()
-  // const headers = yield call(getDefaultHeaders, state)
+/**
+ * automatic login saga worker
+ */
+function * authLoginWorker () {
+  const requestUrl = `${DUMMY_API}/users/0` // <-- add a real endpoint
+  const state = yield select()
+  const headers = yield call(getDefaultHeaders, state)
 
-  // const response = yield call(request, requestUrl, { headers })
-
-  // if (!response.err) {
-  //   yield put(authLoginSucces(response.data))
-  // } else {
-  //   yield put(authLoginError(response.err))
-  // }
-
-  const requestUrl = `${DUMMY_API}/users/0`
-
-  const response = yield call(request, requestUrl)
+  const response = yield call(request, requestUrl, { headers })
 
   if (!response.err) {
     yield put(authLoginSucces(response.data))
@@ -111,8 +69,11 @@ function * authLoginSaga () {
   }
 }
 
-function * authLogin () {
-  yield takeLatest(AUTH_LOGIN_USER, authLoginSaga)
+/**
+ * automatic login saga
+ */
+function * authLoginSaga () {
+  yield takeLatest(AUTH_LOGIN_USER, authLoginWorker)
 }
 
-export default [login, signup, authLogin]
+export default [loginSaga, authLoginSaga]
