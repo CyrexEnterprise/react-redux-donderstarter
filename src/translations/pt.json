@@ -13,5 +13,30 @@
     "id": "homePage.button",
     "defaultMessage": "protected",
     "message": "protegida"
+  },
+  {
+    "id": "examples.formatMessage",
+    "defaultMessage": "this is a test {value}",
+    "message": "isto é um teste {value}"
+  },
+  {
+    "id": "examples.formatDate",
+    "defaultMessage": "this is a test made in {when, date, short} | {when, date, medium} | {when, date, long} | {when, date, full}",
+    "message": "isto é um teste feito em {when, date, short} | {when, date, medium} | {when, date, long} | {when, date, full}"
+  },
+  {
+    "id": "examples.formatNumber",
+    "defaultMessage": "this is a test number {value, number} | {percentage, number, percent} | {value, number, GBP}",
+    "message": "isto é um numero teste {value, number} | {percentage, number, percent} | {value, number, EUR}"
+  },
+  {
+    "id": "examples.formatPlural",
+    "defaultMessage": "this is a plural test {value, plural, one {1 item} other {{value} items}} | {values, plural, one {1 item} other {{values} items}}",
+    "message": "isto é um plural teste {value, plural, one {1 item} other {{value} items}} | {values, plural, one {1 item} other {{values} items}}"
+  },
+  {
+    "id": "examples.formatTime",
+    "defaultMessage": "this is a test {expires, time, short} | {expires, time, medium} | {expires, time, long}",
+    "message": "isto é um teste {expires, time, short} | {expires, time, medium} | {expires, time, long}"
   }
 ]

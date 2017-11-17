@@ -1,16 +1,18 @@
+/**
+ * @module LanguageProvider/LocaleSelect
+ */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import { object, func } from 'prop-types'
 import { connect } from 'react-redux'
-import { appLocales } from 'util/i18n'
-import { changeLocale } from 'containers/LanguageProvider/actions'
+import { changeLocale } from 'containers/LanguageProvider/ducks'
 
-const LocaleSelect = ({ locale, onLocalChange }) => (
+const LocaleSelect = ({ lang, onLocalChange }) => (
   <select
-    defaultValue={locale}
+    defaultValue={lang.locale}
     onChange={onLocalChange}
   >
-    {appLocales.map(locale =>
+    {lang.locales.map(locale =>
       <option
         key={locale}
         value={locale}
@@ -20,11 +22,11 @@ const LocaleSelect = ({ locale, onLocalChange }) => (
 )
 
 LocaleSelect.propTypes = {
-  locale: PropTypes.string.isRequired,
-  onLocalChange: PropTypes.func.isRequired
+  lang: object.isRequired,
+  onLocalChange: func.isRequired
 }
 
-const mapStateToProps = ({ locale }) => (locale)
+const mapStateToProps = ({ lang }) => ({ lang })
 
 const mapDispatchToProps = (dispatch) => ({
   onLocalChange: ({ target: { value } }) => dispatch(changeLocale(value))

@@ -1,30 +1,29 @@
-/*
- *
- * Language Provider
- *
- * connects the redux state locale to the
+/**
+ * Connects the redux state locale to the
  * IntlProvider component and i18n messages
  * loaded from `src/translations`.
- *
+ * @module LanguageProvider
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import { object, element } from 'prop-types'
 import { connect } from 'react-redux'
 import { IntlProvider } from 'react-intl'
 
 class LanguageProvider extends Component {
   render () {
     const {
-      locale,
+      lang,
       messages,
+      formats,
       children
     } = this.props
 
     return (
       <IntlProvider
-        locale={locale}
-        messages={messages[locale]}
+        locale={lang.locale}
+        messages={messages[lang.locale]}
+        formats={formats}
       >
         {React.Children.only(children)}
       </IntlProvider>
@@ -32,12 +31,17 @@ class LanguageProvider extends Component {
   }
 }
 
-LanguageProvider.propTypes = {
-  locale: PropTypes.string.isRequired,
-  messages: PropTypes.object.isRequired,
-  children: PropTypes.element.isRequired
+LanguageProvider.defaultProps = {
+  formats: {}
 }
 
-const mapStateToProps = ({ locale }) => (locale)
+LanguageProvider.propTypes = {
+  lang: object.isRequired,
+  messages: object.isRequired,
+  formats: object,
+  children: element.isRequired
+}
+
+const mapStateToProps = ({ lang }) => ({ lang })
 
 export default connect(mapStateToProps)(LanguageProvider)

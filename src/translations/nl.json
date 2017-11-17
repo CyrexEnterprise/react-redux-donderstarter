@@ -12,6 +12,31 @@
   {
     "id": "homePage.button",
     "defaultMessage": "protected",
-    "message": "beschermde"
+    "message": "beschermd"
+  },
+  {
+    "id": "examples.formatMessage",
+    "defaultMessage": "this is a test {value}",
+    "message": "dit is een test {value}"
+  },
+  {
+    "id": "examples.formatDate",
+    "defaultMessage": "this is a test made in {when, date, short} | {when, date, medium} | {when, date, long} | {when, date, full}",
+    "message": "dit is een test gemaakt op {when, date, short} | {when, date, medium} | {when, date, long} | {when, date, full}"
+  },
+  {
+    "id": "examples.formatNumber",
+    "defaultMessage": "this is a test number {value, number} | {percentage, number, percent} | {value, number, GBP}",
+    "message": "dit is een test nummer {value, number} | {percentage, number, percent} | {value, number, EUR}"
+  },
+  {
+    "id": "examples.formatPlural",
+    "defaultMessage": "this is a plural test {value, plural, one {1 item} other {{value} items}} | {values, plural, one {1 item} other {{values} items}}",
+    "message": "dit is een meervoudstest {value, plural, one {1 item} other {{value} items}} | {values, plural, one {1 item} other {{values} items}}"
+  },
+  {
+    "id": "examples.formatTime",
+    "defaultMessage": "this is a test {expires, time, short} | {expires, time, medium} | {expires, time, long}",
+    "message": "dit is een test {expires, time, short} | {expires, time, medium} | {expires, time, long}"
   }
 ]

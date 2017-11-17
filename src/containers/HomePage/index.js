@@ -2,13 +2,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import LocaleSelect from 'containers/LocaleSelect'
+import { FormattedMessage } from 'react-intl'
 
 const imgUrl = require('assets/hackforgood.jpg')
 
 const navigate = (fn, path) => event => fn(path)
-const HomePage = ({ history }, { intl }) => (
+const HomePage = ({ history }) => (
   <div style={styles.container}>
-    <h2>Cloudoki {intl.messages['homePage.h1']} <a href='http://hackforgood.pt/index/en/' target='_blank'>#hackforgood</a></h2>
+    <h2>Cloudoki <FormattedMessage id='homePage.h1' /> <a href='http://hackforgood.pt/index/en/' target='_blank'>#hackforgood</a></h2>
     <div style={styles.imgContainer}>
       <img style={styles.img} src={imgUrl} />
     </div>
@@ -18,11 +19,14 @@ const HomePage = ({ history }, { intl }) => (
     </div>
     <br />
     <div>
-      {intl.messages['homePage.hello']}
+      <FormattedMessage id='homePage.hello' />
     </div>
     <div style={styles.actions}>
       <button style={styles.button} onClick={navigate(history.push, '/login')}>login</button>
-      <button style={styles.button} onClick={navigate(history.push, '/protected')}>{intl.messages['homePage.button']}</button>
+      <button style={styles.button} onClick={navigate(history.push, '/protected')}>
+        <FormattedMessage id='homePage.button' />
+      </button>
+      <button style={styles.button} onClick={navigate(history.push, '/intlexamples')}>Intl Examples</button>
     </div>
   </div>
 )

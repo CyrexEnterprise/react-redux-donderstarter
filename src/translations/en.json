@@ -13,5 +13,30 @@
     "id": "homePage.button",
     "defaultMessage": "protected",
     "message": ""
+  },
+  {
+    "id": "examples.formatMessage",
+    "defaultMessage": "this is a test {value}",
+    "message": ""
+  },
+  {
+    "id": "examples.formatDate",
+    "defaultMessage": "this is a test made in {when, date, short} | {when, date, medium} | {when, date, long} | {when, date, full}",
+    "message": ""
+  },
+  {
+    "id": "examples.formatNumber",
+    "defaultMessage": "this is a test number {value, number} | {percentage, number, percent} | {value, number, GBP}",
+    "message": ""
+  },
+  {
+    "id": "examples.formatPlural",
+    "defaultMessage": "this is a plural test {value, plural, one {1 item} other {{value} items}} | {values, plural, one {1 item} other {{values} items}}",
+    "message": ""
+  },
+  {
+    "id": "examples.formatTime",
+    "defaultMessage": "this is a test {expires, time, short} | {expires, time, medium} | {expires, time, long}",
+    "message": ""
   }
 ]
