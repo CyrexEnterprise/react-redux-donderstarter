@@ -10,7 +10,7 @@ import { history } from 'store'
  * Constants
  */
 export const TOKEN_KEY = 'a_t'
-export const TOKEN_MAX_AGE = 60 * 60 * 24 * 14 // <-- 14 days (sec, min, hour, day)
+export const TOKEN_MAX_AGE = 30 // <-- 1 month
 export const LOGIN_USER = 'Auth/LOGIN_USER'
 export const LOGIN_USER_SUCCESS = 'Auth/LOGIN_USER_SUCCESS'
 export const LOGIN_USER_ERROR = 'Auth/LOGIN_USER_ERROR'

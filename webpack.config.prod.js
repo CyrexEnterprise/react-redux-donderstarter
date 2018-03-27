@@ -8,7 +8,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const BabiliPlugin = require('babili-webpack-plugin')
 const Visualizer = require('webpack-visualizer-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const API_URL = process.env.API_URL
 
 module.exports = {
@@ -30,7 +29,6 @@ module.exports = {
     }),
     new ExtractTextPlugin({ filename: '[name]-[hash].css' }),
     new BabiliPlugin(),
-    new Visualizer({ filename: './statistics.html' }),
-    new CopyWebpackPlugin([{ from: path.resolve(__dirname, 'src', 'manifest.json'), to: path.resolve(__dirname, 'dist', 'manifest.json') }])
+    new Visualizer({ filename: './statistics.html' })
   ]
 }

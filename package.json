@@ -35,7 +35,6 @@
   "dependencies": {
     "babel-polyfill": "6.26.0",
     "commitizen": "2.9.6",
-    "copy-webpack-plugin": "4.5.1",
     "cz-conventional-changelog": "2.1.0",
     "history": "4.7.2",
     "immutability-helper": "2.5.0",
