@@ -1,18 +1,21 @@
 /*
- *
  * Webpack DEVELOPMENT configuration file
- *
  */
 
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const merge = require('webpack-merge')
-const baseConfig = require('./webpack.config')
+const API_URL = process.env.API_URL
 
-module.exports = merge.smart(baseConfig, {
+module.exports = {
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('development'),
+        API_URL: JSON.stringify(API_URL)
+      }
+    }),
     new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'index.html') }),
     new ExtractTextPlugin({ filename: 'styles.css' }),
     new webpack.HotModuleReplacementPlugin(),
@@ -23,7 +26,7 @@ module.exports = merge.smart(baseConfig, {
     contentBase: path.resolve(__dirname, 'src'),
     publicPath: '/',
     historyApiFallback: true,
-    port: 9000,
+    port: 9001,
     host: '0.0.0.0',
     noInfo: false,
     inline: true,
@@ -32,4 +35,4 @@ module.exports = merge.smart(baseConfig, {
   },
 
   devtool: 'eval-source-map'
-})
+}

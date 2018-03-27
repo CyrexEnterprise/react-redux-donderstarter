@@ -5,7 +5,7 @@
 import request from 'util/request'
 import getDefaultHeaders from 'util/getDefaultHeaders'
 import { takeLatest, call, put, select } from 'redux-saga/effects'
-import { DUMMY_API } from 'constants/endpoints'
+import { API_URL } from 'constants/endpoints'
 import {
   LOGIN_USER,
   AUTH_LOGIN_USER,
@@ -28,7 +28,7 @@ import {
  * @param {credentials} action.credentials
  */
 function * loginWorker (action) {
-  const requestUrl = `${DUMMY_API}/users/0` // <-- add a real endpoint
+  const requestUrl = `${API_URL}/users/0` // <-- add a real endpoint
   // const headers = { 'Content-Type': 'application/json' }
   // const body = JSON.stringify(action.credentials)
 
@@ -56,7 +56,7 @@ function * loginSaga () {
  * automatic login saga worker
  */
 function * authLoginWorker () {
-  const requestUrl = `${DUMMY_API}/users/0` // <-- add a real endpoint
+  const requestUrl = `${API_URL}/users/0` // <-- add a real endpoint
   const state = yield select()
   const headers = yield call(getDefaultHeaders, state)
 
