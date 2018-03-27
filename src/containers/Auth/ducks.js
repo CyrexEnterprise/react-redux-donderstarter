@@ -4,7 +4,6 @@
 
 import cookie from 'js-cookie'
 import update from 'immutability-helper'
-import { history } from 'store'
 
 /**
  * Constants
@@ -138,7 +137,7 @@ export function logout () {
  * logged in if the user resets the application.
  * i.e. when the page is reloaded.
  */
-export const authMiddleware = (store) => (next) => (action) => {
+export const createAuthMiddleware = (history) => (store) => (next) => (action) => {
   next(action)
 
   if (action.type === LOGIN_USER_SUCCESS) {
