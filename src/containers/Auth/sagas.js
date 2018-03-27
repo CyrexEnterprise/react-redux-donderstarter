@@ -11,7 +11,7 @@ import {
   AUTH_LOGIN_USER,
   loginSuccess,
   loginError,
-  authLoginSucces,
+  authLoginSuccess,
   authLoginError
 } from './ducks'
 
@@ -48,7 +48,7 @@ function * loginWorker (action) {
 /**
  * login saga
  */
-function * loginSaga () {
+export function * loginSaga () {
   yield takeLatest(LOGIN_USER, loginWorker)
 }
 
@@ -63,7 +63,7 @@ function * authLoginWorker () {
   const response = yield call(request, requestUrl, { headers })
 
   if (!response.err) {
-    yield put(authLoginSucces(response.data))
+    yield put(authLoginSuccess(response.data))
   } else {
     yield put(authLoginError(response.err))
   }
@@ -72,7 +72,7 @@ function * authLoginWorker () {
 /**
  * automatic login saga
  */
-function * authLoginSaga () {
+export function * authLoginSaga () {
   yield takeLatest(AUTH_LOGIN_USER, authLoginWorker)
 }
 

@@ -6,12 +6,13 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server",
     "mock-api": "json-server --watch mock-api/db.json --port 9004",
-    "prebuild": "jest && rimraf dist",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js --progress",
-    "test": "jest --watch",
+    "prebuild": "yarn test && rimraf dist",
+    "build": "cross-env NODE_ENV=production webpack --progress",
+    "test": "cross-env NODE_ENV=test jest --coverage",
     "commit": "git-cz",
     "prestart": "yarn build",
-    "start": "http-server-spa ./dist index.html 8080"
+    "start": "http-server-spa ./dist index.html 8080",
+    "open-cov": "open coverage/lcov-report/index.html"
   },
   "repository": {
     "type": "git",
@@ -47,6 +48,7 @@
     "react-router-redux": "5.0.0-alpha.8",
     "redux": "3.7.2",
     "redux-saga": "0.16.0",
+    "redux-saga-test-plan": "3.6.0",
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
@@ -139,9 +141,31 @@
       "./internals/jest/shim.js",
       "./internals/jest/setup.js"
     ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|svg|graphql)$": "<rootDir>/__mocks__/fileMock.js"
+    },
     "modulePaths": [
       "src"
-    ]
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js",
+      "!src/**/index.js",
+      "!src/**/routes.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/util/",
+      "store",
+      "/App/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 35,
+        "functions": 35,
+        "lines": 35,
+        "statements": 35
+      }
+    }
   },
   "config": {
     "commitizen": {
