@@ -1,14 +1,19 @@
 // Main styles
 
-// * Set the global `box-sizing` state to `border-box`.
+// Set the global `box-sizing` state to `border-box`.
+// And set the root font-size for unit mesurements purposes
 html {
   box-sizing: border-box;
+  font-size: 16px;
+
+  @media only screen and (max-height: 600px)  {
+    font-size: 12px;
+  }
 }
 
 html,
 body,
-#root,
-.routerRoot {
+#root {
   width: 100%;
   height: 100%;
 }
@@ -22,8 +27,8 @@ body,
 }
 
 body {
-  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  line-height: 1.4em;
+  font-family: BlinkMacSystemFont, "Segoe UI", Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  line-height: 1.7rem;
   color: #4d4d4d;
   margin: 0;
   padding: 0;
@@ -34,3 +39,7 @@ body {
 a:visited {
   color: inherit;
 }
+
+// Component imports
+@import '../containers/App/styles';
+@import '../containers/Login/styles';

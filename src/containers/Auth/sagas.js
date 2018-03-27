@@ -5,13 +5,13 @@
 import request from 'util/request'
 import getDefaultHeaders from 'util/getDefaultHeaders'
 import { takeLatest, call, put, select } from 'redux-saga/effects'
-import { DUMMY_API } from 'constants/endpoints'
+import { API_URL } from 'constants/endpoints'
 import {
   LOGIN_USER,
   AUTH_LOGIN_USER,
   loginSuccess,
   loginError,
-  authLoginSucces,
+  authLoginSuccess,
   authLoginError
 } from './ducks'
 
@@ -28,7 +28,7 @@ import {
  * @param {credentials} action.credentials
  */
 function * loginWorker (action) {
-  const requestUrl = `${DUMMY_API}/users/0` // <-- add a real endpoint
+  const requestUrl = `${API_URL}/users/0` // <-- add a real endpoint
   // const headers = { 'Content-Type': 'application/json' }
   // const body = JSON.stringify(action.credentials)
 
@@ -48,7 +48,7 @@ function * loginWorker (action) {
 /**
  * login saga
  */
-function * loginSaga () {
+export function * loginSaga () {
   yield takeLatest(LOGIN_USER, loginWorker)
 }
 
@@ -56,14 +56,14 @@ function * loginSaga () {
  * automatic login saga worker
  */
 function * authLoginWorker () {
-  const requestUrl = `${DUMMY_API}/users/0` // <-- add a real endpoint
+  const requestUrl = `${API_URL}/users/0` // <-- add a real endpoint
   const state = yield select()
   const headers = yield call(getDefaultHeaders, state)
 
   const response = yield call(request, requestUrl, { headers })
 
   if (!response.err) {
-    yield put(authLoginSucces(response.data))
+    yield put(authLoginSuccess(response.data))
   } else {
     yield put(authLoginError(response.err))
   }
@@ -72,7 +72,7 @@ function * authLoginWorker () {
 /**
  * automatic login saga
  */
-function * authLoginSaga () {
+export function * authLoginSaga () {
   yield takeLatest(AUTH_LOGIN_USER, authLoginWorker)
 }
 

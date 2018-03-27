@@ -4,17 +4,15 @@
 
 import cookie from 'js-cookie'
 import update from 'immutability-helper'
-import { history } from 'store'
 
 /**
  * Constants
  */
 export const TOKEN_KEY = 'a_t'
-export const TOKEN_MAX_AGE = 60 * 60 * 24 * 14 // <-- 14 days (sec, min, hour, day)
+export const TOKEN_MAX_AGE = 30 // <-- 1 month
 export const LOGIN_USER = 'Auth/LOGIN_USER'
 export const LOGIN_USER_SUCCESS = 'Auth/LOGIN_USER_SUCCESS'
 export const LOGIN_USER_ERROR = 'Auth/LOGIN_USER_ERROR'
-export const USER_ROLES = ['user', 'admin']
 export const AUTH_LOGIN_USER = 'Auth/AUTH_LOGIN_USER'
 export const AUTH_LOGIN_USER_SUCCESS = 'Auth/AUTH_LOGIN_USER_SUCCESS'
 export const AUTH_LOGIN_USER_ERROR = 'Auth/AUTH_LOGIN_USER_ERROR'
@@ -112,15 +110,15 @@ export function authLogin (token) {
  * automatic login success action creator
  * @param {Object} data - data received from the successful call
  */
-export function authLoginSucces (data) {
+export function authLoginSuccess (data) {
   return { type: AUTH_LOGIN_USER_SUCCESS, data }
 }
 
 /**
  * automatic login error action creator
  */
-export function authLoginError () {
-  return { type: AUTH_LOGIN_USER_ERROR }
+export function authLoginError (error) {
+  return { type: AUTH_LOGIN_USER_ERROR, error }
 }
 
 /**
@@ -138,7 +136,7 @@ export function logout () {
  * logged in if the user resets the application.
  * i.e. when the page is reloaded.
  */
-export const authMiddleware = (store) => (next) => (action) => {
+export const createAuthMiddleware = (history) => (store) => (next) => (action) => {
   next(action)
 
   if (action.type === LOGIN_USER_SUCCESS) {

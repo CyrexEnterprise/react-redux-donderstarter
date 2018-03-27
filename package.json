@@ -4,13 +4,15 @@
   "description": "react, redux, react-router boilerplate",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "webpack-dev-server --config webpack.config.dev.js",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server",
     "mock-api": "json-server --watch mock-api/db.json --port 9004",
-    "prebuild": "jest && rimraf dist",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js --progress",
-    "test": "jest --watch",
+    "prebuild": "yarn test && rimraf dist",
+    "build": "cross-env NODE_ENV=production webpack --progress",
+    "test": "cross-env NODE_ENV=test jest --coverage",
+    "commit": "git-cz",
     "prestart": "yarn build",
-    "start": "http-server-spa ./dist index.html 8080"
+    "start": "http-server-spa ./dist index.html 8080",
+    "open-cov": "open coverage/lcov-report/index.html"
   },
   "repository": {
     "type": "git",
@@ -33,6 +35,8 @@
   "homepage": "https://github.com/Cloudoki/react-redux-donderstarter.git#readme",
   "dependencies": {
     "babel-polyfill": "6.26.0",
+    "commitizen": "2.9.6",
+    "cz-conventional-changelog": "2.1.0",
     "history": "4.7.2",
     "immutability-helper": "2.5.0",
     "js-cookie": "2.2.0",
@@ -45,6 +49,7 @@
     "react-router-redux": "5.0.0-alpha.8",
     "redux": "3.7.2",
     "redux-saga": "0.16.0",
+    "redux-saga-test-plan": "3.6.0",
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
@@ -58,7 +63,7 @@
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
     "babili-webpack-plugin": "0.1.2",
-    "cross-env": "5.1.1",
+    "cross-env": "5.1.4",
     "css-hot-loader": "1.3.3",
     "css-loader": "0.28.7",
     "enzyme": "3.2.0",
@@ -137,8 +142,35 @@
       "./internals/jest/shim.js",
       "./internals/jest/setup.js"
     ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|svg|graphql)$": "<rootDir>/__mocks__/fileMock.js"
+    },
     "modulePaths": [
       "src"
-    ]
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js",
+      "!src/**/index.js",
+      "!src/**/routes.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/util/",
+      "store",
+      "/App/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 35,
+        "functions": 35,
+        "lines": 35,
+        "statements": 35
+      }
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }
