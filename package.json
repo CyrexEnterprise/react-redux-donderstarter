@@ -9,6 +9,7 @@
     "prebuild": "jest && rimraf dist",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js --progress",
     "test": "jest --watch",
+    "commit": "git-cz",
     "prestart": "yarn build",
     "start": "http-server-spa ./dist index.html 8080"
   },
@@ -33,6 +34,8 @@
   "homepage": "https://github.com/Cloudoki/react-redux-donderstarter.git#readme",
   "dependencies": {
     "babel-polyfill": "6.26.0",
+    "commitizen": "2.9.6",
+    "cz-conventional-changelog": "2.1.0",
     "history": "4.7.2",
     "immutability-helper": "2.5.0",
     "js-cookie": "2.2.0",
@@ -139,5 +142,10 @@
     "modulePaths": [
       "src"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }

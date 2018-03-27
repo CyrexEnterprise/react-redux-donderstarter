@@ -67,6 +67,7 @@ All scripts at your disposal:
 |`build`            |Builds the application to ./dist|
 |`test`             |Runs unit tests with jest|
 |`start`            |Runs tests, build and serves dist application at `localhost:8080`|
+|`commmit`          |Runs `git-cz`, to help with commit conventions|
 
 ## Project Structure
 
