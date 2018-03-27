@@ -1,47 +1,26 @@
-/**
- * Connects the redux state locale to the
- * IntlProvider component and i18n messages
- * loaded from `src/translations`.
- * @module LanguageProvider
- */
 
-import React, { Component } from 'react'
-import { object, element } from 'prop-types'
 import { connect } from 'react-redux'
-import { IntlProvider } from 'react-intl'
+import LanguageProvider from './LanguageProvider'
+import LocaleSelectComponent from './LocaleSelect'
+import { changeLocale } from './ducks'
 
-class LanguageProvider extends Component {
-  render () {
-    const {
-      lang,
-      messages,
-      formats,
-      children
-    } = this.props
+/**
+ * Conected LanguageProvider
+ * It passes store lang which is used to get the language translations
+ *
+ */
+const LanguageProviderMapStateToProps = ({ lang }) => ({ lang })
+export default connect(LanguageProviderMapStateToProps)(LanguageProvider)
 
-    return (
-      <IntlProvider
-        locale={lang.locale}
-        messages={messages[lang.locale]}
-        formats={formats}
-      >
-        {React.Children.only(children)}
-      </IntlProvider>
-    )
-  }
-}
+/**
+ * Connected LocalSelect
+ * It passes store lang which is used to display available languages
+ * translations and also trigger change of the locale selected.
+ *
+ */
+const LocaleSelectMapStateToProps = ({ lang }) => ({ lang })
+const LocaleSelectMapDispatchToProps = (dispatch) => ({
+  onLocalChange: ({ target: { value } }) => dispatch(changeLocale(value))
+})
 
-LanguageProvider.defaultProps = {
-  formats: {}
-}
-
-LanguageProvider.propTypes = {
-  lang: object.isRequired,
-  messages: object.isRequired,
-  formats: object,
-  children: element.isRequired
-}
-
-const mapStateToProps = ({ lang }) => ({ lang })
-
-export default connect(mapStateToProps)(LanguageProvider)
+export const LocaleSelect = connect(LocaleSelectMapStateToProps, LocaleSelectMapDispatchToProps)(LocaleSelectComponent)

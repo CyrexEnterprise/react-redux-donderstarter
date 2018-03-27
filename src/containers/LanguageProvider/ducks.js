@@ -15,7 +15,7 @@ export const CHANGE_LOCALE = 'languageProvider/CHANGE_LOCALE'
  * Validates localStorage language string an sets that locale
  * if valid. Defaults to `en`.
  */
-const validateLocale = () => {
+export const validateLocale = () => {
   const locale = localGet('_lang')
   if (appLocales.indexOf(locale) !== -1) return locale
 
