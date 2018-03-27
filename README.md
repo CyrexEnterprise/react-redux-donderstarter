@@ -63,9 +63,11 @@ All scripts at your disposal:
 |`yarn <script>`    |Description|
 |-------------------|-----------|
 |`dev`            	|Serves your app at `localhost:9000`|
-|`mock-api`			    |Serves a mock api at `localhost:9004`|
+|`mock-api`			|Serves a mock api at `localhost:9004` - see [json-server](https://github.com/typicode/json-server) for more|
+|`commmit`          |Runs `git-cz`, to help with commit conventions|
+|`test`             |Runs unit tests with jest pass `--watch` to watch file changes|
+|`open-cov`			|Opens jest coverage `html` page in the browser|
 |`build`            |Builds the application to ./dist|
-|`test`             |Runs unit tests with jest|
 |`start`            |Runs tests, build and serves dist application at `localhost:8080`|
 
 ## Project Structure

@@ -1,15 +1,16 @@
 /*
- *
- * Webpack DEVELOPMENT configuration file
- *
+ * Webpack configuration file
  */
 
 const path = require('path')
 const autoprefixer = require('autoprefixer')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const merge = require('webpack-merge')
 const __PROD__ = process.env.NODE_ENV === 'production'
+const devConfig = require('./webpack.config.dev')
+const prodConfig = require('./webpack.config.prod')
 
-module.exports = {
+module.exports = merge.smart({
   entry: path.resolve(__dirname, 'src', 'index.js'),
 
   output: {
@@ -26,7 +27,7 @@ module.exports = {
         use: 'babel-loader'
       },
       {
-        test: /\.scss$/,
+        test: /\.s?css$/,
         use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
@@ -50,13 +51,25 @@ module.exports = {
         }))
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|svg)$/,
         use: [
           {
             loader: 'url-loader',
             options: {
               limit: 8192,
               name: 'assets/images/[hash].[ext]'
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: 'assets/fonts/[hash].[ext]'
             }
           }
         ]
@@ -70,4 +83,4 @@ module.exports = {
       'node_modules'
     ]
   }
-}
+}, __PROD__ ? prodConfig : devConfig)

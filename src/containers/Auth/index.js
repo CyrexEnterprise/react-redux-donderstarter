@@ -1,54 +1,21 @@
-/**
- * HOC that authorizes users based on their role
- * and the component required role
- * @module Auth
- */
 
-import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { USER_ROLES } from './ducks'
+import RequireAuth from './RequireAuth'
+import { USER_ROLES } from 'constants/global'
 
-export default (Component, roleRequired = 'user') => {
-  class requireAuth extends React.Component {
-    state = {
-      isAuthorized: false
-    }
+/**
+ * Conected RequireAuth
+ * It passes store auth, Component and roleRequired as props to RequireAuth.
+ *
+ * @param {Function} Component - The component to be shown if authorized
+ * @param {string} roleRequired - The minimum role a user must have to see the component
+ */
+export default (Component, roleRequired = USER_ROLES[0]) => {
+  const mapStateToProps = ({ auth }) => ({
+    ...auth,
+    Component,
+    roleRequired
+  })
 
-    componentWillMount () {
-      const { user, isAuthorizing } = this.props
-      this.checkAuth(USER_ROLES.indexOf(user.role), isAuthorizing)
-    }
-
-    componentWillReceiveProps (nextprops) {
-      const { user, isAuthorizing } = nextprops
-      this.checkAuth(USER_ROLES.indexOf(user.role), isAuthorizing)
-    }
-
-    checkAuth (userLevel, isAuthorizing) {
-      const { history, location } = this.props
-      const requiredLevel = USER_ROLES.indexOf(roleRequired)
-
-      if (userLevel >= requiredLevel) {
-        this.setState({ isAuthorized: true })
-      } else if (!isAuthorizing) {
-        history.replace('/login', { onSuccess: location.pathname })
-      }
-    }
-
-    render () {
-      return (this.state.isAuthorized && <Component {...this.props} />)
-    }
-  }
-
-  requireAuth.propTypes = {
-    history: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired,
-    isAuthorizing: PropTypes.bool.isRequired
-  }
-
-  const mapStateToProps = ({ auth }) => (auth)
-
-  return connect(mapStateToProps)(requireAuth)
+  return connect(mapStateToProps)(RequireAuth)
 }
