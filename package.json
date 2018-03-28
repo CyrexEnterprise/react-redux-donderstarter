@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server",
-    "mock-api": "json-server --watch mock-api/db.json --port 9004",
+    "mock-api": "json-server --watch __mocks__/db.json --port 9004",
     "prebuild": "yarn test && rimraf dist",
     "build": "cross-env NODE_ENV=production webpack --progress",
     "test": "cross-env NODE_ENV=test jest --coverage",

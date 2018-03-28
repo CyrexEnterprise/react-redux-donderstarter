@@ -5,8 +5,7 @@
  */
 
 import React, { Component } from 'react'
-import { object, bool, func, string } from 'prop-types'
-import { USER_ROLES } from 'constants/global'
+import { object, bool, func, string, arrayOf } from 'prop-types'
 
 export class RequireAuth extends Component {
   state = {
@@ -15,12 +14,14 @@ export class RequireAuth extends Component {
 
   componentWillMount () {
     const { user, isAuthorizing } = this.props
-    this.checkAuth(USER_ROLES.indexOf(user.role), isAuthorizing)
+    const scopes = Array.isArray(user.scope) ? user.scope : []
+    this.checkAuth(scopes, isAuthorizing)
   }
 
   componentWillReceiveProps (nextprops) {
     const { user, isAuthorizing } = nextprops
-    this.checkAuth(USER_ROLES.indexOf(user.role), isAuthorizing)
+    const scopes = Array.isArray(user.scope) ? user.scope : []
+    this.checkAuth(scopes, isAuthorizing)
   }
 
   /**
@@ -28,14 +29,13 @@ export class RequireAuth extends Component {
    * and show the component authorized or redirects to login otherwise.
    * It also waits if the `isAuthorizing` flag is true.
    *
-   * @param {number} userLevel - The current user level to be match with the Component required level
+   * @param {[]string} scopes - The current user scopes to be match with the Component required scopes
    * @param {boolean} isAuthorizing - Flag used to perform no action until athorization is resolved
    */
-  checkAuth (userLevel, isAuthorizing) {
-    const { history, location, roleRequired } = this.props
-    const requiredLevel = USER_ROLES.indexOf(roleRequired)
+  checkAuth (scopes, isAuthorizing) {
+    const { history, location, scopesRequired } = this.props
 
-    if (userLevel >= requiredLevel) {
+    if (scopesRequired.every(s => scopes.includes(s))) {
       return this.setState({ isAuthorized: true })
     } else if (!isAuthorizing) {
       history.replace('/login', { onSuccess: location.pathname })
@@ -43,7 +43,7 @@ export class RequireAuth extends Component {
   }
 
   render () {
-    const { Component, roleRequired, isAuthorizing, ...rest } = this.props
+    const { Component, scopesRequired, isAuthorizing, ...rest } = this.props
     return (this.state.isAuthorized && <Component {...rest} />)
   }
 }
@@ -70,9 +70,9 @@ RequireAuth.propTypes = {
    */
   Component: func.isRequired,
   /**
-   * The role required to show the wrapped Component
+   * The scopes required to show the wrapped Component
    */
-  roleRequired: string.isRequired
+  scopesRequired: arrayOf(string).isRequired
 }
 
 export default RequireAuth

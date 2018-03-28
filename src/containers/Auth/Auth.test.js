@@ -14,7 +14,7 @@ const props = {
   user: {},
   isAuthorizing: false,
   Component: () => (<div />),
-  roleRequired: 'user'
+  scopesRequired: ['user']
 }
 
 describe('Auth', () => {
@@ -35,7 +35,7 @@ describe('Auth', () => {
 
   it('should check authorization when it receives new props', () => {
     const checkAuthSpy = jest.spyOn(wrapper.instance(), 'checkAuth')
-    wrapper.setProps({ user: { role: 'user' }, isAuthorizing: false })
+    wrapper.setProps({ user: { scope: ['user'] }, isAuthorizing: false })
 
     expect(checkAuthSpy).toHaveBeenCalled()
   })
@@ -44,7 +44,7 @@ describe('Auth', () => {
 const credentialsMock = { email: 'foo', password: 'bar' }
 const tokenMock = 'abc.123.xxx'
 const initialState = { authToken: null, user: {}, isAuthorizing: false }
-const dataMock = { 'id': 0, 'name': 'Zé', 'role': 'user', 'token': tokenMock }
+const dataMock = { 'id': 0, 'name': 'Zé', 'scope': ['user'], 'token': tokenMock }
 const errorMock = { message: 'error-stub' }
 const fullState = { authToken: 'abc.123.xxx', user: dataMock, isAuthorizing: true }
 

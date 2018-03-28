@@ -3,7 +3,7 @@
     {
       "id": 0,
       "name": "Zé",
-      "role": "user",
+      "scope": ["user"],
       "token": "abc.123.xxx"
     }
   ]
