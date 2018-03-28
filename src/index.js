@@ -6,7 +6,7 @@ import { Route } from 'react-router'
 import { ConnectedRouter } from 'react-router-redux'
 import store, { history } from 'store'
 
-// route components
+import ErrorMonitor from 'components/ErrorMonitor'
 import App from 'containers/App'
 
 // Main Application Styles
@@ -14,11 +14,13 @@ import 'styles/app.scss'
 
 function render (Component) {
   ReactDOM.render(
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <Route path='/' component={Component} />
-      </ConnectedRouter>
-    </Provider>,
+    <ErrorMonitor>
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <Route path='/' component={Component} />
+        </ConnectedRouter>
+      </Provider>
+    </ErrorMonitor>,
     document.getElementById('root')
   )
 }

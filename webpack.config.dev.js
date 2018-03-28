@@ -34,5 +34,5 @@ module.exports = {
     stats: 'errors-only'
   },
 
-  devtool: 'eval-source-map'
+  devtool: 'cheap-module-source-map'
 }
