@@ -12,7 +12,9 @@
     "commit": "git-cz",
     "prestart": "yarn build",
     "start": "http-server-spa ./dist index.html 8080",
-    "open-cov": "open coverage/lcov-report/index.html"
+    "open-cov": "open coverage/lcov-report/index.html",
+    "prerelease": "git fetch --tags",
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",
@@ -49,6 +51,7 @@
     "redux": "3.7.2",
     "redux-saga": "0.16.0",
     "redux-saga-test-plan": "3.6.0",
+    "standard-version": "4.3.0",
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {

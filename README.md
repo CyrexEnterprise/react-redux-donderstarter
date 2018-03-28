@@ -69,6 +69,7 @@ All scripts at your disposal:
 |`open-cov`			|Opens jest coverage `html` page in the browser|
 |`build`            |Builds the application to ./dist|
 |`start`            |Runs tests, build and serves dist application at `localhost:8080`|
+|`release`			|Generates `CHANGELOG.md` file, bumps `package.json` version and creates tags from conventional commits - see [standard-version](https://github.com/conventional-changelog/standard-version) for more|
 
 ## Project Structure
 
