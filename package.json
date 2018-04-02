@@ -14,7 +14,8 @@
     "start": "http-server-spa ./dist index.html 8080",
     "open-cov": "open coverage/lcov-report/index.html",
     "prerelease": "git fetch --tags",
-    "release": "standard-version"
+    "release": "standard-version",
+    "generate": "node ./internals/generate"
   },
   "repository": {
     "type": "git",
@@ -83,6 +84,7 @@
     "file-loader": "1.1.5",
     "html-webpack-plugin": "2.30.1",
     "http-server-spa": "1.2.0",
+    "inquirer": "5.2.0",
     "jest": "21.2.1",
     "json-server": "0.12.1",
     "node-sass": "4.6.1",

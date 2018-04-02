@@ -3,8 +3,13 @@
     {
       "id": 0,
       "name": "Zé",
-      "scope": ["user"],
+      "scope": [
+        "user"
+      ],
       "token": "abc.123.xxx"
     }
-  ]
+  ],
+  "counter": {
+    "total": 0
+  }
 }
