@@ -82,6 +82,7 @@ const reducer = function (withSagas) {
 
 const actionCreators = function () {
   return `
+
 /**
  * increment success action creator
  */

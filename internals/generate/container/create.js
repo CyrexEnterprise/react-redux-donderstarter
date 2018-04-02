@@ -42,6 +42,6 @@ module.exports = function (data) {
 
   if (data.include.includes('tests')) {
     const testsFile = path.resolve(folder, `${data.name}.test.js`)
-    fs.writeFileSync(testsFile, testsTemplate(data.name))
+    fs.writeFileSync(testsFile, testsTemplate(data.name, withSagas))
   }
 }
