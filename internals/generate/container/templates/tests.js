@@ -136,16 +136,16 @@ describe('<${name} />', () => {
 `
     : `import React from 'react'
 import { shallow } from 'enzyme'
-import Foo from './Foo'
+import ${name} from './${name}'
 import reducer, { increment } from './ducks'
 
-describe('<Foo />', () => {
+describe('<${name} />', () => {
   const props = {
     counter: 0,
     increment: jest.fn()
   }
 
-  const wrapper = shallow(<Foo {...props} />)
+  const wrapper = shallow(<${name} {...props} />)
 
   it('should update call increment on button click', () => {
     expect(props.increment).toHaveBeenCalledTimes(0)
