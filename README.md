@@ -50,7 +50,7 @@ $ git push
 
 ## Development
 
-After completing the [installation](#installation) step, you're ready to start deveoping your App!
+After completing the [installation](#installation) step, you're ready to start developing your App!
 
 ```bash
 $ yarn dev  # Start the development server (or `npm run dev`)
@@ -70,6 +70,7 @@ All scripts at your disposal:
 |`build`            |Builds the application to ./dist|
 |`start`            |Runs tests, build and serves dist application at `localhost:8080`|
 |`release`			|Generates `CHANGELOG.md` file, bumps `package.json` version and creates tags from conventional commits - see [standard-version](https://github.com/conventional-changelog/standard-version) for more|
+|`generate`          |generates a quick `component` or `container` with input choices|
 
 ## Project Structure
 
@@ -81,36 +82,47 @@ Ex: `import App from 'components/App'`
 
 ```
 .
-├── __tests__                       # Unit tests
+├── __mocks__                       # Unit tests mocks and db file
 ├── dist                            # All build-related source code
+│
 ├── internals                       # Project development configurations
 │ └── jest                          # Tests setups and shims
-mock-api
-│ └── db.json                       # mock api data
+│ └── generate                      # File generation scripts
+│
 └── src                             # Application source code
+    ├── assets                      # asset files to be required
     ├── index.html                  # Main HTML page container for app
     ├── index.js                    # Application bootstrap and rendering
+    │
     ├── components                  # Global reusable components
     │   └── Component
-    │       ├── index.js            # Component source code
+    │       ├── _styles.scss        # Your component styles (if any)
+    │       ├── Component.js        # Pure component source code (easily tested)
+    │       ├── Component.test.js   # Component test cases
     │       ├── routes.js           # Your nested routes (if any)
-    │       └── _styles.scss        # Your component styles (if any)
+    │       └── index.js            # Component export (HOC should be added here if any)
+    │
     ├── containers                  # Components wrapped by redux/connect
     │   └── Container
-    │       ├── index.js            # Component source code
-    │       ├── routes.js           # Your nested routes (if any)
+    │       ├── _styles.scss        # Your container styles (if any)
+    │       ├── Component.js        # Pure Component source code (easily tested)
+    │       ├── Component.test.js   # Component test cases
     │       ├── ducks.js            # Reducer, action creators, contstants and middleware
+    │       ├── routes.js           # Your nested routes (if any)
     │       ├── sagas.js            # All container related sagas
-    │       └── _styles.scss        # Your container styles (if any)
+    │       └── index.js            # Component export with HOC (connect in this case)
+    │
     ├── constants                   # Global constants
+    │
     ├── store
     │   ├── combinedReducers.js     # Combine all reducers in one place
     │   ├── combinedSagas.js        # Combine all sagas in one place
     │   └── index.js                # Redux store bootstrap
+    │
     ├── styles                      # Global styles
     └── util
-        ├── request.js              # Fetch API handler
-        └── getDefaultHeaders.js    # Helper to inject headers on requests
+        ├── getDefaultHeaders.js    # Helper to inject headers on requests
+        └── request.js              # Fetch API handler
 ```
 
 ## i18n Support
