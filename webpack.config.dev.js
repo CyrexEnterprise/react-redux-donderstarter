@@ -5,21 +5,20 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const API_URL = process.env.API_URL
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
+  mode: 'development',
+
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('development'),
-        API_URL: JSON.stringify(API_URL)
+        API_URL: JSON.stringify(process.env.API_URL)
       }
     }),
     new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'index.html') }),
-    new ExtractTextPlugin({ filename: 'styles.css' }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin()
+    new MiniCssExtractPlugin('style.css'),
+    new webpack.HotModuleReplacementPlugin()
   ],
 
   devServer: {
@@ -31,7 +30,10 @@ module.exports = {
     noInfo: false,
     inline: true,
     hot: true,
-    stats: 'errors-only'
+    stats: {
+      modules: false,
+      colors: true
+    }
   },
 
   devtool: 'cheap-module-source-map'

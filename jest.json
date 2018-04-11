@@ -17,8 +17,9 @@
   ],
   "coveragePathIgnorePatterns": [
     "/util/",
-    "store",
-    "/App/"
+    "/store/",
+    "/App/",
+    "/ErrorMonitor/"
   ],
   "coverageThreshold": {
     "global": {
