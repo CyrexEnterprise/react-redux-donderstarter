@@ -9,6 +9,7 @@
     "prebuild": "yarn test && rimraf dist",
     "build": "cross-env NODE_ENV=production webpack --progress",
     "test": "cross-env NODE_ENV=test jest --c ./jest.json --coverage",
+    "precommit": "yarn test",
     "commit": "git-cz",
     "prestart": "yarn build",
     "start": "http-server-spa ./dist index.html 8080",
