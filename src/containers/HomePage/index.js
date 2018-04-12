@@ -12,7 +12,6 @@ const HomePage = ({ history }) => (
       <img style={styles.img} src={imgUrl} />
     </div>
     <div style={styles.actions}>
-      <button onClick={navigate(history.push, '/login')}>LOGIN</button>
       <button onClick={navigate(history.push, '/protected')}>PROTECTED</button>
     </div>
   </div>
@@ -24,7 +23,8 @@ const styles = {
     flexDirection: 'column',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingBottom: '2rem'
   },
   imgContainer: {
     width: 700,

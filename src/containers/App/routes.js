@@ -10,12 +10,14 @@ import NotFound from 'components/NotFound'
 /**
  * Add routes here
  * - should the route be protected by auth? - `scopes: [string]`
- * Array of the required scopes for the route
+ *    Array of the required scopes for the route.
+ *
+ * - should the route have bottom navigation? - `navigation: true`
  */
 export const routesConfig = [
-  { path: '/', exact: true, component: HomePage },
+  { path: '/', exact: true, component: HomePage, navigation: true },
   { path: '/login', component: Login },
-  { path: '/protected', component: Protected, scopes: ['user'] },
+  { path: '/protected', component: Protected, scopes: ['user'], navigation: true },
   { component: NotFound }
 ]
 
