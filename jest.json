@@ -14,7 +14,7 @@
     "!src/index.js",
     "!src/**/index.js",
     "!src/**/routes.js",
-    "!src/**/story.js"
+    "!src/**/stories.js"
   ],
   "coveragePathIgnorePatterns": [
     "/util/",

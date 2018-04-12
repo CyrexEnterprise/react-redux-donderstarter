@@ -11,7 +11,8 @@ setOptions({
 })
 
 function loadStories () {
-  require('../components/Navigation/story')
+  require('../components/Navigation/stories')
+  require('../components/NotFound/stories')
 }
 
 // addon-info
