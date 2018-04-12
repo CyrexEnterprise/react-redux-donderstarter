@@ -16,7 +16,8 @@
     "open-cov": "open coverage/lcov-report/index.html",
     "prerelease": "git fetch --tags",
     "release": "standard-version",
-    "generate": "node ./internals/generate"
+    "generate": "node ./internals/generate",
+    "storybook": "start-storybook -p 9002 -c ./src/storybook"
   },
   "repository": {
     "type": "git",
@@ -53,6 +54,9 @@
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
+    "@storybook/addon-info": "3.4.1",
+    "@storybook/addon-options": "3.4.1",
+    "@storybook/react": "3.4.1",
     "autoprefixer": "8.2.0",
     "babel-core": "6.26.0",
     "babel-eslint": "8.0.2",

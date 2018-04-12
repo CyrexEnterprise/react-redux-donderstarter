@@ -71,6 +71,7 @@ All scripts at your disposal:
 |`start`            |Runs tests, build and serves dist application at `localhost:8080`|
 |`release`			|Generates `CHANGELOG.md` file, bumps `package.json` version and creates tags from conventional commits - see [standard-version](https://github.com/conventional-changelog/standard-version) for more|
 |`generate`          |generates a quick `component` or `container` with input choices|
+|`storybook`         |runs storybook server on port `localhost:9002` - see [storybook](https://github.com/storybooks/storybook) for more|
 
 ## Project Structure
 
@@ -100,6 +101,7 @@ Ex: `import App from 'components/App'`
     │       ├── Component.js        # Pure component source code (easily tested)
     │       ├── Component.test.js   # Component test cases
     │       ├── routes.js           # Your nested routes (if any)
+    │       ├── story.js            # Your component stories (if any)
     │       └── index.js            # Component export (HOC should be added here if any)
     │
     ├── containers                  # Components wrapped by redux/connect

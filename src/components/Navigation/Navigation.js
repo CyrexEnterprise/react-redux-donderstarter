@@ -12,7 +12,13 @@ const Navigation = ({ title, children }) => (
 )
 
 Navigation.propTypes = {
+  /**
+   * The navigation title
+   */
   title: string.isRequired,
+  /**
+   * Children components to be rendered on the right
+   */
   children: node
 }
 

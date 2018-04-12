@@ -18,6 +18,7 @@
   "coveragePathIgnorePatterns": [
     "/util/",
     "/store/",
+    "/storybook/",
     "/App/",
     "/ErrorMonitor/"
   ],
