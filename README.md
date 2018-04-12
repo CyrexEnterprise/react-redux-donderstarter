@@ -63,15 +63,17 @@ All scripts at your disposal:
 |`yarn <script>`    |Description|
 |-------------------|-----------|
 |`dev`            	|Serves your app at `localhost:9000`|
-|`mock-api`			|Serves a mock api at `localhost:9004` - see [json-server](https://github.com/typicode/json-server) for more|
+|`mock-api`			    |Serves a mock api at `localhost:9004` - see [json-server](https://github.com/typicode/json-server) for more|
 |`commmit`          |Runs `git-cz`, to help with commit conventions|
 |`test`             |Runs unit tests with jest pass `--watch` to watch file changes|
-|`open-cov`			|Opens jest coverage `html` page in the browser|
+|`open-cov`			    |Opens jest coverage `html` page in the browser|
 |`build`            |Builds the application to ./dist|
 |`start`            |Runs tests, build and serves dist application at `localhost:8080`|
-|`release`			|Generates `CHANGELOG.md` file, bumps `package.json` version and creates tags from conventional commits - see [standard-version](https://github.com/conventional-changelog/standard-version) for more|
-|`generate`          |generates a quick `component` or `container` with input choices|
-|`storybook`         |runs storybook server on port `localhost:9002` - see [storybook](https://github.com/storybooks/storybook) for more|
+|`release`			    |Generates `CHANGELOG.md` file, bumps `package.json` version and creates tags from conventional commits - see [standard-version](https://github.com/conventional-changelog/standard-version) for more|
+|`generate`         |Generates a quick `component` or `container` with input choices|
+|`storybook`        |Runs storybook server on port `localhost:9002` - see [storybook](https://github.com/storybooks/storybook) for more|
+|`storybook:build`  |Builds a static version of storybook to `./docs`|
+|`open-storybook`   |Runs `storybook:build` and opens storybook static version on `docs/index.html`|
 
 ## Project Structure
 
@@ -101,7 +103,7 @@ Ex: `import App from 'components/App'`
     │       ├── Component.js        # Pure component source code (easily tested)
     │       ├── Component.test.js   # Component test cases
     │       ├── routes.js           # Your nested routes (if any)
-    │       ├── story.js            # Your component stories (if any)
+    │       ├── stories.js          # Your component stories (if any)
     │       └── index.js            # Component export (HOC should be added here if any)
     │
     ├── containers                  # Components wrapped by redux/connect
