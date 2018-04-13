@@ -137,12 +137,6 @@ Ex: `import App from 'components/App'`
 
 If you are working in team maybe it is a good thing to help your team mates how to use your components without much burden. One can also develop theses components without create a dummy view for it. Storybook for the help!
 
-### Adding a story
-
-Create a stories file on your component folder and use Storybook `storiesOf ` to start adding stories, add the minimum requirements component examples and all the other states you think it should be shown.
-
-Note: Component `PropTypes` annotations will be automaticly shown on Storybook.
-
 Example component: `components/MyComponent/MyComponent.js`
 
 ```javascript
@@ -165,8 +159,14 @@ MyComponent.propTypes = {
   children: node
 }
 
-export default Navigation
+export default MyComponent
 ```
+
+### Adding a story
+
+Create a stories file on your component folder and use Storybook `storiesOf ` to start adding stories, add the minimum requirements component examples and all the other states you think it should be shown.
+
+Note: Component `PropTypes` annotations will be automaticly shown on Storybook.
 
 Write the stories you want to show: `components/MyComponent/stories.js`
 
