@@ -9,6 +9,7 @@ The primary goal of this boilerplate is to provide a stable foundation upon whic
 1. [Installation](#installation)
 1. [Development](#development)
 1. [Project Structure](#project-structure)
+1. [Stories with Storybook](#stories-with-storybook)
 1. [i18n Support](#i18n-support)
 1. [Caveats](#caveats)
 
@@ -123,11 +124,84 @@ Ex: `import App from 'components/App'`
     │   ├── combinedSagas.js        # Combine all sagas in one place
     │   └── index.js                # Redux store bootstrap
     │
+    ├── storybook
+    │   └── config.js               # Require your stories in `loadStories`
+    │
     ├── styles                      # Global styles
     └── util
         ├── getDefaultHeaders.js    # Helper to inject headers on requests
         └── request.js              # Fetch API handler
 ```
+
+## Stories with Storybook
+
+If you are working in team maybe it is a good thing to help your team mates how to use your components without much burden. One can also develop theses components without create a dummy view for it. Storybook for the help!
+
+### Adding a story
+
+Create a stories file on your component folder and use Storybook `storiesOf ` to start adding stories, add the minimum requirements component examples and all the other states you think it should be shown.
+
+Note: Component `PropTypes` annotations will be automaticly shown on Storybook.
+
+Example component: `components/MyComponent/MyComponent.js`
+
+```javascript
+import React from 'react'
+import { string, node } from 'prop-types'
+
+const MyComponent = ({ children }) => (
+  <div className='myComponent'>
+    {children != null
+    	? <div>{children}</div>
+    	: <div>I am a childless component</div>
+    }
+  </div>
+)
+
+MyComponent.propTypes = {
+  /**
+   * Children components to be rendered on the right
+   */
+  children: node
+}
+
+export default Navigation
+```
+
+Write the stories you want to show: `components/MyComponent/stories.js`
+
+```javascript
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import MyComponent from './MyComponent'
+
+storiesOf('MyComponent', module)
+  .addWithInfo('default', () => (
+    <MyComponent />
+  ))
+  .addWithInfo('with children', () => (
+    <MyComponent>
+      <button>Click me!</button>
+    </MyComponent>
+  ))
+
+```
+
+Finally require your story in Storybook: `storybook/config.js`
+
+```
+...
+function loadStories () {
+  require('../components/MyComponent/stories')
+}
+...
+```
+
+### Running Storybook
+
+To see all stories one can simply run `yarn open-storybook`, this will create a satic version of storybook and open it on your default browser. This is good to see the docs only.
+
+If you're developing the component or making stories for it, run `yarn storybook`, this will crete a server on `localhost:9002` with hot reloading enabled, so we can see changes on the fly for both the component and the story.
 
 ## i18n Support
 
