@@ -1,5 +1,6 @@
 import React from 'react'
 import { string, node } from 'prop-types'
+import LocaleSelect from 'containers/LocaleSelect'
 
 const Navigation = ({ title, children }) => (
   <div className='navigation'>
@@ -7,6 +8,7 @@ const Navigation = ({ title, children }) => (
       <h3>{title}</h3>
       <div className='center-content' />
       <div>{children}</div>
+      <div className='locale-select-container'><LocaleSelect /></div>
     </div>
   </div>
 )

@@ -1,7 +1,6 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import LocaleSelect from 'containers/LocaleSelect'
 import { FormattedMessage } from 'react-intl'
 
 const imgUrl = require('assets/hackforgood.jpg')
@@ -12,10 +11,6 @@ const HomePage = ({ history }) => (
     <h2>Cloudoki <FormattedMessage id='homePage.h1' /> <a href='http://hackforgood.pt/index/en/' target='_blank'>#hackforgood</a></h2>
     <div style={styles.imgContainer}>
       <img style={styles.img} src={imgUrl} />
-    </div>
-    <br />
-    <div>
-      Change Language: <LocaleSelect />
     </div>
     <br />
     <div>

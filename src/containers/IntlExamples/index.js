@@ -1,16 +1,11 @@
 
 import React from 'react'
-import LocaleSelect from 'containers/LocaleSelect'
 import { FormattedMessage } from 'react-intl'
 
 const date = new Date('2017-11-16')
 const expires = new Date(1459832991883)
 const IntlExamples = () => (
   <div style={styles.container}>
-    <div>
-      Change Language: <LocaleSelect />
-    </div>
-    <br />
     <div>
       <b>Format message:</b>&nbsp; <FormattedMessage id='examples.formatMessage' values={{ value: <b>foo</b> }} />
       <br />
@@ -34,8 +29,8 @@ const styles = {
     minHeight: '100%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: '1.5rem'
   }
 }
 
