@@ -1,20 +1,19 @@
 
 import { connect } from 'react-redux'
 import RequireAuth from './RequireAuth'
-import { USER_ROLES } from 'constants/global'
 
 /**
  * Conected RequireAuth
  * It passes store auth, Component and roleRequired as props to RequireAuth.
  *
  * @param {Function} Component - The component to be shown if authorized
- * @param {string} roleRequired - The minimum role a user must have to see the component
+ * @param {[]string} scopesRequired - The scopes a user must have to see the component
  */
-export default (Component, roleRequired = USER_ROLES[0]) => {
+export default (Component, scopesRequired) => {
   const mapStateToProps = ({ auth }) => ({
     ...auth,
     Component,
-    roleRequired
+    scopesRequired
   })
 
   return connect(mapStateToProps)(RequireAuth)

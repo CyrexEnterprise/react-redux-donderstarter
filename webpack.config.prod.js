@@ -5,19 +5,19 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const BabiliPlugin = require('babili-webpack-plugin')
 const Visualizer = require('webpack-visualizer-plugin')
-const API_URL = process.env.API_URL
 
 module.exports = {
+  mode: 'production',
+
   output: { filename: 'app-[hash].js' },
 
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-        API_URL: JSON.stringify(API_URL)
+        API_URL: JSON.stringify(process.env.API_URL)
       }
     }),
     new HtmlWebpackPlugin({
@@ -27,8 +27,12 @@ module.exports = {
         collapseWhitespace: true
       }
     }),
-    new ExtractTextPlugin({ filename: '[name]-[hash].css' }),
+    new MiniCssExtractPlugin({ filename: '[name]-[hash].css' }),
     new BabiliPlugin(),
     new Visualizer({ filename: './statistics.html' })
-  ]
+  ],
+
+  performance: {
+    hints: false
+  }
 }

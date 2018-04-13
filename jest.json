@@ -1,0 +1,34 @@
+{
+  "setupFiles": [
+    "./internals/jest/shim.js",
+    "./internals/jest/setup.js"
+  ],
+  "moduleNameMapper": {
+    "\\.(jpg|jpeg|png|gif|svg|graphql)$": "<rootDir>/__mocks__/fileMock.js"
+  },
+  "modulePaths": [
+    "src"
+  ],
+  "collectCoverageFrom": [
+    "src/**/*.js",
+    "!src/index.js",
+    "!src/**/index.js",
+    "!src/**/routes.js",
+    "!src/**/stories.js"
+  ],
+  "coveragePathIgnorePatterns": [
+    "/util/",
+    "/store/",
+    "/storybook/",
+    "/App/",
+    "/ErrorMonitor/"
+  ],
+  "coverageThreshold": {
+    "global": {
+      "branches": 35,
+      "functions": 35,
+      "lines": 35,
+      "statements": 35
+    }
+  }
+}

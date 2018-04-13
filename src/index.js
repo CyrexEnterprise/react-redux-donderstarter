@@ -7,7 +7,7 @@ import { ConnectedRouter } from 'react-router-redux'
 import store, { history } from 'store'
 import { translationMessages, formats } from 'util/i18n'
 
-// route components
+import ErrorMonitor from 'components/ErrorMonitor'
 import LanguageProvider from 'containers/LanguageProvider'
 import App from 'containers/App'
 
@@ -16,13 +16,15 @@ import 'styles/app.scss'
 
 function render (Component) {
   ReactDOM.render(
-    <Provider store={store}>
-      <LanguageProvider messages={translationMessages} formats={formats}>
-        <ConnectedRouter history={history}>
-          <Route path='/' component={Component} />
-        </ConnectedRouter>
-      </LanguageProvider>
-    </Provider>,
+    <ErrorMonitor>
+      <Provider store={store}>
+        <LanguageProvider messages={translationMessages} formats={formats}>
+          <ConnectedRouter history={history}>
+            <Route path='/' component={Component} />
+          </ConnectedRouter>
+        </LanguageProvider>
+      </Provider>
+    </ErrorMonitor>,
     document.getElementById('root')
   )
 }

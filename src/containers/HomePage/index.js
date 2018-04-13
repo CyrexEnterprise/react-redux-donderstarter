@@ -22,7 +22,6 @@ const HomePage = ({ history }) => (
       <FormattedMessage id='homePage.hello' />
     </div>
     <div style={styles.actions}>
-      <button style={styles.button} onClick={navigate(history.push, '/login')}>login</button>
       <button style={styles.button} onClick={navigate(history.push, '/protected')}>
         <FormattedMessage id='homePage.button' />
       </button>
@@ -37,7 +36,8 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingBottom: '2rem'
   },
   imgContainer: {
     width: 700,
