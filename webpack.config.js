@@ -4,7 +4,7 @@
 
 const path = require('path')
 const autoprefixer = require('autoprefixer')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const merge = require('webpack-merge')
 const __PROD__ = process.env.NODE_ENV === 'production'
 const devConfig = require('./webpack.config.dev')
@@ -28,36 +28,40 @@ module.exports = merge.smart({
       },
       {
         test: /\.s?css$/,
-        use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: { minimize: __PROD__ }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins: () => ([autoprefixer({ browsers: ['last 3 versions', '> 1%'] })])
-              }
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                outputStyle: 'extended'
-              }
+        use: [
+          'css-hot-loader',
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { minimize: __PROD__ }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => ([autoprefixer({ browsers: ['last 3 versions', '> 1%'] })])
             }
-          ]
-        }))
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              outputStyle: 'extended'
+            }
+          }
+        ]
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
         use: [
           {
-            loader: 'url-loader',
+            loader: 'file-loader',
             options: {
-              limit: 8192,
               name: 'assets/images/[hash].[ext]'
+            }
+          },
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: !__PROD__
             }
           }
         ]
@@ -82,5 +86,17 @@ module.exports = merge.smart({
       path.resolve(__dirname, 'src'),
       'node_modules'
     ]
+  },
+
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
+    }
   }
 }, __PROD__ ? prodConfig : devConfig)

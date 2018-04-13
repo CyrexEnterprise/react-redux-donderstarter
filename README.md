@@ -9,6 +9,7 @@ The primary goal of this boilerplate is to provide a stable foundation upon whic
 1. [Installation](#installation)
 1. [Development](#development)
 1. [Project Structure](#project-structure)
+1. [Stories with Storybook](#stories-with-storybook)
 1. [i18n Support](#i18n-support)
 1. [Caveats](#caveats)
 
@@ -50,7 +51,7 @@ $ git push
 
 ## Development
 
-After completing the [installation](#installation) step, you're ready to start deveoping your App!
+After completing the [installation](#installation) step, you're ready to start developing your App!
 
 ```bash
 $ yarn dev  # Start the development server (or `npm run dev`)
@@ -63,12 +64,17 @@ All scripts at your disposal:
 |`yarn <script>`    |Description|
 |-------------------|-----------|
 |`dev`            	|Serves your app at `localhost:9000`|
-|`mock-api`			|Serves a mock api at `localhost:9004` - see [json-server](https://github.com/typicode/json-server) for more|
+|`mock-api`			    |Serves a mock api at `localhost:9004` - see [json-server](https://github.com/typicode/json-server) for more|
 |`commmit`          |Runs `git-cz`, to help with commit conventions|
 |`test`             |Runs unit tests with jest pass `--watch` to watch file changes|
-|`open-cov`			|Opens jest coverage `html` page in the browser|
+|`open-cov`			    |Opens jest coverage `html` page in the browser|
 |`build`            |Builds the application to ./dist|
 |`start`            |Runs tests, build and serves dist application at `localhost:8080`|
+|`release`			    |Generates `CHANGELOG.md` file, bumps `package.json` version and creates tags from conventional commits - see [standard-version](https://github.com/conventional-changelog/standard-version) for more|
+|`generate`         |Generates a quick `component` or `container` with input choices|
+|`storybook`        |Runs storybook server on port `localhost:9002` - see [storybook](https://github.com/storybooks/storybook) for more|
+|`storybook:build`  |Builds a static version of storybook to `./docs`|
+|`open-storybook`   |Runs `storybook:build` and opens storybook static version on `docs/index.html`|
 
 ## Project Structure
 
@@ -80,37 +86,122 @@ Ex: `import App from 'components/App'`
 
 ```
 .
-├── __tests__                       # Unit tests
+├── __mocks__                       # Unit tests mocks and db file
 ├── dist                            # All build-related source code
+│
 ├── internals                       # Project development configurations
 │ └── jest                          # Tests setups and shims
-mock-api
-│ └── db.json                       # mock api data
+│ └── generate                      # File generation scripts
+│
 └── src                             # Application source code
+    ├── assets                      # asset files to be required
     ├── index.html                  # Main HTML page container for app
     ├── index.js                    # Application bootstrap and rendering
+    │
     ├── components                  # Global reusable components
     │   └── Component
-    │       ├── index.js            # Component source code
+    │       ├── _styles.scss        # Your component styles (if any)
+    │       ├── Component.js        # Pure component source code (easily tested)
+    │       ├── Component.test.js   # Component test cases
     │       ├── routes.js           # Your nested routes (if any)
-    │       └── _styles.scss        # Your component styles (if any)
+    │       ├── stories.js          # Your component stories (if any)
+    │       └── index.js            # Component export (HOC should be added here if any)
+    │
     ├── containers                  # Components wrapped by redux/connect
     │   └── Container
-    │       ├── index.js            # Component source code
-    │       ├── routes.js           # Your nested routes (if any)
+    │       ├── _styles.scss        # Your container styles (if any)
+    │       ├── Component.js        # Pure Component source code (easily tested)
+    │       ├── Component.test.js   # Component test cases
     │       ├── ducks.js            # Reducer, action creators, contstants and middleware
+    │       ├── routes.js           # Your nested routes (if any)
     │       ├── sagas.js            # All container related sagas
-    │       └── _styles.scss        # Your container styles (if any)
+    │       └── index.js            # Component export with HOC (connect in this case)
+    │
     ├── constants                   # Global constants
+    │
     ├── store
     │   ├── combinedReducers.js     # Combine all reducers in one place
     │   ├── combinedSagas.js        # Combine all sagas in one place
     │   └── index.js                # Redux store bootstrap
+    │
+    ├── storybook
+    │   └── config.js               # Require your stories in `loadStories`
+    │
     ├── styles                      # Global styles
     └── util
-        ├── request.js              # Fetch API handler
-        └── getDefaultHeaders.js    # Helper to inject headers on requests
+        ├── getDefaultHeaders.js    # Helper to inject headers on requests
+        └── request.js              # Fetch API handler
 ```
+
+## Stories with Storybook
+
+If you are working in team maybe it is a good thing to help your team mates how to use your components without much burden. One can also develop theses components without create a dummy view for it. Storybook for the help!
+
+Example component: `components/MyComponent/MyComponent.js`
+
+```javascript
+import React from 'react'
+import { string, node } from 'prop-types'
+
+const MyComponent = ({ children }) => (
+  <div className='myComponent'>
+    {children != null
+    	? <div>{children}</div>
+    	: <div>I am a childless component</div>
+    }
+  </div>
+)
+
+MyComponent.propTypes = {
+  /**
+   * Children components to be rendered on the right
+   */
+  children: node
+}
+
+export default MyComponent
+```
+
+### Adding a story
+
+Create a stories file on your component folder and use Storybook `storiesOf ` to start adding stories, add the minimum requirements component examples and all the other states you think it should be shown.
+
+Note: Component `PropTypes` annotations will be automaticly shown on Storybook.
+
+Write the stories you want to show: `components/MyComponent/stories.js`
+
+```javascript
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import MyComponent from './MyComponent'
+
+storiesOf('MyComponent', module)
+  .addWithInfo('default', () => (
+    <MyComponent />
+  ))
+  .addWithInfo('with children', () => (
+    <MyComponent>
+      <button>Click me!</button>
+    </MyComponent>
+  ))
+
+```
+
+Finally require your story in Storybook: `storybook/config.js`
+
+```javascript
+...
+function loadStories () {
+  require('../components/MyComponent/stories')
+}
+...
+```
+
+### Running Storybook
+
+To see all stories one can simply run `yarn open-storybook`, this will create a satic version of storybook and open it on your default browser. This is good to see the docs only.
+
+If you're developing the component or making stories for it, run `yarn storybook`, this will crete a server on `localhost:9002` with hot reloading enabled, so we can see changes on the fly for both the component and the story.
 
 ## i18n Support
 

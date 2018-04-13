@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "standard",
+    "standard-react"
+  ],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "rules": {
+    "prefer-const": 2,
+    "no-var": 2,
+    "prefer-arrow-callback": 2,
+    "arrow-body-style": 2,
+    "react/no-unused-prop-types": 0,
+    "import/no-unresolved": 2
+  },
+  "settings": {
+    "import/resolver": "webpack"
+  }
+}
