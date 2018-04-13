@@ -189,7 +189,7 @@ storiesOf('MyComponent', module)
 
 Finally require your story in Storybook: `storybook/config.js`
 
-```
+```javascript
 ...
 function loadStories () {
   require('../components/MyComponent/stories')
