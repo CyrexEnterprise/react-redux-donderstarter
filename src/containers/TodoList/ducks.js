@@ -16,8 +16,12 @@ export const CREATE_TODO = 'TodoList/CREATE_TODO'
 export const CREATE_TODO_SUCCESS = 'TodoList/CREATE_TODO_SUCCESS'
 export const CREATE_TODO_ERROR = 'TodoList/CREATE_TODO_ERROR'
 
+export const DELETE_TODO = 'TodoList/DELETE_TODO'
+export const DELETE_TODO_SUCCESS = 'TodoList/DELETE_TODO_SUCCESS'
+export const DELETE_TODO_ERROR = 'TodoList/DELETE_TODO_ERROR'
+
 /**
- * Auth state
+ * TodoList state
  * @typedef {Object} state
 
  */
@@ -70,14 +74,14 @@ export function fetchTodosError (error) {
 }
 
 /**
- * Fetch todos action creator
+ * Create todo action creator
  */
-export function createTodo (todo) {
-  return { type: CREATE_TODO, todo }
+export function createTodo (data) {
+  return { type: CREATE_TODO, data }
 }
 
 /**
- * Fetch todos success action creator
+ * Create todo success action creator
  * @param {Object} data - data received from the successful call
  */
 export function createTodoSuccess (data) {
@@ -85,9 +89,32 @@ export function createTodoSuccess (data) {
 }
 
 /**
- * Fetch todos error action creator
+ * Create todo error action creator
  * @param {ServerError} error
  */
 export function createTodoError (error) {
   return { type: CREATE_TODO_ERROR, error }
+}
+
+/**
+ * Delete todo action creator
+ */
+export function deleteTodo (data) {
+  return { type: DELETE_TODO, data }
+}
+
+/**
+ * Delete todo success action creator
+ * @param {Object} data - data received from the successful call
+ */
+export function deleteTodoSuccess (data) {
+  return { type: DELETE_TODO_SUCCESS, data }
+}
+
+/**
+ * Delete todo error action creator
+ * @param {ServerError} error
+ */
+export function deleteTodoError (error) {
+  return { type: DELETE_TODO_ERROR, error }
 }

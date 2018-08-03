@@ -3,14 +3,16 @@
  */
 
 import { takeLatest, put } from 'redux-saga/effects'
-// import { getFirebase } from 'react-redux-firebase'
 import {
   // FETCH_TODOS,
   // fetchTodosSuccess,
   // fetchTodosError,
   CREATE_TODO,
-  createTodoSuccess,
-  createTodoError
+  // createTodoSuccess,
+  createTodoError,
+  DELETE_TODO,
+  // deleteTodoSuccess,
+  deleteTodoError
 } from './ducks'
 
 /**
@@ -18,13 +20,10 @@ import {
  * @param {Object} action
  */
 function * createTodoWorker (getFirebase, action) {
-  console.log('createWorker', action, getFirebase)
-  const response = yield getFirebase().push('todos', action.data)
-
-  if (!response.err) {
-    yield put(createTodoSuccess(response.data))
-  } else {
-    yield put(createTodoError(response.err))
+  try {
+    yield getFirebase().push('todos', action.data)
+  } catch (err) {
+    yield put(createTodoError(err))
   }
 }
 
@@ -32,8 +31,26 @@ function * createTodoWorker (getFirebase, action) {
  * create todo saga
  */
 export function * createTodoSaga (getFirebase) {
-  const worker = createTodoWorker(getFirebase)
-  yield takeLatest(CREATE_TODO, worker)
+  yield takeLatest(CREATE_TODO, createTodoWorker, getFirebase)
 }
 
-export default [createTodoSaga]
+/**
+ * delete todo saga worker
+ * @param {Object} action
+ */
+function * deleteTodoWorker (getFirebase, action) {
+  try {
+    yield getFirebase().remove(`/todos/${action.data.id}`)
+  } catch (err) {
+    yield put(deleteTodoError(err))
+  }
+}
+
+/**
+ * delete todo saga
+ */
+export function * deleteTodoSaga (getFirebase) {
+  yield takeLatest(DELETE_TODO, deleteTodoWorker, getFirebase)
+}
+
+export default [createTodoSaga, deleteTodoSaga]

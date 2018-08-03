@@ -5,7 +5,6 @@ import { firebaseConnect } from 'react-redux-firebase'
 
 import { createTodo, deleteTodo } from './ducks'
 import TodoList from './TodoList'
-import TodoListItemComponent from './TodoListItem'
 
 const mapStateToProps = ({ firebase }) => ({
   todos: firebase.data.todos
@@ -23,9 +22,3 @@ export default compose(
   ]),
   connect(mapStateToProps, mapDispatchToProps)
 )(TodoList)
-
-const todoItemMapDispatchToProps = (dispatch) => ({
-  deleteTodo: (id) => dispatch(deleteTodo(id))
-})
-
-export const TodoListItem = connect(null, todoItemMapDispatchToProps)(TodoListItemComponent)
