@@ -6,6 +6,7 @@ import Login from 'containers/Login'
 import HomePage from 'containers/HomePage'
 import Protected from 'components/Protected'
 import NotFound from 'components/NotFound'
+import TodoList from 'containers/TodoList'
 
 /**
  * Add routes here
@@ -18,6 +19,7 @@ export const routesConfig = [
   { path: '/', exact: true, component: HomePage, navigation: true },
   { path: '/login', component: Login },
   { path: '/protected', component: Protected, scopes: ['user'], navigation: true },
+  { path: '/todo', component: TodoList },
   { component: NotFound }
 ]
 

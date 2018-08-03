@@ -6,9 +6,11 @@
  */
 
 import AuthSagas from 'containers/Auth/sagas'
+import TodoListSagas from 'containers/TodoList/sagas'
 
 const sagas = [
-  ...AuthSagas
+  ...AuthSagas,
+  ...TodoListSagas
 ]
 
 export default sagas
