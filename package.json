@@ -43,6 +43,7 @@
   "homepage": "https://github.com/Cloudoki/react-redux-donderstarter.git#readme",
   "dependencies": {
     "babel-polyfill": "6.26.0",
+    "dotenv-webpack": "1.5.7",
     "history": "4.7.2",
     "immutability-helper": "2.5.0",
     "js-cookie": "2.2.0",

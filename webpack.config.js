@@ -5,6 +5,7 @@
 const path = require('path')
 const autoprefixer = require('autoprefixer')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const Dotenv = require('dotenv-webpack')
 const merge = require('webpack-merge')
 const __PROD__ = process.env.NODE_ENV === 'production'
 const devConfig = require('./webpack.config.dev')
@@ -80,6 +81,8 @@ module.exports = merge.smart({
       }
     ]
   },
+
+  plugins: [new Dotenv()],
 
   resolve: {
     modules: [
