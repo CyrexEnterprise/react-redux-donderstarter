@@ -53,13 +53,30 @@ $ git push
 
 After completing the [installation](#installation) step, you're ready to start developing your App!
 
+**Start by adding your first file in the root of the project:**
+
+`.env`
+
 ```bash
-$ yarn dev  # Start the development server (or `npm run dev`)
+# Your .env files can include sensitive information.
+# Because of this, `dotenv-webpack` will only expose environment
+# variables that are explicitly referenced in your code to your final bundle.
+# see more here: https://github.com/mrsteele/dotenv-webpack#description
+
+# API url
+API_URL = 'http://localhost:9004'
+```
+If you look at `src/constants/endpoints.js` you will see a reference to `process.env.API_URL`, use it to make calls to mock API :D
+
+**Runing the project in `development` mode:**
+
+```bash
+$ yarn dev  # or `npm run dev`
 ```
 
 Hot reloading is enabled by default for both **JavaScript** and **SCSS** files.
 
-All scripts at your disposal:
+**All scripts at your disposal:**
 
 |`yarn <script>`    |Description|
 |-------------------|-----------|

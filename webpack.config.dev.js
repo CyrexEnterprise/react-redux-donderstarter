@@ -11,11 +11,6 @@ module.exports = {
   mode: 'development',
 
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        API_URL: JSON.stringify(process.env.API_URL)
-      }
-    }),
     new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'index.html') }),
     new MiniCssExtractPlugin('style.css'),
     new webpack.HotModuleReplacementPlugin()
