@@ -7,7 +7,13 @@
 
 function checkStatus (response) {
   if (response.ok) {
-    return Promise.resolve(response.json())
+    const contentType = response.headers.get('Content-Type')
+
+    if (/application\/json/.test(contentType)) {
+      return Promise.resolve(response.json())
+    }
+
+    return Promise.resolve(response.text())
   }
 
   return response.json().then(json => {
@@ -32,5 +38,4 @@ export default function request (url, options) {
   return fetch(url, options)
     .then(checkStatus)
     .then(data => ({ data }))
-    .catch(err => ({ err }))
 }

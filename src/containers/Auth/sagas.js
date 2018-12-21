@@ -23,57 +23,48 @@ import {
  */
 
 /**
- * login saga worker
+ * login
  * @param {Object} action
  * @param {credentials} action.credentials
  */
-function * loginWorker (action) {
-  const requestUrl = `${API_URL}/users/0` // <-- add a real endpoint
-  // const headers = { 'Content-Type': 'application/json' }
-  // const body = JSON.stringify(action.credentials)
+function * login (action) {
+  try {
+    const requestUrl = `${API_URL}/users/0` // <-- add a real endpoint
+    // const headers = { 'Content-Type': 'application/json' }
+    // const body = JSON.stringify(action.credentials)
 
-  const response = yield call(request, requestUrl, {
-    method: 'GET', // <-- shold be a `POST` in real calls
+    const { data } = yield call(request, requestUrl, {
+      method: 'GET', // <-- shold be a `POST` in real calls
     // headers,
     // body
-  })
+    })
 
-  if (!response.err) {
-    yield put(loginSuccess(response.data))
-  } else {
-    yield put(loginError(response.err))
+    yield put(loginSuccess(data))
+  } catch (error) {
+    yield put(loginError(error))
   }
 }
 
 /**
- * login saga
+ * automatic login
  */
-export function * loginSaga () {
-  yield takeLatest(LOGIN_USER, loginWorker)
-}
+function * authLogin () {
+  try {
+    const requestUrl = `${API_URL}/users/0` // <-- add a real endpoint
+    const state = yield select()
+    const headers = yield call(getDefaultHeaders, state)
 
-/**
- * automatic login saga worker
- */
-function * authLoginWorker () {
-  const requestUrl = `${API_URL}/users/0` // <-- add a real endpoint
-  const state = yield select()
-  const headers = yield call(getDefaultHeaders, state)
+    const { data } = yield call(request, requestUrl, { headers })
 
-  const response = yield call(request, requestUrl, { headers })
-
-  if (!response.err) {
-    yield put(authLoginSuccess(response.data))
-  } else {
-    yield put(authLoginError(response.err))
+    yield put(authLoginSuccess(data))
+  } catch (error) {
+    yield put(authLoginError(error))
   }
 }
 
-/**
- * automatic login saga
- */
-export function * authLoginSaga () {
-  yield takeLatest(AUTH_LOGIN_USER, authLoginWorker)
+export function * rootSaga () {
+  yield takeLatest(LOGIN_USER, login)
+  yield takeLatest(AUTH_LOGIN_USER, authLogin)
 }
 
-export default [loginSaga, authLoginSaga]
+export default rootSaga

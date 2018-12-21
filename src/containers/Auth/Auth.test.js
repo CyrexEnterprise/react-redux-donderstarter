@@ -3,8 +3,9 @@ import React from 'react'
 import { mount } from 'enzyme'
 import request from 'util/request'
 import { expectSaga } from 'redux-saga-test-plan'
+import { throwError } from 'redux-saga-test-plan/providers'
 import * as matchers from 'redux-saga-test-plan/matchers'
-import { loginSaga, authLoginSaga } from './sagas'
+import rootSaga from './sagas'
 import RequireAuth from './RequireAuth'
 import reducer, { login, loginSuccess, loginError, authLogin, authLoginSuccess, authLoginError, logout, createAuthMiddleware, TOKEN_KEY } from './ducks'
 
@@ -95,7 +96,7 @@ describe('<RequireAuth />', () => {
       const fakeUser = { name: 'John', role: 'user' }
       const fakeResponse = { data: fakeUser }
 
-      return expectSaga(loginSaga)
+      return expectSaga(rootSaga)
         .provide([[matchers.call.fn(request), fakeResponse]])
         .put(loginSuccess(fakeUser))
         .dispatch(login(fakeCredentials))
@@ -103,10 +104,10 @@ describe('<RequireAuth />', () => {
     })
 
     it('should call login API and handle the error', () => {
-      const fakeResponse = { err: errorMock }
+      const fakeError = errorMock
 
-      return expectSaga(loginSaga)
-        .provide([[matchers.call.fn(request), fakeResponse]])
+      return expectSaga(rootSaga)
+        .provide([[matchers.call.fn(request), throwError(fakeError)]])
         .put(loginError(errorMock))
         .dispatch(login(credentialsMock))
         .silentRun()
@@ -115,7 +116,7 @@ describe('<RequireAuth />', () => {
     it('should call authorization API and return user object', () => {
       const fakeResponse = { data: dataMock }
 
-      return expectSaga(authLoginSaga)
+      return expectSaga(rootSaga)
         .provide([[matchers.call.fn(request), fakeResponse]])
         .put(authLoginSuccess(dataMock))
         .dispatch(authLogin(tokenMock))
@@ -123,10 +124,10 @@ describe('<RequireAuth />', () => {
     })
 
     it('should call authorization API and handle the error', () => {
-      const fakeResponse = { err: errorMock }
+      const fakeError = errorMock
 
-      return expectSaga(authLoginSaga)
-        .provide([[matchers.call.fn(request), fakeResponse]])
+      return expectSaga(rootSaga)
+        .provide([[matchers.call.fn(request), throwError(fakeError)]])
         .put(authLoginError(errorMock))
         .dispatch(authLogin(tokenMock))
         .silentRun()

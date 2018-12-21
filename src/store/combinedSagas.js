@@ -5,10 +5,10 @@
  *
  */
 
-import AuthSagas from 'containers/Auth/sagas'
+import auth from 'containers/Auth/sagas'
 
 const sagas = [
-  ...AuthSagas,
+  auth,
 ]
 
 export default sagas
