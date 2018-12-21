@@ -47,7 +47,7 @@ class App extends Component {
   render () {
     return [
       this.includeNavigation() && this.renderNav(),
-      routes()
+      routes(),
     ]
   }
 }
@@ -57,7 +57,7 @@ App.propTypes = {
   userAuthLogin: func.isRequired,
   location: object.isRequired,
   history: object.isRequired,
-  logUserOut: func.isRequired
+  logUserOut: func.isRequired,
 }
 
 export default App

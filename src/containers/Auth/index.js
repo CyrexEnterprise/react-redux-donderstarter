@@ -13,7 +13,7 @@ export default (Component, scopesRequired) => {
   const mapStateToProps = ({ auth }) => ({
     ...auth,
     Component,
-    scopesRequired
+    scopesRequired,
   })
 
   return connect(mapStateToProps)(RequireAuth)

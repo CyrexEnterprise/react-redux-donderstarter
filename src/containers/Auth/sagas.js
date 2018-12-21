@@ -12,7 +12,7 @@ import {
   loginSuccess,
   loginError,
   authLoginSuccess,
-  authLoginError
+  authLoginError,
 } from './ducks'
 
 /**

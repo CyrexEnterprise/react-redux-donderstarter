@@ -15,7 +15,7 @@ describe('<RequireAuth />', () => {
     user: {},
     isAuthorizing: false,
     Component: () => (<div />),
-    scopesRequired: ['user']
+    scopesRequired: ['user'],
   }
 
   const wrapper = mount(<RequireAuth {...props} />)
@@ -137,11 +137,11 @@ describe('<RequireAuth />', () => {
     const create = () => {
       const history = {
         replace: jest.fn(),
-        location: {}
+        location: {},
       }
       const store = {
         getState: jest.fn(() => ({})),
-        dispatch: jest.fn()
+        dispatch: jest.fn(),
       }
 
       const next = jest.fn()

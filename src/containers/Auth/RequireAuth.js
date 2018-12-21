@@ -9,7 +9,7 @@ import { object, bool, func, string, arrayOf } from 'prop-types'
 
 export class RequireAuth extends Component {
   state = {
-    isAuthorized: false
+    isAuthorized: false,
   }
 
   componentWillMount () {
@@ -72,7 +72,7 @@ RequireAuth.propTypes = {
   /**
    * The scopes required to show the wrapped Component
    */
-  scopesRequired: arrayOf(string).isRequired
+  scopesRequired: arrayOf(string).isRequired,
 }
 
 export default RequireAuth

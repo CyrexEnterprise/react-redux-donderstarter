@@ -28,7 +28,7 @@ export const LOGOUT_USER = 'Auth/LOGOUT_USER'
 const initialState = {
   authToken: cookie.get(TOKEN_KEY) || null,
   user: {},
-  isAuthorizing: false
+  isAuthorizing: false,
 }
 
 /**
@@ -41,18 +41,18 @@ export default function reducer (state = initialState, action) {
     case LOGIN_USER:
     case AUTH_LOGIN_USER:
       return update(state, {
-        isAuthorizing: { $set: true }
+        isAuthorizing: { $set: true },
       })
     case LOGIN_USER_SUCCESS:
       return update(state, {
         authToken: { $set: action.data.token },
         user: { $set: action.data },
-        isAuthorizing: { $set: false }
+        isAuthorizing: { $set: false },
       })
     case AUTH_LOGIN_USER_SUCCESS:
       return update(state, {
         user: { $set: action.data },
-        isAuthorizing: { $set: false }
+        isAuthorizing: { $set: false },
       })
     case LOGIN_USER_ERROR:
     case AUTH_LOGIN_USER_ERROR:
@@ -60,7 +60,7 @@ export default function reducer (state = initialState, action) {
       return update(state, {
         authToken: { $set: null },
         user: { $set: {} },
-        isAuthorizing: { $set: false }
+        isAuthorizing: { $set: false },
       })
     default:
       return state
@@ -142,7 +142,7 @@ export const createAuthMiddleware = (history) => (store) => (next) => (action) =
   if (action.type === LOGIN_USER_SUCCESS) {
     cookie.set(TOKEN_KEY, action.data.token, {
       path: '/',
-      expires: TOKEN_MAX_AGE
+      expires: TOKEN_MAX_AGE,
     })
 
     const nextPath = history.location.state && history.location.state.onSuccess ? history.location.state.onSuccess : '/'

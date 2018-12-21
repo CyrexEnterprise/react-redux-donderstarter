@@ -18,7 +18,7 @@ export const routesConfig = [
   { path: '/', exact: true, component: HomePage, navigation: true },
   { path: '/login', component: Login },
   { path: '/protected', component: Protected, scopes: ['user'], navigation: true },
-  { component: NotFound }
+  { component: NotFound },
 ]
 
 export default () => [
@@ -31,5 +31,5 @@ export default () => [
         component={Array.isArray(route.scopes) ? requireAuth(route.component, route.scopes) : route.component}
       />
     )}
-  </Switch>
+  </Switch>,
 ]

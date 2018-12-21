@@ -8,7 +8,7 @@
 import AuthSagas from 'containers/Auth/sagas'
 
 const sagas = [
-  ...AuthSagas
+  ...AuthSagas,
 ]
 
 export default sagas
