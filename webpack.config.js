@@ -58,12 +58,6 @@ module.exports = merge.smart({
             options: {
               name: 'assets/images/[hash].[ext]'
             }
-          },
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              bypassOnDebug: !__PROD__
-            }
           }
         ]
       },
