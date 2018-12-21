@@ -10,7 +10,9 @@ import NotFound from 'components/NotFound'
 /**
  * Add routes here
  *
- * - should the route have bottom navigation? - `navigation: true`
+ * - to protect a route wrap it in `requireAuth` - requireAuth(Component, arrayOfScopes)
+ *
+ * - should the route have top navigation? - `navigation: true`
  */
 export const routesConfig = [
   { path: '/', exact: true, component: HomePage, navigation: true },
@@ -19,7 +21,7 @@ export const routesConfig = [
   { component: NotFound },
 ]
 
-export default () => [
+export default () => (
   <Switch key='routes'>
     {routesConfig.map((options, indx) =>
       <Route
@@ -27,5 +29,5 @@ export default () => [
         {...options}
       />
     )}
-  </Switch>,
-]
+  </Switch>
+)
