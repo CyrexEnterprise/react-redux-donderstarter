@@ -5,8 +5,6 @@
  *
  */
 
-import 'whatwg-fetch'
-
 function checkStatus (response) {
   if (response.ok) {
     return Promise.resolve(response.json())
