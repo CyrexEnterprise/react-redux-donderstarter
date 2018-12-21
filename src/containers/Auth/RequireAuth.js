@@ -5,45 +5,43 @@
  */
 
 import React, { Component } from 'react'
-import { object, bool, func, string, arrayOf } from 'prop-types'
+import { object, bool, func, string, arrayOf, array } from 'prop-types'
 
 export class RequireAuth extends Component {
-  state = {
-    isAuthorized: false,
+  constructor (props) {
+    super(props)
+
+    const isAuthorized = RequireAuth.isAuthorized(props)
+
+    if (!props.isAuthorizing && !isAuthorized) {
+      const { history, location } = props
+      const pathname = location.pathname
+      const loginPath = '/login'
+
+      if (pathname !== loginPath) {
+        history.replace(loginPath, { onSuccess: pathname })
+      }
+    }
+
+    this.state = {
+      isAuthorized,
+    }
   }
 
-  componentWillMount () {
-    const { user, isAuthorizing } = this.props
-    const scopes = Array.isArray(user.scope) ? user.scope : []
-    this.checkAuth(scopes, isAuthorizing)
+  static isAuthorized (props) {
+    const { scopes, scopesRequired } = props
+
+    return scopesRequired.every(s => scopes.includes(s))
   }
 
-  componentWillReceiveProps (nextprops) {
-    const { user, isAuthorizing } = nextprops
-    const scopes = Array.isArray(user.scope) ? user.scope : []
-    this.checkAuth(scopes, isAuthorizing)
-  }
-
-  /**
-   * Matches the user authorization level with the component required level
-   * and show the component authorized or redirects to login otherwise.
-   * It also waits if the `isAuthorizing` flag is true.
-   *
-   * @param {[]string} scopes - The current user scopes to be match with the Component required scopes
-   * @param {boolean} isAuthorizing - Flag used to perform no action until athorization is resolved
-   */
-  checkAuth (scopes, isAuthorizing) {
-    const { history, location, scopesRequired } = this.props
-
-    if (scopesRequired.every(s => scopes.includes(s))) {
-      return this.setState({ isAuthorized: true })
-    } else if (!isAuthorizing) {
-      history.replace('/login', { onSuccess: location.pathname })
+  static getDerivedStateFromProps (nextProps, prevState) {
+    return {
+      isAuthorized: RequireAuth.isAuthorized(nextProps),
     }
   }
 
   render () {
-    const { Component, scopesRequired, isAuthorizing, ...rest } = this.props
+    const { Component, scopesRequired, scopes, isAuthorizing, ...rest } = this.props
     return (this.state.isAuthorized && <Component {...rest} />)
   }
 }
@@ -58,9 +56,9 @@ RequireAuth.propTypes = {
    */
   location: object.isRequired,
   /**
-   * The user object
+   * The user scopes
    */
-  user: object.isRequired,
+  scopes: array.isRequired,
   /**
    * Flag that tells an authorization is been asked
    */

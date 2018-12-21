@@ -23,11 +23,13 @@ export const LOGOUT_USER = 'Auth/LOGOUT_USER'
  * @typedef {Object} state
  * @prop {string} [authtoken] - token provided after login or loaded from cookies
  * @prop {Object} user - user object
+ * @prop {arra[string]} scopes - the user scopes
  * @prop {boolean} isAuthorizing - flag to tell if the API was called to authenticate the user
  */
 const initialState = {
   authToken: cookie.get(TOKEN_KEY) || null,
   user: {},
+  scopes: [],
   isAuthorizing: false,
 }
 
@@ -47,11 +49,13 @@ export default function reducer (state = initialState, action) {
       return update(state, {
         authToken: { $set: action.data.token },
         user: { $set: action.data },
+        scopes: { $set: action.data.scope },
         isAuthorizing: { $set: false },
       })
     case AUTH_LOGIN_USER_SUCCESS:
       return update(state, {
         user: { $set: action.data },
+        scopes: { $set: action.data.scope },
         isAuthorizing: { $set: false },
       })
     case LOGIN_USER_ERROR:
@@ -60,6 +64,7 @@ export default function reducer (state = initialState, action) {
       return update(state, {
         authToken: { $set: null },
         user: { $set: {} },
+        scopes: { $set: [] },
         isAuthorizing: { $set: false },
       })
     default:

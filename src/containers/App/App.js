@@ -10,10 +10,12 @@ const routesWithNav = routesConfig
   .map(route => ({ path: route.path, exact: true }))
 
 class App extends Component {
-  componentWillMount () {
-    const { auth } = this.props
+  constructor (props) {
+    super(props)
+
+    const { auth, userAuthLogin } = props
     if (auth.authToken != null) {
-      this.props.userAuthLogin(auth.authToken)
+      userAuthLogin()
     }
   }
 
@@ -34,7 +36,7 @@ class App extends Component {
 
   renderNav () {
     const { auth, logUserOut } = this.props
-    const loggedin = auth.user.scope && auth.user.scope.length > 0
+    const loggedin = auth.scopes && auth.scopes.length > 0
 
     return (
       <Navigation key='navigation' title='DonderStarter'>

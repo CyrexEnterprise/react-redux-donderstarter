@@ -14,6 +14,7 @@ describe('<RequireAuth />', () => {
     history: { replace: jest.fn() },
     location: { pathname: '/' },
     user: {},
+    scopes: [],
     isAuthorizing: false,
     Component: () => (<div />),
     scopesRequired: ['user'],
@@ -34,19 +35,18 @@ describe('<RequireAuth />', () => {
     expect(props.history.replace).toHaveBeenCalledTimes(1)
   })
 
-  it('should check authorization when it receives new props', () => {
-    const checkAuthSpy = jest.spyOn(wrapper.instance(), 'checkAuth')
-    wrapper.setProps({ user: { scope: ['user'] }, isAuthorizing: false })
-
-    expect(checkAuthSpy).toHaveBeenCalled()
+  it('should change state to authorized when receives the correct scopes', () => {
+    expect(wrapper.state().isAuthorized).toBe(false)
+    wrapper.setProps({ scopes: ['user'], isAuthorizing: false })
+    expect(wrapper.state().isAuthorized).toBe(true)
   })
 
   const credentialsMock = { email: 'foo', password: 'bar' }
   const tokenMock = 'abc.123.xxx'
-  const initialState = { authToken: null, user: {}, isAuthorizing: false }
-  const dataMock = { 'id': 0, 'name': 'Zé', 'scope': ['user'], 'token': tokenMock }
+  const initialState = { authToken: null, user: {}, scopes: [], isAuthorizing: false }
+  const dataMock = { id: 0, name: 'Zé', scope: ['user'], token: tokenMock }
   const errorMock = { message: 'error-stub' }
-  const fullState = { authToken: 'abc.123.xxx', user: dataMock, isAuthorizing: true }
+  const fullState = { authToken: tokenMock, user: dataMock, scopes: dataMock.scope, isAuthorizing: true }
 
   describe('reducer', () => {
     it('should return the initial state', () => {
@@ -66,15 +66,15 @@ describe('<RequireAuth />', () => {
         reducer(
           {...initialState, isAuthorizing: true},
           loginSuccess(dataMock)
-        )).toEqual({...initialState, user: dataMock, authToken: dataMock.token})
+        )).toEqual({...initialState, user: dataMock, scopes: dataMock.scope, authToken: dataMock.token})
     })
 
     it('should set the user and authorizing flag on AUTH_LOGIN_USER_SUCCESS', () => {
       expect(
         reducer(
-          {...initialState, isAuthorizing: true, authToken: 'abc.123.xxx'},
+          {...initialState, isAuthorizing: true, authToken: tokenMock},
           authLoginSuccess(dataMock)
-        )).toEqual({...initialState, user: dataMock, authToken: 'abc.123.xxx'})
+        )).toEqual({...initialState, user: dataMock, scopes: dataMock.scope, authToken: tokenMock})
     })
 
     it('should reset state on LOGIN_USER_ERROR', () => {
