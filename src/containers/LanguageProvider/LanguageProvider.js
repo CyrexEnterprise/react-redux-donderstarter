@@ -15,7 +15,7 @@ class LanguageProvider extends Component {
       lang,
       messages,
       formats,
-      children
+      children,
     } = this.props
 
     return (
@@ -31,7 +31,7 @@ class LanguageProvider extends Component {
 }
 
 LanguageProvider.defaultProps = {
-  formats: {}
+  formats: {},
 }
 
 LanguageProvider.propTypes = {
@@ -50,7 +50,7 @@ LanguageProvider.propTypes = {
   /**
    * The children to be rendered
    */
-  children: element.isRequired
+  children: element.isRequired,
 }
 
 export default LanguageProvider

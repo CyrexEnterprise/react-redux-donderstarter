@@ -27,7 +27,7 @@ LocaleSelect.propTypes = {
   /**
    * Triggers local change
    */
-  onLocalChange: func.isRequired
+  onLocalChange: func.isRequired,
 }
 
 export default LocaleSelect

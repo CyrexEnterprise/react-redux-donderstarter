@@ -23,13 +23,13 @@ const LocaleSelect = ({ lang, onLocalChange }) => (
 
 LocaleSelect.propTypes = {
   lang: object.isRequired,
-  onLocalChange: func.isRequired
+  onLocalChange: func.isRequired,
 }
 
 const mapStateToProps = ({ lang }) => ({ lang })
 
 const mapDispatchToProps = (dispatch) => ({
-  onLocalChange: ({ target: { value } }) => dispatch(changeLocale(value))
+  onLocalChange: ({ target: { value } }) => dispatch(changeLocale(value)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocaleSelect)

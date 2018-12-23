@@ -20,7 +20,7 @@ export default connect(LanguageProviderMapStateToProps)(LanguageProvider)
  */
 const LocaleSelectMapStateToProps = ({ lang }) => ({ lang })
 const LocaleSelectMapDispatchToProps = (dispatch) => ({
-  onLocalChange: ({ target: { value } }) => dispatch(changeLocale(value))
+  onLocalChange: ({ target: { value } }) => dispatch(changeLocale(value)),
 })
 
 export const LocaleSelect = connect(LocaleSelectMapStateToProps, LocaleSelectMapDispatchToProps)(LocaleSelectComponent)

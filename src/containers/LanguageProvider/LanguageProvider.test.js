@@ -12,12 +12,60 @@ describe('<LanguageProvider />', () => {
   const props = {
     lang: { locale: 'en' },
     messages: { en: {} },
-    children: <MockElement />
+    children: <MockElement />,
   }
 
   it('should render IntlProvider', () => {
     const wrapper = shallow(<LanguageProvider {...props} />)
     expect(wrapper.find(IntlProvider).length).toEqual(1)
+  })
+
+  describe('reducer', () => {
+    const initialState = {
+      locale: validateLocale(),
+      locales: appLocales,
+    }
+
+    it('should return the initial state', () => {
+      expect(reducer(undefined, {})).toEqual(initialState)
+    })
+
+    it('should set locale on CHANGE_LOCALE', () => {
+      expect(reducer(initialState, changeLocale(appLocales[1]))).toEqual({...initialState, locale: appLocales[1]})
+    })
+  })
+
+  describe('middleware', () => {
+    const create = () => {
+      const store = {
+        getState: jest.fn(() => ({})),
+        dispatch: jest.fn(),
+      }
+
+      const next = jest.fn()
+
+      const invoke = (action) => localeMiddleware(store)(next)(action)
+
+      return { store, next, invoke, history }
+    }
+
+    it('should allways call next with the action and not perform any action', () => {
+      const { next, invoke } = create()
+      const action = {type: 'TEST'}
+      invoke(action)
+
+      expect(next).toHaveBeenCalledWith(action)
+      expect(global.localStorage.getItem('_lang')).toBeFalsy()
+    })
+
+    it('should set localStorage _lang on CHANGE_LOCALE', () => {
+      const { next, invoke } = create()
+      const action = changeLocale(appLocales[1])
+      invoke(action)
+
+      expect(next).toHaveBeenCalledWith(action)
+      expect(global.localStorage.getItem('_lang')).toEqual(appLocales[1])
+    })
   })
 })
 
@@ -25,7 +73,7 @@ describe('<LocaleSelect />', () => {
   const props = {
     lang: { locale: 'en', locales: ['en', 'pt', 'nl'] },
     messages: { en: {} },
-    onLocalChange: jest.fn()
+    onLocalChange: jest.fn(),
   }
 
   const wrapper = shallow(<LocaleSelect {...props} />)
@@ -43,53 +91,5 @@ describe('<LocaleSelect />', () => {
     wrapper.find('select').simulate('change', event)
 
     expect(props.onLocalChange).toHaveBeenCalledWith(event)
-  })
-})
-
-describe('LanguageProvider reducer', () => {
-  const initialState = {
-    locale: validateLocale(),
-    locales: appLocales
-  }
-
-  it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual(initialState)
-  })
-
-  it('should set locale on CHANGE_LOCALE', () => {
-    expect(reducer(initialState, changeLocale(appLocales[1]))).toEqual({...initialState, locale: appLocales[1]})
-  })
-})
-
-describe('LanguageProvider middleware', () => {
-  const create = () => {
-    const store = {
-      getState: jest.fn(() => ({})),
-      dispatch: jest.fn()
-    }
-
-    const next = jest.fn()
-
-    const invoke = (action) => localeMiddleware(store)(next)(action)
-
-    return { store, next, invoke, history }
-  }
-
-  it('should allways call next with the action and not perform any action', () => {
-    const { next, invoke } = create()
-    const action = {type: 'TEST'}
-    invoke(action)
-
-    expect(next).toHaveBeenCalledWith(action)
-    expect(global.localStorage._data._lang).not.toBeDefined()
-  })
-
-  it('should set localStorage _lang on CHANGE_LOCALE', () => {
-    const { next, invoke } = create()
-    const action = changeLocale(appLocales[1])
-    invoke(action)
-
-    expect(next).toHaveBeenCalledWith(action)
-    expect(global.localStorage._data._lang).toEqual(appLocales[1])
   })
 })

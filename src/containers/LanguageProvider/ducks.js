@@ -30,7 +30,7 @@ export const validateLocale = () => {
  */
 const initialState = {
   locale: validateLocale(),
-  locales: appLocales
+  locales: appLocales,
 }
 
 /**
@@ -42,7 +42,7 @@ export default function reducer (state = initialState, action) {
   switch (action.type) {
     case CHANGE_LOCALE:
       return update(state, {
-        locale: { $set: action.locale }
+        locale: { $set: action.locale },
       })
     default:
       return state
