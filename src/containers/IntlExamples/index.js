@@ -30,8 +30,8 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: '1.5rem'
-  }
+    padding: '1.5rem',
+  },
 }
 
 export default IntlExamples
