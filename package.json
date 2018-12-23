@@ -18,7 +18,7 @@
     "release": "standard-version",
     "generate": "node ./internals/generate",
     "storybook": "start-storybook -p 9002 -c ./src/storybook",
-    "storybook:dist": "build-storybook -c webpack.config.common.js -o docs",
+    "storybook:dist": "build-storybook -c ./src/storybook -o docs",
     "preopen-storybook": "yarn storybook:dist",
     "open-storybook": "open docs/index.html"
   },
