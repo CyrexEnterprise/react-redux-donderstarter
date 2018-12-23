@@ -20,8 +20,7 @@ module.exports = function (folder, name) {
   const variableName = name.charAt(0).toLowerCase() + name.slice(1)
 
   body.splice(lastImportLine + 1, 0, `import ${variableName} from '${folder}/${name}/ducks'`)
-  body.splice(body.length - 3, 1, `${body[body.length - 3]},`)
-  body.splice(body.length - 2, 0, `  ${variableName}`)
+  body.splice(body.length - 2, 0, `  ${variableName},`)
 
   const output = body.join('\n')
   fs.writeFileSync(reducersPath, output)

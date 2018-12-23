@@ -2,64 +2,62 @@ module.exports = function () {
   return `import request from 'util/request'
 import { takeLatest, call, put, select } from 'redux-saga/effects'
 import { API_URL } from 'constants/endpoints'
-import { INCREMENT, incrementSuccess, incrementError, INCREMENT_LOAD, loadIncrementSuccess, loadIncrementError } from './ducks'
+import {
+  INCREMENT,
+  incrementSuccess,
+  incrementError,
+  INCREMENT_LOAD,
+  loadIncrementSuccess,
+  loadIncrementError,
+} from './ducks'
 
 /**
  * increment saga worker
  * @param {Object} action
  */
-function * incrementWorker (action) {
-  const requestUrl = \`$\{API_URL}/counter\`
-  const headers = { 'Content-Type': 'application/json' }
-  const state = yield select()
-  const total = state.foo.counter + 1
-  const body = JSON.stringify({ total })
+function * increment (action) {
+  try {
+    const requestUrl = \`$\{API_URL}/counter\`
+    const headers = { 'Content-Type': 'application/json' }
+    const state = yield select()
+    const total = state.foo.counter + 1
+    const body = JSON.stringify({ total })
 
-  const response = yield call(request, requestUrl, {
-    method: 'POST',
-    headers,
-    body
-  })
+    const { data } = yield call(request, requestUrl, {
+      method: 'POST',
+      headers,
+      body,
+    })
 
-  if (!response.err) {
-    yield put(incrementSuccess(response.data))
-  } else {
-    yield put(incrementError(response.err))
+    yield put(incrementSuccess(data))
+  } catch (error) {
+    yield put(incrementError(error))
   }
-}
-
-/**
- * increment saga
- */
-export function * incrementSaga () {
-  yield takeLatest(INCREMENT, incrementWorker)
 }
 
 /**
  * load increment saga worker
  * @param {Object} action
  */
-function * loadIncrementWorker (action) {
-  const requestUrl = \`$\{API_URL}/counter\`
+function * loadIncrement (action) {
+  try {
+    const requestUrl = \`$\{API_URL}/counter\`
 
-  const response = yield call(request, requestUrl, {
-    method: 'GET'
-  })
+    const { data } = yield call(request, requestUrl, {
+      method: 'GET',
+    })
 
-  if (!response.err) {
-    yield put(loadIncrementSuccess(response.data))
-  } else {
-    yield put(loadIncrementError(response.err))
+    yield put(loadIncrementSuccess(data))
+  } catch (error) {
+    yield put(loadIncrementError(error))
   }
 }
 
-/**
- * load increment saga
- */
-export function * loadIncrementSaga () {
-  yield takeLatest(INCREMENT_LOAD, loadIncrementWorker)
+export function * rootSaga () {
+  yield takeLatest(INCREMENT, increment)
+  yield takeLatest(INCREMENT_LOAD, loadIncrement)
 }
 
-export default [incrementSaga, loadIncrementSaga]
+export default rootSaga
 `
 }

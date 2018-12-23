@@ -1,11 +1,13 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
+import { withInfo } from '@storybook/addon-info'
 import NotFound from './NotFound'
 
 storiesOf('NotFound', module)
-  .addWithInfo('default', () => (
+  .addDecorator(withInfo({ header: false, inline: true }))
+  .add('default', () => (
     <NotFound />
   ))
-  .addWithInfo('with children on right', () => (
+  .add('with children on right', () => (
     <NotFound message='Oops! Not found.' />
   ))

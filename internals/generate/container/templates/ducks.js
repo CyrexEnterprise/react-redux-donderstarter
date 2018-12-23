@@ -30,7 +30,7 @@ const initialState = function (name, withSagas) {
 const initialState = {
   counter: 0,
   loaded: false,
-  error: null
+  error: null,
 }`
     : `
 /**
@@ -39,7 +39,7 @@ const initialState = {
 * @prop {number} counter - The total counter
 */
 const initialState = {
-  counter: 0
+  counter: 0,
 }
 `
 }
@@ -50,22 +50,22 @@ const reducer = function (withSagas) {
     case INCREMENT_SUCCESS:
       return update(state, {
         counter: { $set: action.data.total },
-        error: { $set: null }
+        error: { $set: null },
       })
     case INCREMENT_ERROR:
       return update(state, {
-        error: { $set: action.error.message }
+        error: { $set: action.error.message },
       })
     case INCREMENT_LOAD_SUCCESS:
       return update(state, {
         counter: { $set: action.data.total },
         loaded: { $set: true },
-        error: { $set: null }
+        error: { $set: null },
       })
     case INCREMENT_LOAD_ERROR:
       return update(state, {
         loaded: { $set: false },
-        error: { $set: action.error.message }
+        error: { $set: action.error.message },
       })
     default:
       return state
@@ -73,7 +73,7 @@ const reducer = function (withSagas) {
     : `switch (action.type) {
     case INCREMENT:
       return update(state, {
-        counter: { $set: state.counter + 1 }
+        counter: { $set: state.counter + 1 },
       })
     default:
       return state

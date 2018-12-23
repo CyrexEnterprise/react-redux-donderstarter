@@ -12,5 +12,5 @@ import auth from 'containers/Auth/ducks'
 
 export default combineReducers({
   routing,
-  auth
+  auth,
 })

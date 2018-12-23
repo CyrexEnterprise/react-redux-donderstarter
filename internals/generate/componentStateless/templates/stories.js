@@ -1,16 +1,18 @@
 module.exports = function (name) {
   return `import React from 'react'
 import { storiesOf } from '@storybook/react'
+import { withInfo } from '@storybook/addon-info'
 import ${name} from './${name}'
 
 storiesOf('${name}', module)
-  .addWithInfo('default', () => (
+  .addDecorator(withInfo({ header: false, inline: true }))
+  .add('default', () => (
     <${name} counter={0} />
   ))
-  .addWithInfo('with different color', () => (
+  .add('with different color', () => (
     <${name} counter={0} clicksColor='blue' />
   ))
-  .addWithInfo('with increment hidden', () => (
+  .add('with increment hidden', () => (
     <${name} counter={0} hideButton />
   ))
 `

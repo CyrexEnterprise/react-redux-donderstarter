@@ -5,8 +5,8 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    minHeight: '100%'
-  }
+    minHeight: '100%',
+  },
 }
 `
 const compWillmount = `
@@ -19,7 +19,7 @@ const compWillmount = `
   }
 `
 
-const props = `,
+const props = `
   /**
    * Flag if the counter was already loaded
    */
@@ -27,7 +27,7 @@ const props = `,
   /**
    * Loads initial increment counter
    */
-  loadIncrement: func.isRequired`
+  loadIncrement: func.isRequired,`
 
 module.exports = function (name, withStylesheet, withSagas) {
   const className = name.charAt(0).toLowerCase() + name.slice(1)
@@ -49,7 +49,7 @@ class ${name} extends Component {${withSagas ? compWillmount : ''}
 }
 ${withStylesheet ? '' : styles}
 ${name}.defaultProps = {
-  clicksColor: '#FFC107'
+  clicksColor: '#FFC107',
 }
 
 ${name}.propTypes = {
@@ -68,7 +68,7 @@ ${name}.propTypes = {
   /**
    * Increments the counter in store
    */
-  increment: func.isRequired${withSagas ? props : ''}
+  increment: func.isRequired,${withSagas ? props : ''}
 }
 
 export default ${name}

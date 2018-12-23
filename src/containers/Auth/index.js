@@ -11,9 +11,10 @@ import RequireAuth from './RequireAuth'
  */
 export default (Component, scopesRequired) => {
   const mapStateToProps = ({ auth }) => ({
-    ...auth,
+    scopes: auth.scopes,
+    isAuthorizing: auth.isAuthorizing,
     Component,
-    scopesRequired
+    scopesRequired,
   })
 
   return connect(mapStateToProps)(RequireAuth)
