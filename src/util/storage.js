@@ -5,17 +5,34 @@
  */
 
 export function localPut (key, value) {
-  window.localStorage.setItem(key, value)
+  try {
+    window.localStorage.setItem(key, value)
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 export function localGet (key) {
-  return window.localStorage.getItem(key)
+  try {
+    return window.localStorage.getItem(key)
+  } catch (err) {
+    console.error(err)
+    return undefined
+  }
 }
 
 export function localRemove (key) {
-  return window.localStorage.removeItem(key)
+  try {
+    return window.localStorage.removeItem(key)
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 export function localClear () {
-  window.localStorage.clear()
+  try {
+    window.localStorage.clear()
+  } catch (err) {
+    console.error(err)
+  }
 }
