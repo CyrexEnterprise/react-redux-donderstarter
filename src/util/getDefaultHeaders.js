@@ -7,7 +7,7 @@
 function getDefaultHeders (state) {
   if (state && state.auth && state.auth.authToken) {
     return {
-      Authorization: `Bearer ${state.auth.authToken}`
+      Authorization: `Bearer ${state.auth.authToken}`,
     }
   }
 

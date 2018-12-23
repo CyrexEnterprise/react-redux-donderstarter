@@ -41,3 +41,6 @@ dist
 
 #storybook static files
 docs
+
+# environment variables file
+.env

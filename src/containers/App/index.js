@@ -7,7 +7,7 @@ const mapStateToProps = ({ auth }) => ({ auth })
 
 const mapDispatchToProps = (dispatch) => ({
   userAuthLogin: (token) => dispatch(authLogin(token)),
-  logUserOut: () => dispatch(logout())
+  logUserOut: () => dispatch(logout()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

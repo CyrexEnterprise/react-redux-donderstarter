@@ -1,26 +1,21 @@
 {
   "presets": [
-    ["env", {
-      "targets": {
-        "browsers": ["last 2 versions"]
-      },
+    ["@babel/preset-env", {
+      "useBuiltIns": "usage",
       "loose": true,
-      "modules": false
+      "modules": false,
+      "forceAllTransforms": true
     }],
-    "react",
-    "stage-2"
-  ],
-  "plugins": [
-    "react-hot-loader/babel",
-    "react-docgen"
+    "@babel/preset-react"
   ],
   "env": {
     "test": {
-      "presets": [
-        ["env", { "modules": "commonjs" }],
-        "react",
-        "stage-2"
-      ]
+      "presets": [["@babel/env"], "@babel/preset-react"]
     }
-  }
+  },
+  "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    "react-hot-loader/babel",
+    "add-react-displayname"
+  ]
 }

@@ -32,34 +32,34 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: '2rem'
+    paddingBottom: '2rem',
   },
   imgContainer: {
     width: 700,
     borderRadius: 8,
     overflow: 'auto',
-    boxShadow: '0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12)'
+    boxShadow: '0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12)',
   },
   img: {
     display: 'block',
     width: '100%',
-    height: 'auto'
+    height: 'auto',
   },
   actions: {
-    marginTop: 20
+    marginTop: 20,
   },
   button: {
     textTransform: 'uppercase',
-    marginRight: 5
-  }
+    marginRight: 5,
+  },
 }
 
 HomePage.contextTypes = {
-  intl: PropTypes.object.isRequired
+  intl: PropTypes.object.isRequired,
 }
 
 HomePage.propTypes = {
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
 }
 
 export default HomePage

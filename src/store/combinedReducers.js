@@ -14,5 +14,5 @@ import lang from 'containers/LanguageProvider/ducks'
 export default combineReducers({
   routing,
   auth,
-  lang
+  lang,
 })

@@ -5,8 +5,8 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    minHeight: '100%'
-  }
+    minHeight: '100%',
+  },
 }
 `
 
@@ -17,7 +17,7 @@ import { bool, string } from 'prop-types'
 
 class ${name} extends Component {
   state = {
-    counter: 0
+    counter: 0,
   }
 
   increment = () => {
@@ -40,7 +40,7 @@ class ${name} extends Component {
 }
 ${withStylesheet ? '' : styles}
 ${name}.defaultProps = {
-  clicksColor: '#FFC107'
+  clicksColor: '#FFC107',
 }
 
 ${name}.propTypes = {
@@ -51,7 +51,7 @@ ${name}.propTypes = {
   /**
    * The color of clicks text
    */
-  clicksColor: string
+  clicksColor: string,
 }
 
 export default ${name}

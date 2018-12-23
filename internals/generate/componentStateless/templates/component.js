@@ -5,8 +5,8 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    minHeight: '100%'
-  }
+    minHeight: '100%',
+  },
 }
 `
 
@@ -25,7 +25,7 @@ const ${name} = ({ hideButton, clicksColor, counter, onButtonClick }) => (
 ${withStylesheet ? '' : styles}
 ${name}.defaultProps = {
   clicksColor: '#FFC107',
-  onButtonClick: () => {}
+  onButtonClick: () => {},
 }
 
 ${name}.propTypes = {
@@ -44,7 +44,7 @@ ${name}.propTypes = {
   /**
    * callback when button is clicked
    */
-  onButtonClick: func
+  onButtonClick: func,
 }
 
 export default ${name}

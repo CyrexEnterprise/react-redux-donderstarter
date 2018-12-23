@@ -1,6 +1,6 @@
 const loadIncrement = function () {
-  return `,
-  loadIncrement: () => dispatch(loadIncrement())`
+  return `
+  loadIncrement: () => dispatch(loadIncrement()),`
 }
 
 module.exports = function (name, withSagas) {
@@ -11,7 +11,7 @@ import { increment${withSagas ? ', loadIncrement' : ''} } from './ducks'
 
 const mapStateToProps = ({ ${lowerName} }) => ({ ...${lowerName} })
 const mapDispatchToProps = (dispatch) => ({
-  increment: () => dispatch(increment())${withSagas ? loadIncrement() : ''}
+  increment: () => dispatch(increment()),${withSagas ? loadIncrement() : ''}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(${name})

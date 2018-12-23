@@ -53,27 +53,44 @@ $ git push
 
 After completing the [installation](#installation) step, you're ready to start developing your App!
 
+**Start by adding your first file in the root of the project:**
+
+`.env`
+
 ```bash
-$ yarn dev  # Start the development server (or `npm run dev`)
+# Your .env files can include sensitive information.
+# Because of this, `dotenv-webpack` will only expose environment
+# variables that are explicitly referenced in your code to your final bundle.
+# see more here: https://github.com/mrsteele/dotenv-webpack#description
+
+# API url
+API_URL = 'http://localhost:9004'
+```
+If you look at `src/constants/endpoints.js` you will see a reference to `process.env.API_URL`, use it to make calls to mock API :D
+
+**Runing the project in `development` mode:**
+
+```bash
+$ yarn dev  # or `npm run dev`
 ```
 
 Hot reloading is enabled by default for both **JavaScript** and **SCSS** files.
 
-All scripts at your disposal:
+**All scripts at your disposal:**
 
 |`yarn <script>`    |Description|
 |-------------------|-----------|
-|`dev`            	|Serves your app at `localhost:9000`|
+|`dev`            	|Serves your app at [localhost:9001](http://localhost:9001)|
 |`mock-api`			    |Serves a mock api at `localhost:9004` - see [json-server](https://github.com/typicode/json-server) for more|
 |`commmit`          |Runs `git-cz`, to help with commit conventions|
 |`test`             |Runs unit tests with jest pass `--watch` to watch file changes|
 |`open-cov`			    |Opens jest coverage `html` page in the browser|
-|`build`            |Builds the application to ./dist|
-|`start`            |Runs tests, build and serves dist application at `localhost:8080`|
+|`build`            |Builds the application to ./dist folder|
+|`start`            |Runs tests, build and serves dist application at [localhost:8080](http://localhost:8080)|
 |`release`			    |Generates `CHANGELOG.md` file, bumps `package.json` version and creates tags from conventional commits - see [standard-version](https://github.com/conventional-changelog/standard-version) for more|
 |`generate`         |Generates a quick `component` or `container` with input choices|
-|`storybook`        |Runs storybook server on port `localhost:9002` - see [storybook](https://github.com/storybooks/storybook) for more|
-|`storybook:build`  |Builds a static version of storybook to `./docs`|
+|`storybook`        |Runs storybook server at [localhost:9002](http://localhost:9002) - see [storybook](https://github.com/storybooks/storybook) for more|
+|`storybook:build`  |Builds a static version of storybook to `./docs` folder|
 |`open-storybook`   |Runs `storybook:build` and opens storybook static version on `docs/index.html`|
 
 ## Project Structure
@@ -173,13 +190,15 @@ Write the stories you want to show: `components/MyComponent/stories.js`
 ```javascript
 import React from 'react'
 import { storiesOf } from '@storybook/react'
+import { withInfo } from '@storybook/addon-info'
 import MyComponent from './MyComponent'
 
 storiesOf('MyComponent', module)
-  .addWithInfo('default', () => (
+  .addDecorator(withInfo({ header: false, inline: true }))
+  .add('default', () => (
     <MyComponent />
   ))
-  .addWithInfo('with children', () => (
+  .add('with children', () => (
     <MyComponent>
       <button>Click me!</button>
     </MyComponent>
