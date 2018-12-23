@@ -4,7 +4,7 @@ import { func } from 'prop-types'
 class Login extends Component {
   state = {
     email: '',
-    password: ''
+    password: '',
   }
 
   inputChange = ({ target }) => {
@@ -52,7 +52,7 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  logUserIn: func.isRequired
+  logUserIn: func.isRequired,
 }
 
 export default Login

@@ -17,9 +17,10 @@ module.exports = function (folder, name) {
     }
   }
 
-  body.splice(lastImportLine + 1, 0, `import ${name}Sagas from '${folder}/${name}/sagas'`)
-  body.splice(body.length - 5, 1, `${body[body.length - 5]},`)
-  body.splice(body.length - 4, 0, `  ...${name}Sagas`)
+  const variableName = name.charAt(0).toLowerCase() + name.slice(1)
+
+  body.splice(lastImportLine + 1, 0, `import ${variableName} from '${folder}/${name}/sagas'`)
+  body.splice(body.length - 4, 0, `  ${variableName},`)
 
   const output = body.join('\n')
   fs.writeFileSync(sagasPath, output)

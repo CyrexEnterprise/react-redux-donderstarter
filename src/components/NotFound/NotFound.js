@@ -10,22 +10,22 @@ const NotFound = ({ message }) => (
 )
 
 NotFound.defaultProps = {
-  message: '404 Page Not Found'
+  message: '404 Page Not Found',
 }
 
 NotFound.propTypes = {
   /**
    * Error message to be displayed
    */
-  message: string
+  message: string,
 }
 
 const styles = {
   container: {
     flex: 1,
     display: 'flex',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 }
 
 export default NotFound

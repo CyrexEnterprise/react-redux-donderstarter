@@ -11,11 +11,11 @@ const questions = [
     choices: [{ name: 'SCSS' }, { name: 'tests' }, { name: 'stories' }],
     when: function ({ generateType }) {
       return generateType === choice
-    }
-  }
+    },
+  },
 ]
 
 module.exports = {
   choice,
-  questions
+  questions,
 }

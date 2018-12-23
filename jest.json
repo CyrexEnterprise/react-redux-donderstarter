@@ -1,11 +1,14 @@
 {
+  "testRegex": "./src/.*.test.js$",
+  "transform": {
+    "^.+\\.js$": "babel-jest",
+    ".+\\.(jpg|jpeg|png|gif|svg|graphql)$": "<rootDir>/internals/jest/transformStub.js"
+  },
+  "transformIgnorePatterns": ["<rootDir>/node_modules/"],
   "setupFiles": [
     "./internals/jest/shim.js",
     "./internals/jest/setup.js"
   ],
-  "moduleNameMapper": {
-    "\\.(jpg|jpeg|png|gif|svg|graphql)$": "<rootDir>/__mocks__/fileMock.js"
-  },
   "modulePaths": [
     "src"
   ],

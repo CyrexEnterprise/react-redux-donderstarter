@@ -5,18 +5,19 @@ module.exports = function (name, withSagas) {
 import { mount } from 'enzyme'
 import request from 'util/request'
 import { expectSaga } from 'redux-saga-test-plan'
+import { throwError } from 'redux-saga-test-plan/providers'
 import * as matchers from 'redux-saga-test-plan/matchers'
 import { select } from 'redux-saga/effects'
 import ${name} from './${name}'
 import reducer, { loadIncrementSuccess, loadIncrementError, incrementSuccess, incrementError, loadIncrement, increment } from './ducks'
-import { loadIncrementSaga, incrementSaga } from './sagas'
+import rootSaga from './sagas'
 
 describe('<${name} />', () => {
   const props = {
     counter: 0,
     increment: jest.fn(),
     loaded: false,
-    loadIncrement: jest.fn()
+    loadIncrement: jest.fn(),
   }
 
   const wrapper = mount(<${name} {...props} />)
@@ -48,7 +49,7 @@ describe('<${name} />', () => {
     const initialState = {
       counter: 0,
       loaded: false,
-      error: null
+      error: null,
     }
 
     const successMock = { total: 2 }
@@ -84,7 +85,7 @@ describe('<${name} />', () => {
       const successMock = { total: 4 }
       const fakeResponse = { data: successMock }
 
-      return expectSaga(loadIncrementSaga)
+      return expectSaga(rootSaga)
         .provide([[matchers.call.fn(request), fakeResponse]])
         .put(loadIncrementSuccess(successMock))
         .dispatch(loadIncrement())
@@ -93,10 +94,9 @@ describe('<${name} />', () => {
 
     it('should call load increment API and handle the error', () => {
       const errorMock = { message: 'error-mock' }
-      const fakeResponse = { err: errorMock }
 
-      return expectSaga(loadIncrementSaga)
-        .provide([[matchers.call.fn(request), fakeResponse]])
+      return expectSaga(rootSaga)
+        .provide([[matchers.call.fn(request), throwError(errorMock)]])
         .put(loadIncrementError(errorMock))
         .dispatch(loadIncrement())
         .silentRun()
@@ -107,10 +107,10 @@ describe('<${name} />', () => {
       const fakeResponse = { data: successMock }
       const reducerMock = { ${reducerName}: reducer(undefined, {}) }
 
-      return expectSaga(incrementSaga)
+      return expectSaga(rootSaga)
         .provide([
           [matchers.call.fn(request), fakeResponse],
-          [select(), reducerMock]
+          [select(), reducerMock],
         ])
         .put(incrementSuccess(successMock))
         .dispatch(increment())
@@ -119,13 +119,12 @@ describe('<${name} />', () => {
 
     it('should call increment API and handle the error', () => {
       const errorMock = { message: 'error-mock' }
-      const fakeResponse = { err: errorMock }
       const reducerMock = { ${reducerName}: reducer(undefined, {}) }
 
-      return expectSaga(incrementSaga)
+      return expectSaga(rootSaga)
         .provide([
-          [matchers.call.fn(request), fakeResponse],
-          [select(), reducerMock]
+          [matchers.call.fn(request), throwError(errorMock)],
+          [select(), reducerMock],
         ])
         .put(incrementError(errorMock))
         .dispatch(increment())

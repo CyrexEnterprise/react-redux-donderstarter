@@ -19,7 +19,7 @@ Navigation.propTypes = {
   /**
    * Children components to be rendered on the right
    */
-  children: node
+  children: node,
 }
 
 export default Navigation

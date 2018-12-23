@@ -4,16 +4,12 @@
 
 const path = require('path')
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   mode: 'development',
 
   plugins: [
-    new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'index.html') }),
-    new MiniCssExtractPlugin('style.css'),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
   ],
 
   devServer: {
@@ -27,9 +23,9 @@ module.exports = {
     hot: true,
     stats: {
       modules: false,
-      colors: true
-    }
+      colors: true,
+    },
   },
 
-  devtool: 'cheap-module-source-map'
+  devtool: 'cheap-module-source-map',
 }
