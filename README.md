@@ -286,6 +286,23 @@ You should first add the translation object to your default language file and th
 ]
 ```
 
+Adding formats to be used on your `FormattedMessages`, add the following to `src/util/i18n.js` formats variable:
+
+```javascript
+...
+
+export const formats = {
+  number: {
+    EUR: {
+      style: 'currency',
+      currency: 'EUR'
+    }
+  }
+}
+
+...
+```
+
 Check [react-intl documentation](https://github.com/yahoo/react-intl/wiki#formatting-data) for more.
 
 ## Caveats
