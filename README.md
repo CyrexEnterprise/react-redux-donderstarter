@@ -14,8 +14,8 @@ The primary goal of this boilerplate is to provide a stable foundation upon whic
 1. [Caveats](#caveats)
 
 ## Requirements
-* node `^5.0.0`
-* yarn `^0.22.0`
+* node `^10.0.0`
+* yarn `1.0.0`
 
 ## Installation
 
@@ -88,10 +88,6 @@ Hot reloading is enabled by default for both **JavaScript** and **SCSS** files.
 |`build`            |Builds the application to ./dist folder|
 |`start`            |Runs tests, build and serves dist application at [localhost:8080](http://localhost:8080)|
 |`release`			    |Generates `CHANGELOG.md` file, bumps `package.json` version and creates tags from conventional commits - see [standard-version](https://github.com/conventional-changelog/standard-version) for more|
-|`generate`         |Generates a quick `component` or `container` with input choices|
-|`storybook`        |Runs storybook server at [localhost:9002](http://localhost:9002) - see [storybook](https://github.com/storybooks/storybook) for more|
-|`storybook:build`  |Builds a static version of storybook to `./docs` folder|
-|`open-storybook`   |Runs `storybook:build` and opens storybook static version on `docs/index.html`|
 
 ## Project Structure
 
@@ -108,7 +104,6 @@ Ex: `import App from 'components/App'`
 │
 ├── internals                       # Project development configurations
 │ └── jest                          # Tests setups and shims
-│ └── generate                      # File generation scripts
 │
 └── src                             # Application source code
     ├── assets                      # asset files to be required
@@ -121,7 +116,6 @@ Ex: `import App from 'components/App'`
     │       ├── Component.js        # Pure component source code (easily tested)
     │       ├── Component.test.js   # Component test cases
     │       ├── routes.js           # Your nested routes (if any)
-    │       ├── stories.js          # Your component stories (if any)
     │       └── index.js            # Component export (HOC should be added here if any)
     │
     ├── containers                  # Components wrapped by redux/connect
@@ -149,78 +143,6 @@ Ex: `import App from 'components/App'`
         ├── getDefaultHeaders.js    # Helper to inject headers on requests
         └── request.js              # Fetch API handler
 ```
-
-## Stories with Storybook
-
-If you are working in team maybe it is a good thing to help your team mates how to use your components without much burden. One can also develop theses components without create a dummy view for it. Storybook for the help!
-
-Example component: `components/MyComponent/MyComponent.js`
-
-```javascript
-import React from 'react'
-import { string, node } from 'prop-types'
-
-const MyComponent = ({ children }) => (
-  <div className='myComponent'>
-    {children != null
-    	? <div>{children}</div>
-    	: <div>I am a childless component</div>
-    }
-  </div>
-)
-
-MyComponent.propTypes = {
-  /**
-   * Children components to be rendered on the right
-   */
-  children: node
-}
-
-export default MyComponent
-```
-
-### Adding a story
-
-Create a stories file on your component folder and use Storybook `storiesOf ` to start adding stories, add the minimum requirements component examples and all the other states you think it should be shown.
-
-Note: Component `PropTypes` annotations will be automaticly shown on Storybook.
-
-Write the stories you want to show: `components/MyComponent/stories.js`
-
-```javascript
-import React from 'react'
-import { storiesOf } from '@storybook/react'
-import { withInfo } from '@storybook/addon-info'
-import MyComponent from './MyComponent'
-
-storiesOf('MyComponent', module)
-  .addDecorator(withInfo({ header: false, inline: true }))
-  .add('default', () => (
-    <MyComponent />
-  ))
-  .add('with children', () => (
-    <MyComponent>
-      <button>Click me!</button>
-    </MyComponent>
-  ))
-
-```
-
-Finally require your story in Storybook: `storybook/config.js`
-
-```javascript
-...
-function loadStories () {
-  require('../components/MyComponent/stories')
-}
-...
-```
-
-### Running Storybook
-
-To see all stories one can simply run `yarn open-storybook`, this will create a satic version of storybook and open it on your default browser. This is good to see the docs only.
-
-If you're developing the component or making stories for it, run `yarn storybook`, this will crete a server on `localhost:9002` with hot reloading enabled, so we can see changes on the fly for both the component and the story.
 
 ## i18n Support
 
@@ -304,11 +226,3 @@ export const formats = {
 ```
 
 Check [react-intl documentation](https://github.com/yahoo/react-intl/wiki#formatting-data) for more.
-
-## Caveats
-
-Some times `node-sass` have build problems on linux environments, probable solution:
-
-- Bring your node version to `^6.0.0`
-- Run `npm rebuild node-sass`
-	- You need to run `npm rebuild node-sass` everytime `node-sass` package is installed.

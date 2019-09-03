@@ -1,21 +1,25 @@
 {
   "presets": [
     ["@babel/preset-env", {
+      "corejs": 3,
       "useBuiltIns": "usage",
       "loose": true,
       "modules": false,
       "forceAllTransforms": true
     }],
-    "@babel/preset-react"
+    "@babel/preset-react",
   ],
   "env": {
+    "dev": {
+      "plugins": ["react-hot-loader/babel"]
+    },
     "test": {
-      "presets": [["@babel/env"], "@babel/preset-react"]
+      "presets": [["@babel/env"]],
+      "plugins": ["@babel/plugin-transform-runtime"],
     }
   },
   "plugins": [
     "@babel/plugin-proposal-class-properties",
     "react-hot-loader/babel",
-    "add-react-displayname"
   ]
 }

@@ -54,39 +54,39 @@ describe('<RequireAuth />', () => {
     })
 
     it('should set authorizing flag on LOGIN_USER', () => {
-      expect(reducer(initialState, login(credentialsMock))).toEqual({...initialState, isAuthorizing: true})
+      expect(reducer(initialState, login(credentialsMock))).toEqual({ ...initialState, isAuthorizing: true })
     })
 
     it('should set authorizing flag on AUTH_LOGIN_USER', () => {
-      expect(reducer(initialState, authLogin(tokenMock))).toEqual({...initialState, isAuthorizing: true})
+      expect(reducer(initialState, authLogin(tokenMock))).toEqual({ ...initialState, isAuthorizing: true })
     })
 
     it('should set the user, token and set authorizing flag on LOGIN_USER_SUCCESS', () => {
       expect(
         reducer(
-          {...initialState, isAuthorizing: true},
+          { ...initialState, isAuthorizing: true },
           loginSuccess(dataMock)
-        )).toEqual({...initialState, user: dataMock, scopes: dataMock.scope, authToken: dataMock.token})
+        )).toEqual({ ...initialState, user: dataMock, scopes: dataMock.scope, authToken: dataMock.token })
     })
 
     it('should set the user and authorizing flag on AUTH_LOGIN_USER_SUCCESS', () => {
       expect(
         reducer(
-          {...initialState, isAuthorizing: true, authToken: tokenMock},
+          { ...initialState, isAuthorizing: true, authToken: tokenMock },
           authLoginSuccess(dataMock)
-        )).toEqual({...initialState, user: dataMock, scopes: dataMock.scope, authToken: tokenMock})
+        )).toEqual({ ...initialState, user: dataMock, scopes: dataMock.scope, authToken: tokenMock })
     })
 
     it('should reset state on LOGIN_USER_ERROR', () => {
-      expect(reducer({...fullState}, loginError(errorMock))).toEqual({...initialState})
+      expect(reducer({ ...fullState }, loginError(errorMock))).toEqual({ ...initialState })
     })
 
     it('should reset state on AUTH_LOGIN_USER_ERROR', () => {
-      expect(reducer({...fullState}, authLoginError(errorMock))).toEqual({...initialState})
+      expect(reducer({ ...fullState }, authLoginError(errorMock))).toEqual({ ...initialState })
     })
 
     it('should reset state on LOGOUT_USER', () => {
-      expect(reducer({...fullState}, logout())).toEqual({...initialState})
+      expect(reducer({ ...fullState }, logout())).toEqual({ ...initialState })
     })
   })
 
@@ -154,7 +154,7 @@ describe('<RequireAuth />', () => {
 
     it('should allways call next with the action and not perform any action', () => {
       const { next, invoke, history } = create()
-      const action = {type: 'TEST'}
+      const action = { type: 'TEST' }
       invoke(action)
 
       expect(next).toHaveBeenCalledWith(action)

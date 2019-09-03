@@ -36,12 +36,7 @@ module.exports = {
               plugins: () => ([autoprefixer()]),
             },
           },
-          {
-            loader: 'sass-loader',
-            options: {
-              outputStyle: 'extended',
-            },
-          },
+          'sass-loader',
         ],
       },
       {
