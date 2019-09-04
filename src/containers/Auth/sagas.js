@@ -1,7 +1,3 @@
-/**
- * @module Auth/sagas
- */
-
 import request from 'util/request'
 import getDefaultHeaders from 'util/getDefaultHeaders'
 import { takeLatest, call, put, select } from 'redux-saga/effects'

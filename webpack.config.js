@@ -9,11 +9,11 @@ const commonConfig = require('./webpack.config.common')
 
 const __PROD__ = process.env.NODE_ENV === 'production'
 
-const conf = merge.smart(commonConfig, __PROD__ ? prodConfig : devConfig)
-
-module.exports = uniquePlugins(conf)
-
 function uniquePlugins (conf) {
+  if (!Array.isArray(conf.plugins) || conf.plugins.length < 2) {
+    return conf
+  }
+
   const plugins = []
   const pluginNames = []
 
@@ -29,5 +29,9 @@ function uniquePlugins (conf) {
     pluginNames.push(pluginName)
   }
 
-  return {...conf, plugins: plugins.reverse()}
+  return { ...conf, plugins: plugins.reverse() }
 }
+
+module.exports = uniquePlugins(
+  merge.smart(commonConfig, __PROD__ ? prodConfig : devConfig)
+)

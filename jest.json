@@ -1,8 +1,9 @@
 {
-  "testRegex": "./src/.*.test.js$",
+  "testRegex": "./src/.*.test.(js|ts)x?$",
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
   "transform": {
-    "^.+\\.js$": "babel-jest",
-    ".+\\.(jpg|jpeg|png|gif|svg|graphql)$": "<rootDir>/internals/jest/transformStub.js"
+    "^.+\\.(js|jsx|ts|tsx)$": "babel-jest",
+    ".+\\.(jpg|jpeg|png|gif|svg|css|scss)$": "<rootDir>/internals/jest/transformStub.js"
   },
   "transformIgnorePatterns": ["<rootDir>/node_modules/"],
   "setupFiles": [
@@ -21,7 +22,6 @@
   "coveragePathIgnorePatterns": [
     "/util/",
     "/store/",
-    "/storybook/",
     "/App/",
     "/ErrorMonitor/"
   ],

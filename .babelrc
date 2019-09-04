@@ -4,10 +4,11 @@
       "corejs": 3,
       "useBuiltIns": "usage",
       "loose": true,
-      "modules": false,
+      "modules": "commonjs",
       "forceAllTransforms": true
     }],
     "@babel/preset-react",
+    "@babel/typescript",
   ],
   "env": {
     "dev": {
@@ -20,6 +21,5 @@
   },
   "plugins": [
     "@babel/plugin-proposal-class-properties",
-    "react-hot-loader/babel",
   ]
 }

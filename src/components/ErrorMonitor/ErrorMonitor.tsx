@@ -1,18 +1,29 @@
-import React, { Component } from 'react'
-import { node } from 'prop-types'
+import * as React from 'react'
 import request from 'util/request'
 import { API_URL } from 'constants/endpoints'
+import { __DEV__ } from 'constants/env'
 
-const __DEV__ = process.env.NODE_ENV !== 'production'
+const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '1rem',
+  } as React.CSSProperties,
+  errorInfo: {
+    color: 'red',
+  },
+}
 
-class ErrorMonitor extends Component {
-  state = {
+class ErrorMonitor extends React.Component {
+  public state = {
     hasError: false,
     error: '',
     errorStack: '',
   }
 
-  componentDidCatch (error, info) {
+  public componentDidCatch (error: any, info: any) {
     if (__DEV__) {
       // Display fallback UI
       this.setState({ hasError: true, error, errorStack: info.componentStack })
@@ -25,29 +36,7 @@ class ErrorMonitor extends Component {
     }
   }
 
-  refreshWindow = () => {
-    location.reload()
-  }
-
-  renderError () {
-    const { error, errorStack } = this.state
-    const stack = errorStack.split('\n').map((line, indx) => <div key={indx}>{line}</div>)
-
-    if (__DEV__) {
-      return [
-        <div key='error'>{error.toString()}</div>,
-        ...stack,
-        <button key='refresh' onMouseUp={this.refreshWindow}>RELOAD</button>,
-      ]
-    }
-
-    return [
-      <div key='message'>Something went wrong! We are trying to fix it.</div>,
-      <button key='refresh' onMouseUp={this.refreshWindow}>RELOAD</button>,
-    ]
-  }
-
-  render () {
+  public render () {
     if (this.state.hasError) {
       return (
         <div style={styles.container}>
@@ -61,23 +50,28 @@ class ErrorMonitor extends Component {
 
     return this.props.children
   }
-}
 
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '1rem',
-  },
-  errorInfo: {
-    color: 'red',
-  },
-}
+  private handleMouseUp = () => {
+    location.reload()
+  }
 
-ErrorMonitor.propTypes = {
-  children: node,
+  private renderError () {
+    const { error, errorStack } = this.state
+    const stack = errorStack.split('\n').map((line, indx) => <div key={indx}>{line}</div>)
+
+    if (__DEV__) {
+      return [
+        <div key='error'>{error.toString()}</div>,
+        ...stack,
+        <button key='refresh' onMouseUp={this.handleMouseUp}>RELOAD</button>,
+      ]
+    }
+
+    return [
+      <div key='message'>Something went wrong! We are trying to fix it.</div>,
+      <button key='refresh' onMouseUp={this.handleMouseUp}>RELOAD</button>,
+    ]
+  }
 }
 
 export default ErrorMonitor

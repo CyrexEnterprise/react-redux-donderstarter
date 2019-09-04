@@ -1,7 +1,3 @@
-/**
- * @module Auth/ducks
- */
-
 import cookie from 'js-cookie'
 import update from 'immutability-helper'
 

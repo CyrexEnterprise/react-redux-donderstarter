@@ -9,7 +9,7 @@ const autoprefixer = require('autoprefixer')
 const Dotenv = require('dotenv-webpack')
 
 module.exports = {
-  entry: path.resolve(__dirname, 'src', 'index.js'),
+  entry: path.resolve(__dirname, 'src', 'index'),
 
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -20,7 +20,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|ts)x?$/,
         exclude: /node_modules/,
         use: 'babel-loader',
       },
@@ -68,10 +68,11 @@ module.exports = {
   plugins: [
     new Dotenv(),
     new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'index.html') }),
-    new MiniCssExtractPlugin('style.css'),
+    new MiniCssExtractPlugin({ filename: 'style.css' }),
   ],
 
   resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     modules: [
       path.resolve(__dirname, 'src'),
       'node_modules',

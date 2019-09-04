@@ -1,7 +1,5 @@
 
-import React from 'react'
-
-export default () => <div style={styles.container}>PROTECTED ROUTE</div>
+import * as React from 'react'
 
 const styles = {
   container: {
@@ -11,3 +9,5 @@ const styles = {
     alignItems: 'center',
   },
 }
+
+export default () => <div style={styles.container}>PROTECTED ROUTE</div>

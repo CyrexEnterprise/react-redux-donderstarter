@@ -1,7 +1,5 @@
 /**
- * HOC that authorizes users based on their role
- * and the component required role
- * @module Auth
+ * HOC that authorizes users based on their role and the component required role
  */
 
 import React, { Component } from 'react'

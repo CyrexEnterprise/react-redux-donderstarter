@@ -1,5 +1,5 @@
 
-import React from 'react'
+import * as React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { Route } from 'react-router'
@@ -12,7 +12,7 @@ import App from 'containers/App'
 // Main Application Styles
 import 'styles/app.scss'
 
-function render (Component) {
+function render (Component: any) {
   ReactDOM.render(
     <ErrorMonitor>
       <Provider store={store}>

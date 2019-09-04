@@ -1,7 +1,5 @@
 /*
- *
  * Redux Store
- *
  */
 
 import { createStore, applyMiddleware } from 'redux'

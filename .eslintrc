@@ -1,23 +1,49 @@
 {
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "react"],
   "extends": [
     "standard",
+    "plugin:@typescript-eslint/recommended",
     "standard-react"
   ],
-  "parser": "babel-eslint",
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "env": {
     "browser": true,
+    "node": true,
+    "es6": true,
     "jest": true
   },
   "rules": {
-    "prefer-const": 2,
-    "no-var": 2,
-    "prefer-arrow-callback": 2,
-    "arrow-body-style": 2,
-    "react/no-unused-prop-types": 0,
-    "import/no-unresolved": 2,
-    "comma-dangle": ["error", "always-multiline"]
+    "react/prop-types": "off",
+    "semi": "error",
+    "prefer-const": "error",
+    "no-var": "error",
+    "comma-dangle": ["error", "always-multiline"],
+    "max-len": ["error", { "code": 120, "ignoreStrings": true, "ignoreTemplateLiterals": true, "ignoreRegExpLiterals": true }],
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-unused-vars": ["error", {
+      "vars": "all",
+      "args": "after-used",
+      "varsIgnorePattern": "[_]",
+      "ignoreRestSiblings": true
+    }],
+    "@typescript-eslint/indent": ["error", 2],
+    "@typescript-eslint/no-object-literal-type-assertion": "off",
+    "@typescript-eslint/member-delimiter-style": ["error", { "multiline": { "delimiter": "comma", "requireLast": true }}],
+    "@typescript-eslint/member-ordering": ["error"],
   },
-  "settings": {
-    "import/resolver": "webpack"
-  }
+  "overrides": [
+    {
+      "files": ["webpack.config.ts", "*.js"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ]
 }

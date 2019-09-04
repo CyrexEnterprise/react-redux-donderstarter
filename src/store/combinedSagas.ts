@@ -1,8 +1,5 @@
 /*
- *
- * Combine all sagas in the this file
- * and export them.
- *
+ * Combine all sagas in the this file and export them.
  */
 
 import auth from 'containers/Auth/sagas'
