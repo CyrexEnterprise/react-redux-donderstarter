@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { matchPath } from 'react-router'
+import { __DEV__ } from 'constants/env'
 import Navigation from 'components/Navigation'
 
 import routes, { routesConfig } from './routes'
@@ -7,6 +8,10 @@ import routes, { routesConfig } from './routes'
 import './styles.scss'
 
 import { AppProps } from './types'
+
+if (__DEV__) {
+  import('util/reactotronConfig').then(() => console.log('Reactotron Configured'))
+}
 
 const routesWithNav = routesConfig
   .filter(route => route.navigation)

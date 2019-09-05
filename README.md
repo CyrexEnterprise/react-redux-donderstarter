@@ -76,6 +76,10 @@ $ yarn dev  # or `npm run dev`
 
 Hot reloading is enabled by default for both **JavaScript** and **SCSS** files.
 
+## Debug
+
+[reactotron](https://github.com/infinitered/reactotron) is enabled in development. Download the appropriate release for your environment [here](https://github.com/infinitered/reactotron/releases).
+
 **All scripts at your disposal:**
 
 |`yarn <script>`    |Description|

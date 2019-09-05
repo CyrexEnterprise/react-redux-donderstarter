@@ -107,9 +107,7 @@ export const authMiddleware: Middleware = (store) => (next) => (action) => {
 
     const nextPath = location.state && location.state.onSuccess ? location.state.onSuccess : '/'
     store.dispatch(router.replace(nextPath))
-  } else if (action.type === AUTH_LOGIN_USER_ERROR) {
-    cookie.remove(TOKEN_KEY, { path: '/' })
-  } else if (action.type === LOGOUT_USER) {
+  } else if (action.type === AUTH_LOGIN_USER_ERROR || action.type === LOGOUT_USER) {
     cookie.remove(TOKEN_KEY, { path: '/' })
     store.dispatch(router.replace('/login'))
   }
