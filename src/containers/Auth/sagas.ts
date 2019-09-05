@@ -2,59 +2,39 @@ import request from 'util/request'
 import getDefaultHeaders from 'util/getDefaultHeaders'
 import { takeLatest, call, put, select } from 'redux-saga/effects'
 import { API_URL } from 'constants/endpoints'
-import {
-  LOGIN_USER,
-  AUTH_LOGIN_USER,
-  loginSuccess,
-  loginError,
-  authLoginSuccess,
-  authLoginError,
-} from './ducks'
+import { LOGIN_USER, AUTH_LOGIN_USER, authActionCreators } from './ducks'
+// import { AuthActionTypes } from './types'
 
-/**
- * User email and password
- * @typedef {Object} credentials
- * @prop {string} email - user email
- * @prop {string} password - user password
- */
-
-/**
- * login
- * @param {Object} action
- * @param {credentials} action.credentials
- */
-function * login (action) {
+// function * login ({ payload }: AuthActionTypes['login']) { // <-- get credentials from action payload
+function * login () {
   try {
     const requestUrl = `${API_URL}/users/0` // <-- add a real endpoint
     // const headers = { 'Content-Type': 'application/json' }
-    // const body = JSON.stringify(action.credentials)
+    // const body = JSON.stringify(payload)
 
-    const { data } = yield call(request, requestUrl, {
+    const { id, name, scope, token } = yield call(request, requestUrl, {
       method: 'GET', // <-- shold be a `POST` in real calls
     // headers,
     // body
     })
 
-    yield put(loginSuccess(data))
+    yield put(authActionCreators.loginSuccess({ user: { id, name, scope }, token }))
   } catch (error) {
-    yield put(loginError(error))
+    yield put(authActionCreators.loginError(error))
   }
 }
 
-/**
- * automatic login
- */
 function * authLogin () {
   try {
     const requestUrl = `${API_URL}/users/0` // <-- add a real endpoint
     const state = yield select()
     const headers = yield call(getDefaultHeaders, state)
 
-    const { data } = yield call(request, requestUrl, { headers })
+    const { id, name, scope } = yield call(request, requestUrl, { headers })
 
-    yield put(authLoginSuccess(data))
+    yield put(authActionCreators.authLoginSuccess({ user: { id, name, scope } }))
   } catch (error) {
-    yield put(authLoginError(error))
+    yield put(authActionCreators.authLoginError(error))
   }
 }
 

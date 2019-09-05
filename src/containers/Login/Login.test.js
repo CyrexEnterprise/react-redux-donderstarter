@@ -23,10 +23,10 @@ describe('<Login />', () => {
 
     const instance = wrapper.instance()
 
-    instance.inputChange({ target: { name: 'email', value: email } })
+    instance.handleInputChange({ target: { name: 'email', value: email } })
     expect(wrapper.state().email).toBe(email)
 
-    instance.inputChange({ target: { name: 'password', value: password } })
+    instance.handleInputChange({ target: { name: 'password', value: password } })
     expect(wrapper.state().password).toBe(password)
   })
 

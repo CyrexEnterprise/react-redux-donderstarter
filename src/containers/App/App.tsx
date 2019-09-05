@@ -1,16 +1,19 @@
-import React, { Component } from 'react'
-import { object, func } from 'prop-types'
+import * as React from 'react'
 import { matchPath } from 'react-router'
 import Navigation from 'components/Navigation'
 
 import routes, { routesConfig } from './routes'
 
+import './styles.scss'
+
+import { AppProps } from './types'
+
 const routesWithNav = routesConfig
   .filter(route => route.navigation)
   .map(route => ({ path: route.path, exact: true }))
 
-class App extends Component {
-  constructor (props) {
+class App extends React.Component<AppProps> {
+  public constructor (props: AppProps) {
     super(props)
 
     const { auth, userAuthLogin } = props
@@ -19,7 +22,14 @@ class App extends Component {
     }
   }
 
-  includeNavigation = () => {
+  public render () {
+    return [
+      this.includeNavigation() && this.renderNav(),
+      routes(),
+    ]
+  }
+
+  private includeNavigation = () => {
     const pathname = this.props.location.pathname
 
     let i = routesWithNav.length
@@ -30,13 +40,13 @@ class App extends Component {
     return false
   }
 
-  navigate = path => event => {
+  private navigate = (path: string) => () => {
     this.props.history.push(path)
   }
 
-  renderNav () {
+  private renderNav () {
     const { auth, logUserOut } = this.props
-    const loggedin = auth.scopes && auth.scopes.length > 0
+    const loggedin = auth.user
 
     return (
       <Navigation key='navigation' title='DonderStarter'>
@@ -45,21 +55,6 @@ class App extends Component {
       </Navigation>
     )
   }
-
-  render () {
-    return [
-      this.includeNavigation() && this.renderNav(),
-      routes(),
-    ]
-  }
-}
-
-App.propTypes = {
-  auth: object.isRequired,
-  userAuthLogin: func.isRequired,
-  location: object.isRequired,
-  history: object.isRequired,
-  logUserOut: func.isRequired,
 }
 
 export default App
