@@ -13,7 +13,10 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 module.exports = {
   mode: 'production',
 
-  output: { filename: '[name]-[contenthash].js' },
+  output: {
+    filename: '[name]-[contenthash].js',
+    chunkFilename: '[name]-[contenthash].js',
+  },
 
   plugins: [
     new HtmlWebpackPlugin({

@@ -76,8 +76,6 @@ $ yarn dev  # or `npm run dev`
 
 Hot reloading is enabled by default for both **JavaScript** and **SCSS** files.
 
-## Debug
-
 [reactotron](https://github.com/infinitered/reactotron) is enabled in development. Download the appropriate release for your environment [here](https://github.com/infinitered/reactotron/releases).
 
 **All scripts at your disposal:**
@@ -88,7 +86,7 @@ Hot reloading is enabled by default for both **JavaScript** and **SCSS** files.
 |`mock-api`			    |Serves a mock api at `localhost:9004` - see [json-server](https://github.com/typicode/json-server) for more|
 |`commmit`          |Runs `git-cz`, to help with commit conventions|
 |`test`             |Runs unit tests with jest pass `--watch` to watch file changes|
-|`open-cov`			    |Opens jest coverage `html` page in the browser|
+|`open-cov`			    |Opens test coverage `html` page in the browser|
 |`build`            |Builds the application to ./dist folder|
 |`start`            |Runs tests, build and serves dist application at [localhost:8080](http://localhost:8080)|
 |`release`			    |Generates `CHANGELOG.md` file, bumps `package.json` version and creates tags from conventional commits - see [standard-version](https://github.com/conventional-changelog/standard-version) for more|
@@ -138,9 +136,6 @@ Ex: `import App from 'components/App'`
     │   ├── combinedReducers.js     # Combine all reducers in one place
     │   ├── combinedSagas.js        # Combine all sagas in one place
     │   └── index.js                # Redux store bootstrap
-    │
-    ├── storybook
-    │   └── config.js               # Require your stories in `loadStories`
     │
     ├── styles                      # Global styles
     └── util

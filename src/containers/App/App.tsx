@@ -2,6 +2,7 @@ import * as React from 'react'
 import { matchPath } from 'react-router'
 import { __DEV__ } from 'constants/env'
 import Navigation from 'components/Navigation'
+import LocaleSelect from 'containers/LocaleSelect'
 
 import routes, { routesConfig } from './routes'
 
@@ -55,6 +56,7 @@ class App extends React.Component<AppProps> {
 
     return (
       <Navigation key='navigation' title='DonderStarter'>
+        <LocaleSelect />
         {!loggedin && <button onClick={this.navigate('/login')}>LOGIN</button>}
         {loggedin && <button onClick={logUserOut}>LOGOUT</button>}
       </Navigation>

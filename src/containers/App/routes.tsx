@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router'
 
 import requireAuth from 'containers/Auth'
 import Login from 'containers/Login'
-import HomePage from 'components/HomePage'
+import HomePage from 'containers/HomePage'
 import Protected from 'components/Protected'
 import NotFound from 'components/NotFound'
 
