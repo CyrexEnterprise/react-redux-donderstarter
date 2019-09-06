@@ -25,6 +25,7 @@
     "no-var": "error",
     "comma-dangle": ["error", "always-multiline"],
     "max-len": ["error", { "code": 120, "ignoreStrings": true, "ignoreTemplateLiterals": true, "ignoreRegExpLiterals": true }],
+    "no-prototype-builtins": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-unused-vars": ["error", {
@@ -36,7 +37,7 @@
     "@typescript-eslint/indent": ["error", 2],
     "@typescript-eslint/no-object-literal-type-assertion": "off",
     "@typescript-eslint/member-delimiter-style": ["error", { "multiline": { "delimiter": "comma", "requireLast": true }}],
-    "@typescript-eslint/member-ordering": ["error"],
+    "@typescript-eslint/member-ordering": ["error"]
   },
   "overrides": [
     {

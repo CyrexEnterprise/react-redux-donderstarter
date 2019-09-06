@@ -9,9 +9,7 @@ The primary goal of this boilerplate is to provide a stable foundation upon whic
 1. [Installation](#installation)
 1. [Development](#development)
 1. [Project Structure](#project-structure)
-1. [Stories with Storybook](#stories-with-storybook)
 1. [i18n Support](#i18n-support)
-1. [Caveats](#caveats)
 
 ## Requirements
 * node `^10.0.0`
@@ -110,118 +108,103 @@ Ex: `import App from 'components/App'`
 └── src                             # Application source code
     ├── assets                      # asset files to be required
     ├── index.html                  # Main HTML page container for app
-    ├── index.js                    # Application bootstrap and rendering
+    ├── index.tsx                   # Application bootstrap and rendering
     │
     ├── components                  # Global reusable components
     │   └── Component
-    │       ├── _styles.scss        # Your component styles (if any)
-    │       ├── Component.js        # Pure component source code (easily tested)
+    │       ├── styles.scss         # Your component styles (if any)
+    │       ├── Component.tsx       # Pure component source code (easily tested)
     │       ├── Component.test.js   # Component test cases
-    │       ├── routes.js           # Your nested routes (if any)
-    │       └── index.js            # Component export (HOC should be added here if any)
+    │       ├── routes.tsx          # Your nested routes (if any)
+    │       ├── types.ts            # Component types (if any)
+    │       └── index.tsx           # Component export (HOC should be added here if any)
     │
     ├── containers                  # Components wrapped by redux/connect
     │   └── Container
-    │       ├── _styles.scss        # Your container styles (if any)
-    │       ├── Component.js        # Pure Component source code (easily tested)
+    │       ├── styles.scss         # Your container styles (if any)
+    │       ├── Component.tsx       # Pure Component source code (easily tested)
     │       ├── Component.test.js   # Component test cases
-    │       ├── ducks.js            # Reducer, action creators, contstants and middleware
-    │       ├── routes.js           # Your nested routes (if any)
-    │       ├── sagas.js            # All container related sagas
-    │       └── index.js            # Component export with HOC (connect in this case)
+    │       ├── ducks.ts            # Reducer, action creators, contstants and middleware
+    │       ├── routes.tsx          # Your nested routes (if any)
+    │       ├── sagas.ts            # All container related sagas
+    │       ├── types.ts            # Container types (if any)
+    │       └── index.tsx           # Component export with HOC
     │
     ├── constants                   # Global constants
     │
     ├── store
-    │   ├── combinedReducers.js     # Combine all reducers in one place
-    │   ├── combinedSagas.js        # Combine all sagas in one place
-    │   └── index.js                # Redux store bootstrap
+    │   ├── combinedReducers.ts     # Combine all reducers in one place
+    │   ├── combinedSagas.ts        # Combine all sagas in one place
+    │   └── index.ts                # Redux store bootstrap
     │
     ├── styles                      # Global styles
     └── util
-        ├── getDefaultHeaders.js    # Helper to inject headers on requests
-        └── request.js              # Fetch API handler
+        ├── getDefaultHeaders.ts    # Helper to inject headers on requests
+        └── request.ts              # Fetch API handler
 ```
 
 ## i18n Support
 
-Same boilerplate with `i18n` support is on this [branch](https://github.com/Cloudoki/react-redux-donderstarter/tree/i18n-support). You can create a new project based on `react-redux-donderstarter` with `i18n` support by doing the following:
+*Adding `fr-FR` translations*
 
-```bash
-$ git clone -b i18n-support https://github.com/Cloudoki/react-redux-donderstarter.git <my-project-name>
-$ cd <my-project-name>
-$ git checkout master
-$ git merge i18n-support
+Add `fr` to `webpackInclude` regex:
+
+```typescript
+// components/Localization/Provider.tsx
+
+...
+
+if (normalizedLocale !== 'en') {
+  await import(
+    /* webpackChunkName: "locale-[request]", webpackInclude: /(pt|nl|fr)\.js$/ */ // <--- here
+    `moment/locale/${normalizedLocale}.js`
+  )
+}
 ```
-Merge into an existing project? Check [Installation](#installation) and point to the `i18n` branch: `react-redux-donderstarter/master` to `react-redux-donderstarter/i18n-support`
 
-### Adding translations
+Add the locale to the `appLocales` array and Locale type:
 
-Add the following to `src/util/i18n.js`
-
-```javascript
-...
-
-import frLocaleData from 'react-intl/locale-data/fr' // import the locale data
+```typescript
+// components/Localization/types.ts
 
 ...
 
-import frTranslationMessages from 'translations/fr.json' // import the translations JSON file
+export type Locales = 'en-US' | 'pt-PT' | 'nl-NL' | 'fr-FR' // <-- here
+
+```
+
+```typescript
+// components/Localization/context.ts
 
 ...
 
-addLocaleData(frLocaleData) // add locale data to react-intl
-
-export const appLocales = [
-  'fr' // add the locale to the array of options
-]
-
-...
-
-export const translationMessages = {
-  fr: formatTranslationMessages(frTranslationMessages) // export the translations
+export const defaultContextState: I18nContextState = {
+  initLoad: true,
+  locale: 'en-US',
+  appLocales: ['en-US', 'pt-PT', 'nl-NL', 'fr-FR'], // <-- here
+  seti18n: async () => undefined,
+  strings: () => '',
 }
 ```
 
 You should first add the translation object to your default language file and then copy paste it on the translation file and add the translation to the message like the following:
 
-```javascript
-// src/translations/en.json
-[
-  {
-    "id": "homePage.hello",
-    "defaultMessage": "Made with ♥ by Cloudoki Team",
-    "message": ""
-  }
-]
-```
+```json
+// translations/en-US.json
 
-```javascript
-// src/translations/fr.json
-[
-  {
-    "id": "homePage.hello",
-    "defaultMessage": "Made with ♥ by Cloudoki Team",
-    "message": "Fabriqué avec ♥ par Cloudoki équipe"
-  }
-]
-```
-
-Adding formats to be used on your `FormattedMessages`, add the following to `src/util/i18n.js` formats variable:
-
-```javascript
-...
-
-export const formats = {
-  number: {
-    EUR: {
-      style: 'currency',
-      currency: 'EUR'
-    }
+{
+  "homePage": {
+    "madeWlove": "Made with ♥ by Cloudoki Team"
   }
 }
-
-...
 ```
 
-Check [react-intl documentation](https://github.com/yahoo/react-intl/wiki#formatting-data) for more.
+```json
+// translations/fr-FR.json
+
+{
+  "homePage": {
+    "madeWlove": "Fabriqué avec ♥ par Cloudoki équipe"
+  }
+}
+```

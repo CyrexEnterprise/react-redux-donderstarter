@@ -38,7 +38,7 @@ class Provider extends React.PureComponent<LocalizationProviderProps, I18nContex
       try {
         const translations = await import(
           /* webpackChunkName: "translation-[request]" */
-          `./translations/${locale}.json`
+          `translations/${locale}.json`
         )
 
         const normalizedLocale = locale.split('-')[0]
