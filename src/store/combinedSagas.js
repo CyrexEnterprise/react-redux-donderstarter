@@ -5,10 +5,7 @@
  *
  */
 
-import auth from 'containers/Auth/sagas'
-
 const sagas = [
-  auth,
 ]
 
 export default sagas

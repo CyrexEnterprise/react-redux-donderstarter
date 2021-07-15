@@ -10,8 +10,6 @@ import { routerMiddleware } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 import { createLogger } from 'redux-logger'
 
-import { createAuthMiddleware } from 'containers/Auth/ducks'
-
 import combinedReducers from './combinedReducers'
 import combinedSagas from './combinedSagas'
 
@@ -20,9 +18,8 @@ export const history = createHistory()
 // Build the middleware for intercepting and dispatching navigation actions
 const sagaMiddleware = createSagaMiddleware()
 const routingMiddleware = routerMiddleware(history)
-const authMiddleware = createAuthMiddleware(history)
 
-const middleware = [sagaMiddleware, routingMiddleware, authMiddleware]
+const middleware = [sagaMiddleware, routingMiddleware]
 
 const __DEV__ = process.env.NODE_ENV !== 'production'
 

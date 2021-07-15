@@ -1,13 +1,22 @@
 
-import { connect } from 'react-redux'
-import { authLogin, logout } from 'containers/Auth/ducks'
-import App from './App'
+import React from 'react'
+import routes from './routes'
+import { useHistory } from "react-router-dom"
+import Navigation from 'components/Navigation'
 
-const mapStateToProps = ({ auth }) => ({ auth })
+const App = () => {
+  const history = useHistory();
 
-const mapDispatchToProps = (dispatch) => ({
-  userAuthLogin: (token) => dispatch(authLogin(token)),
-  logUserOut: () => dispatch(logout()),
-})
+  const navigate = (route) => { 
+    if (route) {
+      history.push(route)
+    }
+  }
+  
+  return [
+    <Navigation navigate={navigate} />,
+    routes(),
+  ]
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App
